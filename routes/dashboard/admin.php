@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\UserManagement\Users\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,11 +26,18 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
         Route::group(['prefix' => 'auth'], function () {
             Route::get('logout', [LoginController::class, 'logout'])->name('logout');
         });
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+
+
+        Route::group(['prefix' => 'users'], function () {
+            Route::get('/', [UserController::class, 'index'])->name('users.index');
+            Route::get('/create', [UserController::class, 'create'])->name('users.create');
+            Route::post('/store', [UserController::class, 'store'])->name('users.store');
+        });
 
     });
 

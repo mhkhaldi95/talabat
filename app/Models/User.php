@@ -6,12 +6,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laratrust\Traits\LaratrustUserTrait;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
+    use LaratrustUserTrait;
     /**
      * The attributes that are mass assignable.
      *
@@ -41,4 +42,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeFilter($q){
+        if(request('search')){
+            $q->where('name','like','%'.request('search').'%');
+        }
+        if(request('search')){
+            $q->where('email','like','%'.request('search').'%');
+        }
+        return $q;
+    }
 }
