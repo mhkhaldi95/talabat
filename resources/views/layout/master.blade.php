@@ -30,21 +30,15 @@ License: For each use you must have a valid license purchased only from above li
         <!--begin::Wrapper-->
         <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
             <!--begin::Header-->
-            @include('layout.header')
+           @include('layout.header')
             <!--end::Header-->
             <!--begin::Content-->
             <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                <!--begin::Toolbar-->
-                <div class="toolbar" id="kt_toolbar">
-                    <!--begin::Container-->
-                        @yield('content')
-                    <!--end::Container-->
-                </div>
-                <!--end::Toolbar-->
+               @yield('content')
             </div>
             <!--end::Content-->
             <!--begin::Footer-->
-            @include('layout.footer')
+           @include('layout.footer')
             <!--end::Footer-->
         </div>
         <!--end::Wrapper-->
@@ -66,7 +60,9 @@ License: For each use you must have a valid license purchased only from above li
 <script src="{{asset('')}}assets/js/custom/apps/chat/chat.js"></script>
 <script src="{{asset('')}}assets/js/custom/modals/create-app.js"></script>
 <script src="{{asset('')}}assets/js/custom/modals/upgrade-plan.js"></script>
+<!--begin::Page Vendors Javascript(used by this page)-->
 <script src="{{asset('')}}assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<!--end::Page Vendors Javascript-->
 {{--<script src="{{asset('')}}assets/js/custom/documentation/general/datatables/server-side.js"></script>--}}
 
 <!--end::Page Custom Javascript-->

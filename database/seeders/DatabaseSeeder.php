@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
 
          $user = \App\Models\User::factory()->create([
              'name' => 'Talabat User',
@@ -26,5 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LaratrustSeeder::class);
         $user->attachRole('super_admin');
         $user->attachPermissions(Permission::all()->pluck('name')->toArray());
+        \App\Models\User::factory(50)->create();
+
     }
 }

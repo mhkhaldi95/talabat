@@ -44,11 +44,8 @@ class User extends Authenticatable
     ];
 
     public function scopeFilter($q){
-        if(request('search')){
-            $q->where('name','like','%'.request('search').'%');
-        }
-        if(request('search')){
-            $q->where('email','like','%'.request('search').'%');
+        if(@request('search')['value']){
+            $q->where('name','like','%'.request('search')['value'].'%') ->orWhere('email','like','%'.request('search')['value'].'%');
         }
         return $q;
     }

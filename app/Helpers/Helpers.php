@@ -42,10 +42,18 @@ function paginate($data,$request = null,$resource = null,$notification = false){
         'total' => $data->total(),
     ];
     return response()->json([
+        'recordsTotal'    => $data->total(),
+        'recordsFiltered' => $data->total(),
+        'data'            => $items,
+    ]);
+    return response()->json([
         'status' =>true,
         'data' =>$items,
         'meta' => $meta
     ]);
+}
+function getPageNumber(){
+   return (request()->get('start', 0)/request()->get('length', 10))+1;
 }
 
 

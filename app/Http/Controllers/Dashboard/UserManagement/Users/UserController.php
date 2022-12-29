@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index(Request $request){
         if($request->ajax()){
-            $items = User::query()->orderByDesc('id')->filter()->paginate(\request()->get('perPage', 10));
+            $items = User::query()->orderByDesc('id')->filter()->paginate(\request()->get('length', 10),'*','*',getPageNumber());
             return paginate($items, null, UserResource::class);
         }
         return view('dashboard.user_management.users.index', [
