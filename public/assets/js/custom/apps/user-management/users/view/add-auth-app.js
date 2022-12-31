@@ -10,7 +10,7 @@ var KTUsersAddAuthApp = function () {
     var initAddAuthApp = () => {
 
         // Close button handler
-        const closeButton = element.querySelector('[data-kt-users-modal-action="close"]');
+        const closeButton = element.querySelector('[data-kt-admins-modal-action="close"]');
         closeButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -27,8 +27,8 @@ var KTUsersAddAuthApp = function () {
                 }
             }).then(function (result) {
                 if (result.value) {
-                    modal.hide(); // Hide modal				
-                } 
+                    modal.hide(); // Hide modal
+                }
             });
         });
 

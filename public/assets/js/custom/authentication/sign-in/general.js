@@ -13,7 +13,7 @@ var KTSigninGeneral = function() {
         validator = FormValidation.formValidation(
 			form,
 			{
-				fields: {					
+				fields: {
 					'email': {
                         validators: {
 							notEmpty: {
@@ -30,7 +30,7 @@ var KTSigninGeneral = function() {
                                 message: 'The password is required'
                             }
                         }
-                    } 
+                    }
 				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
@@ -39,7 +39,7 @@ var KTSigninGeneral = function() {
                     })
 				}
 			}
-		);		
+		);
 
         // Handle form submit
         submitButton.addEventListener('click', function (e) {
@@ -52,9 +52,9 @@ var KTSigninGeneral = function() {
                     // Show loading indication
                     submitButton.setAttribute('data-kt-indicator', 'on');
 
-                    // Disable button to avoid multiple click 
+                    // Disable button to avoid multiple click
                     submitButton.disabled = true;
-                    
+
 
                     // Simulate ajax request
                     setTimeout(function() {
@@ -74,13 +74,13 @@ var KTSigninGeneral = function() {
                                 confirmButton: "btn btn-primary"
                             }
                         }).then(function (result) {
-                            if (result.isConfirmed) { 
+                            if (result.isConfirmed) {
                                 form.querySelector('[name="email"]').value= "";
-                                form.querySelector('[name="password"]').value= "";                                
+                                form.querySelector('[name="password"]').value= "";
                                 //form.submit(); // submit form
                             }
                         });
-                    }, 2000);   						
+                    }, 2000);
                 } else {
                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                     Swal.fire({
@@ -103,7 +103,7 @@ var KTSigninGeneral = function() {
         init: function() {
             form = document.querySelector('#kt_sign_in_form');
             submitButton = document.querySelector('#kt_sign_in_submit');
-            
+
             handleForm();
         }
     };
@@ -111,5 +111,5 @@ var KTSigninGeneral = function() {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function() {
-    KTSigninGeneral.init();
+    // KTSigninGeneral.init();
 });

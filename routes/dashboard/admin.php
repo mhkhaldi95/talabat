@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\UserManagement\Users\UserController;
+use App\Http\Controllers\Dashboard\UserManagement\Admins\AdminController;
+use App\Http\Controllers\Dashboard\UserManagement\Roles\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,10 +34,21 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
 
-        Route::group(['prefix' => 'users'], function () {
-            Route::get('/', [UserController::class, 'index'])->name('users.index');
-            Route::get('/create', [UserController::class, 'create'])->name('users.create');
-            Route::post('/store', [UserController::class, 'store'])->name('users.store');
+        Route::group(['prefix' => 'admins'], function () {
+            Route::get('/', [AdminController::class, 'index'])->name('admins.index');
+            Route::get('/create/{id?}', [AdminController::class, 'create'])->name('admins.create');
+            Route::post('/store', [AdminController::class, 'store'])->name('admins.store');
+            Route::post('{id}/update', [AdminController::class, 'update'])->name('admins.update');
+            Route::post('{id}/delete', [AdminController::class, 'delete'])->name('admins.delete');
+            Route::post('delete-selected', [AdminController::class, 'deleteSelected'])->name('admins.deleteSelected');
+        });
+
+        Route::group(['prefix' => 'roles'], function () {
+            Route::get('/', [RoleController::class, 'index'])->name('roles.index');
+            Route::get('/create/{id?}', [RoleController::class, 'create'])->name('roles.create');
+            Route::post('/store', [RoleController::class, 'store'])->name('roles.store');
+            Route::post('{id}/update', [RoleController::class, 'update'])->name('roles.update');
+            Route::get('{id}/delete', [RoleController::class, 'delete'])->name('roles.delete');
         });
 
     });

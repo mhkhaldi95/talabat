@@ -31,7 +31,7 @@ class LaratrustSetupTables extends Migration
             $table->timestamps();
         });
 
-        // Create table for associating roles to users and teams (Many To Many Polymorphic)
+        // Create table for associating roles to admins and teams (Many To Many Polymorphic)
         Schema::create('role_user', function (Blueprint $table) {
             $table->unsignedBigInteger('role_id');
             $table->unsignedBigInteger('user_id');
@@ -43,7 +43,7 @@ class LaratrustSetupTables extends Migration
             $table->primary(['user_id', 'role_id', 'user_type']);
         });
 
-        // Create table for associating permissions to users (Many To Many Polymorphic)
+        // Create table for associating permissions to admins (Many To Many Polymorphic)
         Schema::create('permission_user', function (Blueprint $table) {
             $table->unsignedBigInteger('permission_id');
             $table->unsignedBigInteger('user_id');

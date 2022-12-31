@@ -13,10 +13,12 @@ return [
 
     'roles_structure' => [
         'super_admin' => [
-            'users' => 'c,r,u,d',
+            'admins' => 'c,r,u,d',
             'products' => 'c,r,u,d',
             'roles' => 'c,r,u,d',
-        ]
+        ],
+        'admin' => [],
+        'customer' => [],
     ],
 
     'permissions_map' => [

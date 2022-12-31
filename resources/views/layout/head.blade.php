@@ -24,6 +24,7 @@
     <!--begin::Global Stylesheets Bundle(used by all pages)-->
     <link href="{{asset('')}}assets/plugins/global/plugins.bundle.rtl.css" rel="stylesheet" type="text/css" />
     <link href="{{asset('')}}assets/css/style.bundle.rtl.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('')}}assets/css/custom.rtl.css" rel="stylesheet" type="text/css" />
 
     <!--end::Global Stylesheets Bundle-->
 @else
@@ -36,4 +37,5 @@
     <link href="{{asset('')}}assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
 @endif
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 @yield('head')

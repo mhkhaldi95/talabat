@@ -34,6 +34,28 @@ License: For each use you must have a valid license purchased only from above li
             <!--end::Header-->
             <!--begin::Content-->
             <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                <!--begin::Toolbar-->
+                <div class="toolbar" id="kt_toolbar">
+                    <!--begin::Container-->
+                    <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+                        <!--begin::Page title-->
+                        <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                            <!--begin::Title-->
+                            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">{{$page_title}}</h1>
+                            <!--end::Title-->
+                            <!--begin::Separator-->
+                            <span class="h-20px border-gray-200 border-start mx-4"></span>
+                            <!--end::Separator-->
+                            <!--begin::Breadcrumb-->
+                            @include('layout.breadcrumb')
+                            <!--end::Breadcrumb-->
+                        </div>
+                        <!--end::Page title-->
+
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Toolbar-->
                @yield('content')
             </div>
             <!--end::Content-->
@@ -64,10 +86,53 @@ License: For each use you must have a valid license purchased only from above li
 <script src="{{asset('')}}assets/plugins/custom/datatables/datatables.bundle.js"></script>
 <!--end::Page Vendors Javascript-->
 {{--<script src="{{asset('')}}assets/js/custom/documentation/general/datatables/server-side.js"></script>--}}
-
+<script src="{{asset('')}}assets/js/custom/documentation/general/toastr.js"></script>
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
 @yield('scripts')
+
+<script type="text/javascript">
+
+    @if(Session::has('message'))
+        toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        @if(app()->getLocale() == 'ar')
+        "positionClass": "toast-top-left",
+        @else
+        "positionClass": "toast-top-right",
+        @endif
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+
+    var type = "{{Session::get('alert-type','info')}}"
+    switch (type) {
+        case 'info':
+            toastr.info("{{Session::get('message') }}");
+            break;
+        case 'success':
+            toastr.success("{{Session::get('message') }}");
+            break;
+        case 'warning':
+            toastr.warning("{{Session::get('message') }}");
+            break;
+        case 'error':
+            toastr.error("{{Session::get('message') }}");
+            break;
+    }
+    @endif
+</script>
 </body>
 <!--end::Body-->
 </html>

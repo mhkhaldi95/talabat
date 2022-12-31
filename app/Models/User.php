@@ -43,9 +43,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function scopeFilter($q){
+    public function scopeFilter($q,$type){
+
+        if($type == 'admin'){
+            $q->whereRoleIs(['super_admin','admin']);
+//            if(auth()->user()->hasRole(['super_admin','admin'])){
+//                $q->whereRoleIs(['super_admin','admin']);;
+//            }elseif(auth()->user()->hasRole(['admin'])){
+//                $q->whereRoleIs(['admin']);;
+//            }
+        }elseif($type == 'customer'){
+            $q->whereRoleIs(['customer']);;
+        }
+
+
         if(@request('search')['value']){
-            $q->where('name','like','%'.request('search')['value'].'%') ->orWhere('email','like','%'.request('search')['value'].'%');
+            $q->where('name','like','%'.request('search')['value'].'%')
+                ->orWhere('email','like','%'.request('search')['value'].'%');
         }
         return $q;
     }

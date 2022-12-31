@@ -36,7 +36,7 @@ var KTUsersUpdateEmail = function () {
         );
 
         // Close button handler
-        const closeButton = element.querySelector('[data-kt-users-modal-action="close"]');
+        const closeButton = element.querySelector('[data-kt-admins-modal-action="close"]');
         closeButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -53,8 +53,8 @@ var KTUsersUpdateEmail = function () {
                 }
             }).then(function (result) {
                 if (result.value) {
-                    form.reset(); // Reset form	
-                    modal.hide(); // Hide modal				
+                    form.reset(); // Reset form
+                    modal.hide(); // Hide modal
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
                         text: "Your form has not been cancelled!.",
@@ -70,7 +70,7 @@ var KTUsersUpdateEmail = function () {
         });
 
         // Cancel button handler
-        const cancelButton = element.querySelector('[data-kt-users-modal-action="cancel"]');
+        const cancelButton = element.querySelector('[data-kt-admins-modal-action="cancel"]');
         cancelButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -87,8 +87,8 @@ var KTUsersUpdateEmail = function () {
                 }
             }).then(function (result) {
                 if (result.value) {
-                    form.reset(); // Reset form	
-                    modal.hide(); // Hide modal				
+                    form.reset(); // Reset form
+                    modal.hide(); // Hide modal
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
                         text: "Your form has not been cancelled!.",
@@ -104,7 +104,7 @@ var KTUsersUpdateEmail = function () {
         });
 
         // Submit button handler
-        const submitButton = element.querySelector('[data-kt-users-modal-action="submit"]');
+        const submitButton = element.querySelector('[data-kt-admins-modal-action="submit"]');
         submitButton.addEventListener('click', function (e) {
             // Prevent default button action
             e.preventDefault();
@@ -118,7 +118,7 @@ var KTUsersUpdateEmail = function () {
                         // Show loading indication
                         submitButton.setAttribute('data-kt-indicator', 'on');
 
-                        // Disable button to avoid multiple click 
+                        // Disable button to avoid multiple click
                         submitButton.disabled = true;
 
                         // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
@@ -129,7 +129,7 @@ var KTUsersUpdateEmail = function () {
                             // Enable button
                             submitButton.disabled = false;
 
-                            // Show popup confirmation 
+                            // Show popup confirmation
                             Swal.fire({
                                 text: "Form has been successfully submitted!",
                                 icon: "success",

@@ -67,7 +67,7 @@ return [
     | This is the array that contains the information of the user models.
     | This information is used in the add-trait command, for the roles and
     | permissions relationships with the possible user models, and the
-    | administration panel to attach roles and permissions to the users.
+    | administration panel to attach roles and permissions to the admins.
     |
     | The key in the array is the name of the relationship inside the roles and permissions.
     |
@@ -306,7 +306,7 @@ return [
         | Enable permissions assignment
         |--------------------------------------------------------------------------
         |
-        | Enable/Disable the permissions assignment to the users.
+        | Enable/Disable the permissions assignment to the admins.
         |
         */
         'assign_permissions_to_user' => true,
@@ -331,7 +331,7 @@ return [
         |
         */
         'roles_restrictions' => [
-            // The user won't be able to remove roles already assigned to users.
+            // The user won't be able to remove roles already assigned to admins.
             'not_removable' => [],
 
             // The user won't be able to edit the role and the permissions assigned.

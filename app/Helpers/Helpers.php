@@ -42,14 +42,32 @@ function paginate($data,$request = null,$resource = null,$notification = false){
         'total' => $data->total(),
     ];
     return response()->json([
-        'recordsTotal'    => $data->total(),
-        'recordsFiltered' => $data->total(),
-        'data'            => $items,
-    ]);
-    return response()->json([
         'status' =>true,
         'data' =>$items,
         'meta' => $meta
+    ]);
+}
+function datatable_response($data,$request = null,$resource = null,$notification = false){
+    $items =  $data->items();
+    if($request && $request['pagination']){
+        $page = $request['pagination']['page']??$data->currentPage();
+    }else{
+        $page = $data->currentPage();
+    }
+
+
+    if(!is_null($resource))
+        $items =  $resource::collection($items);
+    $meta =  [
+        'page' => $page,
+        'pages' => $data->lastPage(),
+        'perpage' => intval($data->perPage()),
+        'total' => $data->total(),
+    ];
+    return response()->json([
+        'recordsTotal'    => $data->total(),
+        'recordsFiltered' => $data->total(),
+        'data'            => $items,
     ]);
 }
 function getPageNumber(){

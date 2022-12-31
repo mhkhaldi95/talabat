@@ -50,7 +50,7 @@ var KTUsersViewMain = function () {
 
     // Init sign out single user
     var initSignOutUser = () => {
-        const signOutButtons = document.querySelectorAll('[data-kt-users-sign-out="single_user"]');
+        const signOutButtons = document.querySelectorAll('[data-kt-admins-sign-out="single_user"]');
 
         signOutButtons.forEach(button => {
             button.addEventListener('click', e => {
@@ -158,7 +158,7 @@ var KTUsersViewMain = function () {
             // Show loading indication
             submitButton.setAttribute('data-kt-indicator', 'on');
 
-            // Disable button to avoid multiple click 
+            // Disable button to avoid multiple click
             submitButton.disabled = true;
 
             // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
@@ -169,7 +169,7 @@ var KTUsersViewMain = function () {
                 // Enable button
                 submitButton.disabled = false;
 
-                // Show popup confirmation 
+                // Show popup confirmation
                 Swal.fire({
                     text: "Form has been successfully submitted!",
                     icon: "success",
@@ -200,7 +200,7 @@ var KTUsersViewMain = function () {
                 }
             }).then(function (result) {
                 if (result.value) {
-                    form.reset(); // Reset form				
+                    form.reset(); // Reset form
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
                         text: "Your form has not been cancelled!.",

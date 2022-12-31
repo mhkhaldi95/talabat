@@ -22,7 +22,7 @@ class LoginController extends Controller
             ]);
         }
         return redirect()->route('login')->with([
-            'error' => 'Login details are not valid'
+            'error' => __('lang.login_not_valid')
         ]);
     }
     public function logout(){
@@ -30,7 +30,7 @@ class LoginController extends Controller
         auth('web')->logout();
 
         return redirect()->route('login')->with([
-            'success' => 'Signed out Successfully'
+            'success' => __('lang.Signed out Successfully')
         ]);
     }
 }

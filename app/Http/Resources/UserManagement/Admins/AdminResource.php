@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\UserManagement\Users;
+namespace App\Http\Resources\UserManagement\Admins;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class AdminResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -26,6 +26,10 @@ class UserResource extends JsonResource
         foreach ($roles as $role){
             $str .=$role->name.' -';
         }
-        return rtrim($str, "-");
+        $str = rtrim($str, "-");
+        if($str == ''){
+            $str = __('lang.no_role');
+        }
+        return $str;
     }
 }

@@ -75,7 +75,7 @@ class LaratrustSeeder extends Seeder
     }
 
     /**
-     * Truncates all the laratrust tables and the users table
+     * Truncates all the laratrust tables and the admins table
      *
      * @return  void
      */
@@ -91,7 +91,7 @@ class LaratrustSeeder extends Seeder
         if (Config::get('laratrust_seeder.truncate_tables')) {
             DB::table('roles')->truncate();
             DB::table('permissions')->truncate();
-            
+
             if (Config::get('laratrust_seeder.create_users')) {
                 $usersTable = (new \App\Models\User)->getTable();
                 DB::table($usersTable)->truncate();

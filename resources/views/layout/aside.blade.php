@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 @if(auth()->user()->isAbleTo([
-                    'users-create', 'users-read','users-update','users-delete',
+                    'admins-create', 'admins-read','admins-update','admins-delete',
                     ]))
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion mb-1">
 									<span class="menu-link">
@@ -50,33 +50,33 @@
 										<span class="menu-arrow"></span>
 									</span>
                     <div class="menu-sub menu-sub-accordion">
-                        @if(auth()->user()->isAbleTo(['users-create', 'users-read']))
+                        @if(auth()->user()->isAbleTo(['admins-create', 'admins-read']))
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion mb-1">
 											<span class="menu-link">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-												<span class="menu-title">{{__('lang.users')}}</span>
+												<span class="menu-title">{{__('lang.admins')}}</span>
 												<span class="menu-arrow"></span>
 											</span>
                             <div class="menu-sub menu-sub-accordion">
-                                @if(auth()->user()->isAbleTo([ 'users-read']))
+                                @if(auth()->user()->isAbleTo([ 'admins-read']))
                                 <div class="menu-item">
-                                    <a class="menu-link" href="{{route('users.index')}}">
+                                    <a class="menu-link" href="{{route('admins.index')}}">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
-                                        <span class="menu-title">{{__('lang.users_list')}}</span>
+                                        <span class="menu-title">{{__('lang.admins')}}</span>
                                     </a>
                                 </div>
                                 @endif
-                                @if(auth()->user()->isAbleTo(['users-create']))
+                                @if(auth()->user()->isAbleTo(['admins-create']))
                                 <div class="menu-item">
-                                    <a class="menu-link" href="{{route('users.create')}}">
+                                    <a class="menu-link" href="{{route('admins.create')}}">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
-                                        <span class="menu-title">{{__('lang.add_user')}}</span>
+                                        <span class="menu-title">{{__('lang.add')}}</span>
                                     </a>
                                 </div>
                                 @endif
@@ -95,21 +95,21 @@
                             <div class="menu-sub menu-sub-accordion">
                                 @if(auth()->user()->isAbleTo(['roles-read']))
                                     <div class="menu-item">
-                                    <a class="menu-link" href="../../demo1/dist/apps/user-management/roles/list.html">
+                                    <a class="menu-link" href="{{route('roles.index')}}">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
-                                        <span class="menu-title">{{__('lang.roles_list')}}</span>
+                                        <span class="menu-title">{{__('lang.roles')}}</span>
                                     </a>
                                 </div>
                                 @endif
                                 @if(auth()->user()->isAbleTo(['roles-create']))
                                     <div class="menu-item">
-                                    <a class="menu-link" href="../../demo1/dist/apps/user-management/roles/view.html">
+                                    <a class="menu-link" href="{{route('roles.create')}}">
 														<span class="menu-bullet">
 															<span class="bullet bullet-dot"></span>
 														</span>
-                                        <span class="menu-title">{{__('lang.add_role')}}</span>
+                                        <span class="menu-title">{{__('lang.add')}}</span>
                                     </a>
                                 </div>
                                 @endif

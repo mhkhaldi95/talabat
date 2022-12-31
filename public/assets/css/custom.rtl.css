@@ -1,0 +1,11 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(../fonts/cairo/Cairo-Bold.woff2);
+}
+* {
+    font-family: myFirstFont;
+}
+.select2-container--bootstrap5 .select2-selection--multiple .select2-selection__rendered .select2-selection__choice .select2-selection__choice__remove
+{
+    left:6% !important;
+}

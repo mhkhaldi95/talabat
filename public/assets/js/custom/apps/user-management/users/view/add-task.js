@@ -48,7 +48,7 @@ var KTUsersAddTask = function () {
         );
 
         // Close button handler
-        const closeButton = element.querySelector('[data-kt-users-modal-action="close"]');
+        const closeButton = element.querySelector('[data-kt-admins-modal-action="close"]');
         closeButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -65,8 +65,8 @@ var KTUsersAddTask = function () {
                 }
             }).then(function (result) {
                 if (result.value) {
-                    form.reset(); // Reset form	
-                    modal.hide(); // Hide modal				
+                    form.reset(); // Reset form
+                    modal.hide(); // Hide modal
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
                         text: "Your form has not been cancelled!.",
@@ -82,7 +82,7 @@ var KTUsersAddTask = function () {
         });
 
         // Cancel button handler
-        const cancelButton = element.querySelector('[data-kt-users-modal-action="cancel"]');
+        const cancelButton = element.querySelector('[data-kt-admins-modal-action="cancel"]');
         cancelButton.addEventListener('click', e => {
             e.preventDefault();
 
@@ -99,8 +99,8 @@ var KTUsersAddTask = function () {
                 }
             }).then(function (result) {
                 if (result.value) {
-                    form.reset(); // Reset form	
-                    modal.hide(); // Hide modal				
+                    form.reset(); // Reset form
+                    modal.hide(); // Hide modal
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
                         text: "Your form has not been cancelled!.",
@@ -116,7 +116,7 @@ var KTUsersAddTask = function () {
         });
 
         // Submit button handler
-        const submitButton = element.querySelector('[data-kt-users-modal-action="submit"]');
+        const submitButton = element.querySelector('[data-kt-admins-modal-action="submit"]');
         submitButton.addEventListener('click', function (e) {
             // Prevent default button action
             e.preventDefault();
@@ -130,7 +130,7 @@ var KTUsersAddTask = function () {
                         // Show loading indication
                         submitButton.setAttribute('data-kt-indicator', 'on');
 
-                        // Disable button to avoid multiple click 
+                        // Disable button to avoid multiple click
                         submitButton.disabled = true;
 
                         // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
@@ -141,7 +141,7 @@ var KTUsersAddTask = function () {
                             // Enable button
                             submitButton.disabled = false;
 
-                            // Show popup confirmation 
+                            // Show popup confirmation
                             Swal.fire({
                                 text: "Form has been successfully submitted!",
                                 icon: "success",
@@ -177,12 +177,12 @@ var KTUsersAddTask = function () {
 
     // Init update task status
     var initUpdateTaskStatus = () => {
-        const allTaskMenus = document.querySelectorAll('[data-kt-menu-id="kt-users-tasks"]');
+        const allTaskMenus = document.querySelectorAll('[data-kt-menu-id="kt-admins-tasks"]');
 
         allTaskMenus.forEach(el => {
-            const resetButton = el.querySelector('[data-kt-users-update-task-status="reset"]');
-            const submitButton = el.querySelector('[data-kt-users-update-task-status="submit"]');
-            const taskForm = el.querySelector('[data-kt-menu-id="kt-users-tasks-form"]');
+            const resetButton = el.querySelector('[data-kt-admins-update-task-status="reset"]');
+            const submitButton = el.querySelector('[data-kt-admins-update-task-status="submit"]');
+            const taskForm = el.querySelector('[data-kt-menu-id="kt-admins-tasks-form"]');
 
             // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
             var validator = FormValidation.formValidation(
@@ -232,7 +232,7 @@ var KTUsersAddTask = function () {
                     }
                 }).then(function (result) {
                     if (result.value) {
-                        taskForm.reset(); // Reset form		
+                        taskForm.reset(); // Reset form
                         el.hide();
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
@@ -261,7 +261,7 @@ var KTUsersAddTask = function () {
                             // Show loading indication
                             submitButton.setAttribute('data-kt-indicator', 'on');
 
-                            // Disable button to avoid multiple click 
+                            // Disable button to avoid multiple click
                             submitButton.disabled = true;
 
                             // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
@@ -272,7 +272,7 @@ var KTUsersAddTask = function () {
                                 // Enable button
                                 submitButton.disabled = false;
 
-                                // Show popup confirmation 
+                                // Show popup confirmation
                                 Swal.fire({
                                     text: "Form has been successfully submitted!",
                                     icon: "success",

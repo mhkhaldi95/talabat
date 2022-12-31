@@ -35,7 +35,7 @@ var KTModalExportUsers = function () {
         );
 
         // Submit button handler
-        const submitButton = element.querySelector('[data-kt-users-modal-action="submit"]');
+        const submitButton = element.querySelector('[data-kt-admins-modal-action="submit"]');
         submitButton.addEventListener('click', function (e) {
             e.preventDefault();
 
@@ -88,7 +88,7 @@ var KTModalExportUsers = function () {
         });
 
         // Cancel button handler
-        const cancelButton = element.querySelector('[data-kt-users-modal-action="cancel"]');
+        const cancelButton = element.querySelector('[data-kt-admins-modal-action="cancel"]');
         cancelButton.addEventListener('click', function (e) {
             e.preventDefault();
 
@@ -105,8 +105,8 @@ var KTModalExportUsers = function () {
                 }
             }).then(function (result) {
                 if (result.value) {
-                    form.reset(); // Reset form	
-                    modal.hide(); // Hide modal				
+                    form.reset(); // Reset form
+                    modal.hide(); // Hide modal
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
                         text: "Your form has not been cancelled!.",
@@ -122,7 +122,7 @@ var KTModalExportUsers = function () {
         });
 
         // Close button handler
-        const closeButton = element.querySelector('[data-kt-users-modal-action="close"]');
+        const closeButton = element.querySelector('[data-kt-admins-modal-action="close"]');
         closeButton.addEventListener('click', function (e) {
             e.preventDefault();
 
@@ -139,8 +139,8 @@ var KTModalExportUsers = function () {
                 }
             }).then(function (result) {
                 if (result.value) {
-                    form.reset(); // Reset form	
-                    modal.hide(); // Hide modal				
+                    form.reset(); // Reset form
+                    modal.hide(); // Hide modal
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
                         text: "Your form has not been cancelled!.",
