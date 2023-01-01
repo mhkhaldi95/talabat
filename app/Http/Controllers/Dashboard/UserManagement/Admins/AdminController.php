@@ -7,7 +7,6 @@ use App\Constants\StatusCodes;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserManagement\Admins\AdminRequest;
 use App\Http\Resources\UserManagement\Admins\AdminResource;
-use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\QueryException;
@@ -17,6 +16,13 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:admins-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:admins-update', ['only' => ['create', 'update']]);
+        $this->middleware('permission:admins-read', ['only' => ['index']]);
+        $this->middleware('permission:admins-delete', ['only' => ['delete','deleteSelected']]);
+    }
     public function index(Request $request){
         if($request->ajax()){
             $items = User::query()->orderByDesc('id')->filter('admin')->paginate(\request()->get('length', 10),'*','*',getPageNumber());

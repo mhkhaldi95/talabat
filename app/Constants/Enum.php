@@ -27,6 +27,13 @@ class Enum {
     const GENERAL_ERROR  = '500.000.0';
 
 
+    // role user
+
+    const SUPER_ADMIN = 1;
+    const ADMIN = 2;
+    const CUSTOMER = 3;
+
+
 
 }
 

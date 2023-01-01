@@ -45,9 +45,7 @@
                             <!--begin::Card footer-->
                             <div class="card-footer flex-wrap pt-0">
                                 <a href="{{route('roles.create',$role->id)}}" class="btn btn-light btn-active-light-primary my-1"  >{{__('lang.edit')}}</a>
-                            </div>
-                            <div class="card-footer flex-wrap pt-0">
-                                <a href="{{route('roles.delete',$role->id)}}" class="btn btn-danger btn-active-danger-primary my-1"  >{{__('lang.delete')}}</a>
+                                <a href="javascript:void(0);" data-id="{{$role->id}}" data-name="{{$role->display_name}}" class="btn btn-danger btn-active-danger-primary my-1 delete_role"   >{{__('lang.delete')}}</a>
                             </div>
                             <!--end::Card footer-->
                         </div>
@@ -83,4 +81,67 @@
         <!--end::Container-->
     </div>
     <!--end::Post-->
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            //set initial state.
+            $('.delete_role').on( "click", function() {
+                const delete_role = $(this);
+                const RoleName = $(this).data('name')
+                Swal.fire({
+                    text: "{{__('lang.Are you sure you want to delete')}} " + RoleName + "?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    buttonsStyling: false,
+                    confirmButtonText: "Yes, delete!",
+                    cancelButtonText: "No, cancel",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-danger",
+                        cancelButton: "btn fw-bold btn-active-light-primary"
+                    }
+                }).then(function (result) {
+                    if (result.value) {
+                        // Simulate delete request -- for demo purpose only
+                        Swal.fire({
+                            text: "Deleting " + RoleName,
+                            icon: "info",
+                            buttonsStyling: false,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(function () {
+                            Swal.fire({
+                                text: "You have deleted " + RoleName + "!.",
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary",
+                                }
+                            }).then(function () {
+                                const id = delete_role.data('id')
+                                // delete row data from server and re-draw datatable
+                                axios.post('/admin/roles/delete',{'id':id}).then(function (response) {
+                                    location.reload();
+                                })
+
+                            });
+                        });
+                    } else if (result.dismiss === 'cancel') {
+                        Swal.fire({
+                            text: RoleName + " was not deleted.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary",
+                            }
+                        });
+                    }
+                });
+
+
+            });
+        });
+    </script>
 @endsection

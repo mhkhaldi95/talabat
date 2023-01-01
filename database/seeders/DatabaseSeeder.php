@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Constants\Enum;
 use App\Models\Permission;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
          $user = \App\Models\User::factory()->create([
              'name' => 'Talabat User',
              'email' => 'talabat@gmail.com',
+             'role' => Enum::SUPER_ADMIN,
              'password' => Hash::make('123456'),
          ]);
         $this->call(LaratrustSeeder::class);

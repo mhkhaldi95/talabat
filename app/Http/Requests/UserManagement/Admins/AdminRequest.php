@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\UserManagement\Admins;
 
+use App\Constants\Enum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminRequest extends FormRequest
@@ -29,10 +30,8 @@ class AdminRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'roles' => 'required|array',
-
             'password' => $password_validation,
             'roles.*' => 'required|numeric',
-//            'role' => 'required|exists:lookup_currency,id',
         ];
     }
     public function messages()

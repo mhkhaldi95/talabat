@@ -64,25 +64,25 @@
                                             <div class="d-flex">
                                                 <!--begin::Checkbox-->
                                                 <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
-                                                    <input type="checkbox" class="form-check-input" value="{{$index+1}}" {{in_array($index+1,$permission_role)?'checked':''}} name="permissions[]">
+                                                    <input type="checkbox" class="form-check-input" value="{{$index+1}}" @if(isset($permission_role)){{in_array($index+1,$permission_role)?'checked':''}} @endif name="permissions[]">
                                                     <span class="form-check-label">Create</span>
                                                 </label>
                                                 <!--end::Checkbox-->
                                                 <!--begin::Checkbox-->
                                                 <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                    <input type="checkbox" class="form-check-input" value="{{$index+2}}" {{in_array($index+2,$permission_role)?'checked':''}} name="permissions[]">
+                                                    <input type="checkbox" class="form-check-input" value="{{$index+2}}" @if(isset($permission_role)){{in_array($index+2,$permission_role)?'checked':''}} @endif name="permissions[]">
                                                     <span class="form-check-label">Read</span>
                                                 </label>
                                                 <!--end::Checkbox-->
                                                 <!--begin::Checkbox-->
                                                 <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
-                                                    <input type="checkbox" class="form-check-input" value="{{$index+3}}" {{in_array($index+3,$permission_role)?'checked':''}} name="permissions[]">
+                                                    <input type="checkbox" class="form-check-input" value="{{$index+3}}" @if(isset($permission_role)){{in_array($index+3,$permission_role)?'checked':''}} @endif name="permissions[]">
                                                     <span class="form-check-label">Update</span>
                                                 </label>
                                                 <!--end::Checkbox-->
                                                 <!--begin::Checkbox-->
                                                 <label class="form-check form-check-custom form-check-solid">
-                                                    <input type="checkbox" class="form-check-input" value="{{$index+4}}" {{in_array($index+4,$permission_role)?'checked':''}} name="permissions[]">
+                                                    <input type="checkbox" class="form-check-input" value="{{$index+4}}" @if(isset($permission_role)){{in_array($index+4,$permission_role)?'checked':''}} @endif name="permissions[]">
                                                     <span class="form-check-label">Delete</span>
                                                 </label>
                                                 <!--end::Checkbox-->
@@ -147,5 +147,6 @@
                 });
             }
         });
+
     </script>
 @endsection

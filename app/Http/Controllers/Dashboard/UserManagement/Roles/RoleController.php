@@ -18,6 +18,13 @@ class RoleController extends Controller
 {
 
 
+    public function __construct()
+    {
+        $this->middleware('permission:roles-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:roles-update', ['only' => ['update']]);
+        $this->middleware('permission:roles-read', ['only' => ['index']]);
+        $this->middleware('permission:roles-delete', ['only' => ['delete']]);
+    }
     public function index()
     {
         $roles = Role::query()->orderByDesc('created_at')->get();
@@ -47,6 +54,7 @@ class RoleController extends Controller
             ['page' => route('roles.index') , 'title' =>__('lang.roles'),'active' => true],
             ['page' => '#' , 'title' =>isset($id)?__('lang.edit_role'):__('lang.add_role'),'active' => false],
         ];
+        if(@$item)
         $permissions = @$item->permissions()->pluck('id')->toArray();
         return view('dashboard.user_management.roles.create', [
             'page_title' =>$page_title,
@@ -86,6 +94,11 @@ class RoleController extends Controller
             $item->update($data);
 
             $item->syncPermissions($request->get('permissions', []));
+            foreach ($item->users as $user){
+                $user->syncPermissions($request->get('permissions', []));
+            }
+
+
             DB::commit();
             return back()->with([
                 'message' => __('lang.save_done'),
@@ -98,17 +111,19 @@ class RoleController extends Controller
     }
 
 
-    public function delete($id)
+    public function delete(Request $request)
     {
         try {
-            $item = Role::query()->find($id);
-            $item->delete();
-            return back()->with([
-                'message' => __('lang.save_done'),
-                'alert-type' => 'success'
-            ]);
+            $item = Role::query()->find($request->id);
+            $result =  $item->delete();
+            if($result){
+                return $this->response_json(true, StatusCodes::OK, Enum::DELETED_SUCCESSFULLY);
+
+            }
+            return $this->response_json(false, StatusCodes::INTERNAL_ERROR, Enum::GENERAL_ERROR);
+
         } catch (QueryException $exception) {
-            return $this->invalidIntParameter();
+            return $this->invalidIntParameterJson();
         }
     }
 

@@ -3,7 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Constants\Enum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laratrust\Traits\LaratrustUserTrait;
@@ -13,6 +15,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use LaratrustUserTrait;
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
@@ -45,21 +48,17 @@ class User extends Authenticatable
 
     public function scopeFilter($q,$type){
 
-        if($type == 'admin'){
-            $q->whereRoleIs(['super_admin','admin']);
-//            if(auth()->user()->hasRole(['super_admin','admin'])){
-//                $q->whereRoleIs(['super_admin','admin']);;
-//            }elseif(auth()->user()->hasRole(['admin'])){
-//                $q->whereRoleIs(['admin']);;
-//            }
-        }elseif($type == 'customer'){
-            $q->whereRoleIs(['customer']);;
+        if(auth()->user()->role == Enum::SUPER_ADMIN){
+            $q->whereNotIn('role',[Enum::CUSTOMER]);
+        }elseif(auth()->user()->role == Enum::ADMIN){
+            $q->where('role',Enum::ADMIN);
+        }elseif(auth()->user()->role == Enum::CUSTOMER){
+            return ;
         }
 
 
         if(@request('search')['value']){
-            $q->where('name','like','%'.request('search')['value'].'%')
-                ->orWhere('email','like','%'.request('search')['value'].'%');
+            $q->where('name','like','%'.request('search')['value'].'%')->orWhere('email','like','%'.request('search')['value'].'%');
         }
         return $q;
     }
