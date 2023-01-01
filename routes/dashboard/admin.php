@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\Products\ProductController;
 use App\Http\Controllers\Dashboard\UserManagement\Admins\AdminController;
+use App\Http\Controllers\Dashboard\UserManagement\Customers\CustomerController;
 use App\Http\Controllers\Dashboard\UserManagement\Roles\RoleController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +45,16 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('delete-selected', [AdminController::class, 'deleteSelected'])->name('admins.deleteSelected');
         });
 
+
+        Route::group(['prefix' => 'customers'], function () {
+            Route::get('/', [CustomerController::class, 'index'])->name('customers.index');
+            Route::get('/create/{id?}', [CustomerController::class, 'create'])->name('customers.create');
+            Route::post('/store/{id?}', [CustomerController::class, 'store'])->name('customers.store');
+//            Route::post('{id}/update', [CustomerController::class, 'update'])->name('customers.update');
+            Route::post('{id}/delete', [CustomerController::class, 'delete'])->name('customers.delete');
+            Route::post('delete-selected', [CustomerController::class, 'deleteSelected'])->name('customers.deleteSelected');
+        });
+
         Route::group(['prefix' => 'roles'], function () {
             Route::get('/', [RoleController::class, 'index'])->name('roles.index');
             Route::get('/create/{id?}', [RoleController::class, 'create'])->name('roles.create');
@@ -50,6 +62,18 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('{id}/update', [RoleController::class, 'update'])->name('roles.update');
             Route::post('delete', [RoleController::class, 'delete'])->name('roles.delete');
         });
+
+
+        Route::group(['prefix' => 'products'], function () {
+            Route::get('/', [ProductController::class, 'index'])->name('products.index');
+            Route::get('/create/{id?}', [ProductController::class, 'create'])->name('products.create');
+            Route::post('/store/{id?}', [ProductController::class, 'store'])->name('products.store');
+//            Route::post('{id}/update', [CustomerController::class, 'update'])->name('customers.update');
+            Route::post('{id}/delete', [ProductController::class, 'delete'])->name('products.delete');
+            Route::post('delete-selected', [ProductController::class, 'deleteSelected'])->name('products.deleteSelected');
+        });
+
+
 
     });
 

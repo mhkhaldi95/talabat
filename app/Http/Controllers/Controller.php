@@ -40,5 +40,17 @@ class Controller extends BaseController
         ], $extra_data);
         return response()->json($response, $code);
     }
+    public function returnBackWithSaveDone(){
+        return back()->with([
+            'message' => __('lang.save_done'),
+            'alert-type' => 'success'
+        ]);
+    }
+    public function returnBackWithSaveDoneFailed(){
+        return back()->with([
+            'message' => __('lang.save_failed'),
+            'alert-type' => 'error'
+        ]);
+    }
 
 }

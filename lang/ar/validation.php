@@ -178,6 +178,7 @@ return [
         'permissions'                  => 'الصلاحيات',
         'category_id'                  => 'القسم',
         'stoke'                  => 'الكمية',
+        'roles'                  => 'الأدوار',
         'sale_price'                  => 'سعر البيع',
         'purchase_price'                  => 'سعر الشراء',
         'phone.0'                  => 'الهاتف الاول',

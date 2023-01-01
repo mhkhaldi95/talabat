@@ -74,10 +74,7 @@ class RoleController extends Controller
             $item = Role::create($data);
             DB::commit();
             $item->permissions()->attach($request->get('permissions', []));
-            return back()->with([
-                'message' => __('lang.save_done'),
-                'alert-type' => 'success'
-            ]);
+            return $this->returnBackWithSaveDone();
         } catch (QueryException $exception) {
         return $this->invalidIntParameter();
         }
@@ -100,10 +97,7 @@ class RoleController extends Controller
 
 
             DB::commit();
-            return back()->with([
-                'message' => __('lang.save_done'),
-                'alert-type' => 'success'
-            ]);
+           return $this->returnBackWithSaveDone();
         } catch (QueryException $exception) {
             return $this->invalidIntParameter();
         }

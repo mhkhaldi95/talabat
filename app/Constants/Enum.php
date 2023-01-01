@@ -33,6 +33,10 @@ class Enum {
     const ADMIN = 2;
     const CUSTOMER = 3;
 
+    // user gender
+
+    const MALE = 1;
+    const FEMALE = 2;
 
 
 }

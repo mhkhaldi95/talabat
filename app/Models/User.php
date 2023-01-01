@@ -25,6 +25,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'phone',
+        'gender',
     ];
 
     /**
@@ -46,19 +49,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function scopeFilter($q,$type){
+    public function scopeAdminFilter($q,$type){
 
-        if(auth()->user()->role == Enum::SUPER_ADMIN){
-            $q->whereNotIn('role',[Enum::CUSTOMER]);
-        }elseif(auth()->user()->role == Enum::ADMIN){
-            $q->where('role',Enum::ADMIN);
-        }elseif(auth()->user()->role == Enum::CUSTOMER){
-            return ;
-        }
-
+        $q->whereNotIn('role',[Enum::CUSTOMER]);
 
         if(@request('search')['value']){
-            $q->where('name','like','%'.request('search')['value'].'%')->orWhere('email','like','%'.request('search')['value'].'%');
+            $value = request('search')['value'];
+            return $q->whereRaw("concat(name, ' ',email) like '%" . $value . "%' ");
+        }
+        return $q;
+    }
+    public function scopeCustomerFilter($q,$type){
+
+        $q->whereIn('role',[Enum::CUSTOMER]);
+
+        if(@request('search')['value']){
+            $value = request('search')['value'];
+            return $q->whereRaw("concat(name, ' ',email) like '%" . $value . "%' ");
+
         }
         return $q;
     }

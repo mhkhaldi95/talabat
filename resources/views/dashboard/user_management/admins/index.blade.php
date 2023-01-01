@@ -679,8 +679,9 @@
                                         }
                                     }).then(function () {
                                         // delete row data from server and re-draw datatable
-                                        axios.post('/admin/admins/'+record_id+'/delete')
-                                        dt.draw();
+                                        axios.post('/admin/admins/'+record_id+'/delete').then(function (response) {
+                                            dt.draw();
+                                        })
                                     });
                                 });
                             } else if (result.dismiss === 'cancel') {
@@ -776,8 +777,9 @@
                                             ids.push(parseInt($(element).val()));
                                     });
                                     // delete row data from server and re-draw datatable
-                                    axios.post('/admin/admins/delete-selected',{'ids':ids})
-                                    dt.draw();
+                                    axios.post('/admin/admins/delete-selected',{'ids':ids}).then(function (response) {
+                                        dt.draw();
+                                    })
                                 });
 
                                 // Remove header checked box

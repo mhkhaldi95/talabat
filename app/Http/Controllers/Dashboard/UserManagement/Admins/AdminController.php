@@ -25,7 +25,7 @@ class AdminController extends Controller
     }
     public function index(Request $request){
         if($request->ajax()){
-            $items = User::query()->orderByDesc('id')->filter('admin')->paginate(\request()->get('length', 10),'*','*',getPageNumber());
+            $items = User::query()->orderByDesc('id')->adminFilter('admin')->paginate(\request()->get('length', 10),'*','*',getPageNumber());
             return datatable_response($items, null, AdminResource::class);
         }
         $page_breadcrumbs = [
@@ -43,7 +43,7 @@ class AdminController extends Controller
         if (isset($id)) {
             $page_title = __('lang.edit_admin');
             try {
-                $item = User::query()->filter('admin')->findOrFail($id);
+                $item = User::query()->adminFilter('admin')->findOrFail($id);
             } catch (QueryException $exception) {
                 return $this->invalidIntParameter();
             }
@@ -87,30 +87,17 @@ class AdminController extends Controller
             $item->permissions()->sync($permissions);
             DB::commit();
 
-            return back()->with([
-                'page_title' =>__('lang.create_admin'),
-                'page_breadcrumbs' => $page_breadcrumbs,
-                'item' => $item,
-                'message' => __('lang.save_done'),
-                'alert-type' => 'success'
-            ]);
+            return $this->returnBackWithSaveDone();
         } catch (\Exception $exception) {
             DB::rollBack();
-            return back()->with([
-                'page_title' =>__('lang.create_admin'),
-                'page_breadcrumbs' => $page_breadcrumbs,
-                'error' => __('lang.save_error'),
-                'item' => @$item,
-                'message' => __('lang.save_failed'),
-                'alert-type' => 'error'
-            ]);
+            return $this->returnBackWithSaveDoneFailed();
         }
     }
     public function update($id,AdminRequest $request)
     {
         $data = $request->validated();
         try {
-            $item = User::query()->filter('admin')->findOrFail($id);
+            $item = User::query()->adminFilter('admin')->findOrFail($id);
         } catch (QueryException $exception) {
             return $this->invalidIntParameter();
         }
@@ -137,30 +124,16 @@ class AdminController extends Controller
             $permissions = DB::table('permission_role')->whereIn('role_id',$request->get('roles', []))->get()->pluck('permission_id')->toArray();
             $item->permissions()->sync($permissions);
             DB::commit();
-
-            return back()->with([
-                'page_title' =>__('lang.create_admin'),
-                'page_breadcrumbs' => $page_breadcrumbs,
-                'item' => $item,
-                'message' => __('lang.save_done'),
-                'alert-type' => 'success'
-            ]);
+            return $this->returnBackWithSaveDone();
         } catch (\Exception $exception) {
             DB::rollBack();
-            return back()->with([
-                'page_title' =>__('lang.create_admin'),
-                'page_breadcrumbs' => $page_breadcrumbs,
-                'error' => __('lang.save_error'),
-                'item' => @$item,
-                'message' => __('lang.save_failed'),
-                'alert-type' => 'error'
-            ]);
+            return $this->returnBackWithSaveDoneFailed();
         }
     }
 
     public function delete($id){
         try {
-            $item = User::query()->filter('admin')->findOrFail($id);
+            $item = User::query()->adminFilter('admin')->findOrFail($id);
         } catch (QueryException $exception) {
             return $this->invalidIntParameter();
         }

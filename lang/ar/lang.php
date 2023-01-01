@@ -60,8 +60,11 @@ return [
     'user_management'                  => 'ادارة المستخدمين',
     'password_confirmation'                  => 'تأكيد كلمة المرور',
     'edit_admin'                  => 'تعديل مشرف',
+    'edit_customer'                  => 'تعديل زبون',
     'add_admin'                  => 'اضافة مشرف ',
+    'add_customer'                  => 'اضافة زبون ',
     'admins'                  => 'المشرفين',
+    'customers'                  => 'الزبائن',
     'sign_out'                  => 'تسجيل خروج',
     'roles'                  => 'الأدوار',
     'submit'                  => 'حفظ',
@@ -87,7 +90,11 @@ return [
     'Select all' => 'تحديد الكل',
     'Add New Role' => 'اضافة دور جديد',
     'edit_role' => 'تعديل الدور',
-    'add_role' => 'اضافة الدور'
+    'add_role' => 'اضافة الدور',
+    'gender' => 'الجنس',
+    'phone' => 'الموبايل',
+    'male' => 'ذكر',
+    'female' => 'أنثى',
 
 ];
 

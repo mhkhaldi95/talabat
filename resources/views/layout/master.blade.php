@@ -87,6 +87,7 @@ License: For each use you must have a valid license purchased only from above li
 <!--end::Page Vendors Javascript-->
 {{--<script src="{{asset('')}}assets/js/custom/documentation/general/datatables/server-side.js"></script>--}}
 <script src="{{asset('')}}assets/js/custom/documentation/general/toastr.js"></script>
+{{--<script src="{{asset('')}}assets/js/custom/bootstrap-datepicker.js"></script>--}}
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
 @yield('scripts')
