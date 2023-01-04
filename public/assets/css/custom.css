@@ -1,0 +1,24 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(../fonts/cairo/Cairo-Bold.woff2);
+}
+* {
+    font-family: myFirstFont;
+}
+.image-input [data-action=make-master]{
+    position: absolute;
+    right: 49px;
+    top: 129px;
+}
+.d-flex-custom{
+    flex-flow: wrap;
+}
+.d-flex-custom .parent_div_photo{
+    margin-left: 10px;
+    margin-bottom: 39px;
+}
+.remove_photo{
+    position: relative;
+    right: 30%;
+}
+

@@ -37,5 +37,7 @@
     <link href="{{asset('')}}assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
 @endif
+<link href="{{asset('')}}assets/css/custom.css" rel="stylesheet" type="text/css" />
+
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 @yield('head')

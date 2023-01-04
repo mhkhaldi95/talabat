@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Dashboard\Addons\AddonController;
 use App\Http\Controllers\Dashboard\Auth\LoginController;
+use App\Http\Controllers\Dashboard\Categories\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\Products\ProductController;
 use App\Http\Controllers\Dashboard\UserManagement\Admins\AdminController;
@@ -64,6 +66,22 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
 
+        Route::group(['prefix' => 'categories'], function () {
+            Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
+            Route::get('/create/{id?}', [CategoryController::class, 'create'])->name('categories.create');
+            Route::post('/store/{id?}', [CategoryController::class, 'store'])->name('categories.store');
+            Route::post('{id}/delete', [CategoryController::class, 'delete'])->name('categories.delete');
+            Route::post('delete-selected', [CategoryController::class, 'deleteSelected'])->name('categories.deleteSelected');
+        });
+
+        Route::group(['prefix' => 'addons'], function () {
+            Route::get('/', [AddonController::class, 'index'])->name('addons.index');
+            Route::get('/create/{id?}', [AddonController::class, 'create'])->name('addons.create');
+            Route::post('/store/{id?}', [AddonController::class, 'store'])->name('addons.store');
+            Route::post('{id}/delete', [AddonController::class, 'delete'])->name('addons.delete');
+            Route::post('delete-selected', [AddonController::class, 'deleteSelected'])->name('addons.deleteSelected');
+        });
+
         Route::group(['prefix' => 'products'], function () {
             Route::get('/', [ProductController::class, 'index'])->name('products.index');
             Route::get('/create/{id?}', [ProductController::class, 'create'])->name('products.create');
@@ -71,6 +89,8 @@ Route::group(['prefix' => 'admin'], function () {
 //            Route::post('{id}/update', [CustomerController::class, 'update'])->name('customers.update');
             Route::post('{id}/delete', [ProductController::class, 'delete'])->name('products.delete');
             Route::post('delete-selected', [ProductController::class, 'deleteSelected'])->name('products.deleteSelected');
+            Route::post('upload-photo', [ProductController::class, 'uploadPhotos'])->name('products.upload.photo');
+            Route::post('remove-photo', [ProductController::class, 'removePhoto'])->name('products.remove.photo');
         });
 
 

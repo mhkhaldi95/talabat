@@ -29,91 +29,8 @@
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                            <!--begin::Filter-->
-                            <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
-                                <span class="svg-icon svg-icon-2">
-													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-														<path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="black" />
-													</svg>
-												</span>
-                                <!--end::Svg Icon-->Filter</button>
-                            <!--begin::Menu 1-->
-                            <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true" id="kt-toolbar-filter">
-                                <!--begin::Header-->
-                                <div class="px-7 py-5">
-                                    <div class="fs-4 text-dark fw-bolder">{{__('lang.Filter Options')}}</div>
-                                </div>
-                                <!--end::Header-->
-                                <!--begin::Separator-->
-                                <div class="separator border-gray-200"></div>
-                                <!--end::Separator-->
-                                <!--begin::Content-->
-                                <div class="px-7 py-5">
-                                    <!--begin::Input group-->
-                                    <div class="mb-10">
-                                        <!--begin::Label-->
-                                        <label class="form-label fs-5 fw-bold mb-3">{{__('lang.Status')}}:</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <select class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="{{__('lang.select')}}" data-allow-clear="true" data-kt-customer-table-filter="status" id="status_filter" data-dropdown-parent="#kt-toolbar-filter">
-                                            <option></option>
-
-                                            <option value="{{\App\Constants\Enum::PUBLISHED}}" {{isset($item)?$item['status'] == \App\Constants\Enum::PUBLISHED?'selected':'':''}}>{{__('lang.Published')}}</option>
-                                            <option value="{{\App\Constants\Enum::INACTIVE}}" {{isset($item)?$item['status'] == \App\Constants\Enum::INACTIVE?'selected':'':''}}>{{__('lang.Inactive')}}</option>
-
-                                        </select>
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-{{--                                    <div class="mb-10">--}}
-{{--                                        <!--begin::Label-->--}}
-{{--                                        <label class="form-label fs-5 fw-bold mb-3">Payment Type:</label>--}}
-{{--                                        <!--end::Label-->--}}
-{{--                                        <!--begin::Options-->--}}
-{{--                                        <div class="d-flex flex-column flex-wrap fw-bold" data-kt-customer-table-filter="payment_type" id="payment_type">--}}
-{{--                                            <!--begin::Option-->--}}
-{{--                                            <label class="form-check form-check-sm form-check-custom form-check-solid mb-3 me-5">--}}
-{{--                                                <input class="form-check-input" type="radio" name="payment_type" value="all" checked="checked" />--}}
-{{--                                                <span class="form-check-label text-gray-600">All</span>--}}
-{{--                                            </label>--}}
-{{--                                            <!--end::Option-->--}}
-{{--                                            <!--begin::Option-->--}}
-{{--                                            <label class="form-check form-check-sm form-check-custom form-check-solid mb-3 me-5">--}}
-{{--                                                <input class="form-check-input" type="radio" name="payment_type" value="visa" />--}}
-{{--                                                <span class="form-check-label text-gray-600">Visa</span>--}}
-{{--                                            </label>--}}
-{{--                                            <!--end::Option-->--}}
-{{--                                            <!--begin::Option-->--}}
-{{--                                            <label class="form-check form-check-sm form-check-custom form-check-solid mb-3">--}}
-{{--                                                <input class="form-check-input" type="radio" name="payment_type" value="mastercard" />--}}
-{{--                                                <span class="form-check-label text-gray-600">Mastercard</span>--}}
-{{--                                            </label>--}}
-{{--                                            <!--end::Option-->--}}
-{{--                                            <!--begin::Option-->--}}
-{{--                                            <label class="form-check form-check-sm form-check-custom form-check-solid">--}}
-{{--                                                <input class="form-check-input" type="radio" name="payment_type" value="american_express" />--}}
-{{--                                                <span class="form-check-label text-gray-600">American Express</span>--}}
-{{--                                            </label>--}}
-{{--                                            <!--end::Option-->--}}
-{{--                                        </div>--}}
-{{--                                        <!--end::Options-->--}}
-{{--                                    </div>--}}
-                                    <!--end::Input group-->
-                                    <!--begin::Actions-->
-                                    <div class="d-flex justify-content-end">
-                                        <button type="reset" class="btn btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true" data-kt-customer-table-filter="reset" id="reset">Reset</button>
-                                        <button type="submit" class="btn btn-primary" data-kt-menu-dismiss="true" data-kt-customer-table-filter="filter" id="filter">Apply</button>
-                                    </div>
-                                    <!--end::Actions-->
-                                </div>
-                                <!--end::Content-->
-                            </div>
-                            <!--end::Menu 1-->
-                            <!--end::Filter-->
                             <!--begin::Add customer-->
-                            <a href="{{route('products.create')}}" type="button" class="btn btn-primary" >{{__('lang.add')}}</a>
+                            <a href="{{route('categories.create')}}" type="button" class="btn btn-primary" >{{__('lang.add')}}</a>
                             <!--end::Add customer-->
                         </div>
                         <!--end::Toolbar-->
@@ -142,8 +59,6 @@
                                 </div>
                             </th>
                             <th class="min-w-125px">{{__('lang.name')}}</th>
-                            <th class="min-w-125px">{{__('lang.price')}}</th>
-                            <th class="min-w-125px">{{__('lang.Status')}}</th>
                             <th class="text-end min-w-70px">{{__('lang.actions')}}</th>
                         </tr>
                         <!--end::Table row-->
@@ -160,6 +75,9 @@
                 </div>
                 <!--end::Card body-->
             </div>
+            <!--end::Card-->
+            <!--begin::Modals-->
+            <!--end::Modals-->
         </div>
         <!--end::Container-->
     </div>
@@ -178,7 +96,6 @@
             var table;
             var dt;
             var filterPayment;
-            var filterStatus;
 
             // Private functions
             var initDatatable = function () {
@@ -195,41 +112,67 @@
                     },
                     ajax: {
                         // url: "https://preview.keenthemes.com/api/datatables.php",
-                        url: "{{route('products.index')}}",
+                        url: "{{route('categories.index')}}",
                     },
                     columns: [
                         { data: 'id' },
                         { data: 'name' },
-                        { data: 'price' },
-                        { data: 'status' },
-                        { data: 'actions' },
+                        { data: null },
                     ],
                     columnDefs: [
                         {
                             targets: 0,
                             orderable: false,
-
+                            render: function (data) {
+                                return `
+                            <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                <input class="form-check-input" type="checkbox" value="${data}" />
+                            </div>`;
+                            }
                         },
                         {
                             targets: 1,
                             orderable: false,
-
                         },
                         {
-                            targets: 2,
-                            orderable: true,
-
-                        },
-                        {
-                            targets: 3,
-                            orderable: true,
-
-                        },
-                        {
-                            targets: 4,
+                            targets: -1,
+                            data: null,
                             orderable: false,
                             className: 'text-end',
+                            render: function (data, type, row) {
+                                return `
+                            <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
+                                {{__('lang.actions')}}
+                                <span class="svg-icon svg-icon-5 m-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                            <path d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z" fill="currentColor" fill-rule="nonzero" transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999)"></path>
+                                        </g>
+                                    </svg>
+                                </span>
+                            </a>
+                            <!--begin::Menu-->
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="/admin/categories/create/${row.id}" class="menu-link px-3" data-kt-docs-table-filter="edit_row">
+                                        {{__('lang.Edit')}}
+                                    </a>
+                                </div>
+                                <!--end::Menu item-->
 
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" class="menu-link px-3" data-kt-docs-table-filter="delete_row" id="delete_row">
+                                         {{__('lang.Delete')}}
+                                    </a>
+                                </div>
+                                <!--end::Menu item-->
+                            </div>
+                            <!--end::Menu-->
+                        `;
+                            },
                         },
                     ],
                     // Add data-filter attribute
@@ -256,23 +199,20 @@
                 const filterSearch = document.querySelector('#search');
                 filterSearch.addEventListener('keyup', function (e) {
                     dt.search(e.target.value,"search").draw();
-
                 });
             }
-            $('#status_filter').change(function (){
-                dt.search($(this).val().toLowerCase(), 'status').draw();
-            });
+
             // Filter Datatable
             var handleFilterDatatable = () => {
                 // Select filter options
                 filterPayment = document.querySelectorAll('[data-kt-customer-table-filter="payment_type"] [name="payment_type"]');
-                // filterStatus = document.querySelectorAll('[data-kt-customer-table-filter="status"] [name="status"]');
+                // filterPayment = document.querySelector('#payment_type');
+                // const filterButton = document.querySelector('[data-kt-docs-table-filter="filter"]');
                 const filterButton = document.querySelector('#filter');
                 // Filter datatable on submit
                 filterButton.addEventListener('click', function () {
                     // Get filter values
                     let paymentValue = '';
-                    let status = '';
 
                     // Get payment value
                     filterPayment.forEach(r => {
@@ -285,19 +225,9 @@
                             paymentValue = '';
                         }
                     });
-                    // Get payment value
-                    // filterStatus.forEach(r => {
-                    //     if (r.selected) {
-                    //         status = r.value;
-                    //     }
-                    // });
 
                     // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
-                    // dt.search(paymentValue,'payment');
-                    // dt.search(status,'status');
-
-                    // dt.search("status_",paymentValue).draw();
-
+                    dt.search(paymentValue).draw();
                 });
             }
 
@@ -350,10 +280,9 @@
                                         }
                                     }).then(function () {
                                         // delete row data from server and re-draw datatable
-                                        axios.post('/admin/products/'+record_id+'/delete').then(function (response) {
+                                        axios.post('/admin/categories/'+record_id+'/delete').then(function (response) {
                                             dt.draw();
                                         })
-
                                     });
                                 });
                             } else if (result.dismiss === 'cancel') {
@@ -385,8 +314,6 @@
 
                     // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
                     dt.search('').draw();
-                    // localStorage.getItem("search");
-
                 });
             }
 
@@ -446,12 +373,12 @@
                                 }).then(function () {
                                     const ids = [];
                                     const headerCheck = container.querySelectorAll('[type="checkbox"]');
-                                    headerCheck.forEach((element) => {
+                                        headerCheck.forEach((element) => {
                                         if(element.checked == true)
                                             ids.push(parseInt($(element).val()));
                                     });
                                     // delete row data from server and re-draw datatable
-                                    axios.post('/admin/products/delete-selected',{'ids':ids}).then(function (response) {
+                                    axios.post('/admin/categories/delete-selected',{'ids':ids}).then(function (response) {
                                         dt.draw();
                                     })
                                 });

@@ -16,11 +16,45 @@ class ProductResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => view('dashboard.products.partial.datatable_cols._id',[
+                'item' => $this
+            ])->render(),
+            'name' => view('dashboard.products.partial.datatable_cols._name',[
+                'item' => $this
+            ])->render(),
+            'descriptiion' => $this->descriptiion,
+            'price' =>  view('dashboard.products.partial.datatable_cols._price',[
+                'item' => $this
+            ])->render(),
+            'avatar' => $this->avatar,
+            'category' => $this->category->name,
+            'actions' => view('dashboard.products.partial.datatable_cols._action',[
+                'item' => $this
+            ])->render(),
+            'status' => view('dashboard.products.partial.datatable_cols._status',[
+                'item' => $this
+            ])->render(),
+        ];
+    }
+    public function toShow(){
+        return [
             'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            'gender' => $this->getGender($this->gender)
+            'name_ar' => $this->name_ar,
+            'name_en' => $this->name_en,
+            'description_ar' => $this->description_ar,
+            'description_en' => $this->description_en,
+            'category_id' => $this->category_id,
+            'price' => $this->price,
+            'discount_option' => $this->discount_option,
+            'discounted_price' => $this->discounted_price,
+            'max_addons' => $this->max_addons,
+            'master_photo' => $this->avatar,
+            'product_addons' => @$this->addons->pluck('id')->toArray(),
+            'photos' => @$this->photos()->select('id','name')->get(),
+            'tags' => $this->tags?(json_encode(convertTagsStringToObject($this->tags))):'',
+            'status' => $this->status,
+
+
         ];
     }
 }

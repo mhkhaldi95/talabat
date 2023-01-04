@@ -39,5 +39,19 @@ class Enum {
     const FEMALE = 2;
 
 
+    // product status
+
+    const PUBLISHED= 'published';
+    const INACTIVE = 'inactive';
+
+    // discount type
+
+    const NO_DISCOUNT= 1;
+    const DISCOUNT_PERCENTAGE  = 2;
+    const DISCOUNT_FIXED = 3;
+
+
+
+
 }
 

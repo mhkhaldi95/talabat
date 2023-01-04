@@ -49,21 +49,9 @@ function paginate($data,$request = null,$resource = null,$notification = false){
 }
 function datatable_response($data,$request = null,$resource = null,$notification = false){
     $items =  $data->items();
-    if($request && $request['pagination']){
-        $page = $request['pagination']['page']??$data->currentPage();
-    }else{
-        $page = $data->currentPage();
-    }
-
 
     if(!is_null($resource))
         $items =  $resource::collection($items);
-    $meta =  [
-        'page' => $page,
-        'pages' => $data->lastPage(),
-        'perpage' => intval($data->perPage()),
-        'total' => $data->total(),
-    ];
     return response()->json([
         'recordsTotal'    => $data->total(),
         'recordsFiltered' => $data->total(),
@@ -73,6 +61,41 @@ function datatable_response($data,$request = null,$resource = null,$notification
 function getPageNumber(){
    return (request()->get('start', 0)/request()->get('length', 10))+1;
 }
+
+function getColAndDirForOrderBy($model){
+    $col  = 'created_at';
+    $dir  = 'desc';
+    if(@request('order')[0]['dir']){
+        $dir  = @request('order')[0]['dir'];
+        $col  = $model::COL_ORDERS[@request('order')[0]['column']];
+    }
+    return ['col'=>$col,'dir'=>$dir];
+}
+function uploadFile($request,$folder_name,$feild='file'){
+    if($request->$feild){
+        $imageName = time().rand(1,100).'.'.$request->$feild->getClientOriginalExtension();
+        $request->$feild->storeAs('public/'.$folder_name, $imageName);
+        return $imageName;
+    }
+}
+function convertTagsObjectToString($tags){
+    $tags_str = '';
+       $tags =  array_column(json_decode($tags),'value');
+       foreach ($tags as $tag){
+           $tags_str .= $tag.' ';
+       }
+     return   $tags_str;
+}
+
+
+function convertTagsStringToObject($tags){
+
+    foreach (explode(' ',rtrim($tags)) as $index=>$tag){
+        $data[$index]['value'] = $tag;
+    }
+    return $data;
+}
+
 
 
 

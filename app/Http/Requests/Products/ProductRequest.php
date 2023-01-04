@@ -25,14 +25,25 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
+//        dd($this->all());
         $id = $this->route('id');
-        $this->merge(['role' => Enum::CUSTOMER]);
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'nullable|email|unique:users,email,' . $id,
-            'phone' => 'required|string|max:15',
-            'gender' => ['nullable','numeric','max:15' , Rule::in([Enum::MALE, Enum::FEMALE])],
-            'role' => ['nullable','numeric','max:15' , Rule::in([Enum::CUSTOMER])]
+            'name_ar' => 'required|string|max:255',
+            'name_en' => 'required|string|max:255',
+            'description_ar' => 'required|string',
+            'description_en' => 'required|string',
+            'master_photo' => 'nullable|file',
+            'status' => ['nullable',Rule::in([Enum::PUBLISHED, Enum::INACTIVE])],
+            'category_id' => ['required','numeric' , 'exists:categories,id'],
+            'max_addons' => ['numeric'],
+            'product_options' => ['nullable','array'],
+            'tags' => ['nullable'],
+            'photos' => 'nullable|array',
+            'photos.*' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'discount_option' => ['nullable','numeric',Rule::in([Enum::NO_DISCOUNT,Enum::DISCOUNT_PERCENTAGE,Enum::DISCOUNT_FIXED])],
+            'discounted_price' => ['nullable','numeric'],
+            'discounted_percentage' => ['nullable','numeric'],
         ];
     }
     public function messages()

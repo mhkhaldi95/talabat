@@ -7,6 +7,11 @@ use App\Constants\StatusCodes;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Products\ProductRequest;
 use App\Http\Resources\Products\ProductResource;
+use App\Models\Addon;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\ProductAddon;
+use App\Models\ProductPhoto;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\QueryException;
@@ -24,7 +29,7 @@ class ProductController extends Controller
     }
     public function index(Request $request){
         if($request->ajax()){
-            $items = User::query()->orderByDesc('id')->productFilter('product')->paginate(\request()->get('length', 10),'*','*',getPageNumber());
+            $items = Product::query()->orderBy(getColAndDirForOrderBy(Product::class)['col'],getColAndDirForOrderBy(Product::class)['dir'])->filter()->paginate(\request()->get('length', 10),'*','*',getPageNumber());
             return datatable_response($items, null, ProductResource::class);
         }
         $page_breadcrumbs = [
@@ -42,7 +47,7 @@ class ProductController extends Controller
         if (isset($id)) {
             $page_title = __('lang.edit_product');
             try {
-                $item = User::query()->productFilter('product')->findOrFail($id);
+                $item = Product::query()->filter()->findOrFail($id);
             } catch (QueryException $exception) {
                 return $this->invalidIntParameter();
             }
@@ -55,19 +60,61 @@ class ProductController extends Controller
         return view('dashboard.products.create', [
             'page_title' =>$page_title,
             'page_breadcrumbs' => $page_breadcrumbs,
-            'item' => @$item,
+            'item' => @$item?(new ProductResource($item))->toShow():null ,
+            'categories' => Category::query()->filter()->get(),
+            'addons' => Addon::query()->filter()->get(),
         ]);
     }
     public function store(ProductRequest $request, $id = null)
     {
-        $data = $request->validated();
+        $data = $request->only(Product::FILLABLE);
+        $photos = $request->get('photos',[]);
+        $addons = $request->get('product_options')?
+            array_column($request->get('product_options'),'addon_id'):[];
+        if($data['discount_option'] == Enum::DISCOUNT_PERCENTAGE){
+            $data['discounted_price'] = $request->get('discounted_percentage');
+        }else{
+            $data['discounted_price'] = $data['discounted_price']??0;
+        }
+
+        if(isset($data['tags'])){
+            $data['tags'] = convertTagsObjectToString($data['tags']);
+        }
         DB::beginTransaction();
         try {
-            $item = User::query()->updateOrCreate([
+
+            if(isset($data['master_photo'])){
+                $data['master_photo'] =  uploadFile($request,'product-photos','master_photo');
+            }
+
+            $item = Product::query()->updateOrCreate([
                 'id' => $id,
             ], $data);
-            if(is_null($id))
-            $item->attachRole('product');
+
+
+            if(isset($photos)){
+                foreach ($photos as $photo){
+                    ProductPhoto::create([
+                        'product_id' => $item->id,
+                        'name' => $photo,
+                    ]);
+                }
+            }
+            if($addons){
+                if(!is_null($id)){
+                    ProductAddon::where('product_id',$id)->whereIn('addon_id',$item->addons->pluck('id')->toArray())->delete();
+                }
+                $addons = array_filter(array_unique($addons));
+                foreach ($addons as $addon){
+                    ProductAddon::create([
+                        'product_id' => $item->id,
+                        'addon_id' => $addon
+                    ]);
+                }
+
+            }
+
+
             DB::commit();
 
             return $this->returnBackWithSaveDone();
@@ -79,7 +126,7 @@ class ProductController extends Controller
 
     public function delete($id){
         try {
-            $item = User::query()->productFilter('product')->findOrFail($id);
+            $item = Product::query()->filter()->findOrFail($id);
         } catch (QueryException $exception) {
             return $this->invalidIntParameter();
         }
@@ -96,7 +143,7 @@ class ProductController extends Controller
     {
         $ids = $request->get('ids');
         try {
-            $result = User::query()->whereIn('id', $ids)->forceDelete();
+            $result = Product::query()->whereIn('id', $ids)->delete();
         } catch (QueryException $exception) {
             return $this->invalidIntParameterJson();
         }
@@ -108,5 +155,28 @@ class ProductController extends Controller
         }
         return $this->response_json(false, StatusCodes::INTERNAL_ERROR, Enum::GENERAL_ERROR);
 
+    }
+
+    public function uploadPhotos(Request $request){
+        return uploadFile($request,'product-photos','file');
+    }
+    public function removePhoto(Request $request){
+
+        $request->validate([
+            'photo_id' => ['required', 'exists:product_photos,id' ,'numeric'],
+            'product_id' => ['required', 'exists:products,id' ,'numeric']
+              ]);
+        $photo = ProductPhoto::where('product_id',$request->product_id)->where('id',$request->photo_id)->first();
+        if($photo){
+            unlink(base_path().'/storage/app/public/product-photos/'. $photo->name);
+            $photo->delete();
+            return response()->json([
+                'status' => true,
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+        ]);
     }
 }
