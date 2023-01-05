@@ -29,7 +29,7 @@ class User extends Authenticatable
         'phone',
         'gender',
     ];
-
+    const COL_ORDERS = [];
     /**
      * The attributes that should be hidden for serialization.
      *

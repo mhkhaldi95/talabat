@@ -10,7 +10,7 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    const FILLABLE = ['name_ar','name_ar','description_ar'
+    const FILLABLE = ['name_ar','name_en','description_ar'
         ,'description_en','master_photo','tags','price','category_id','discounted_price','max_addons','discount_option','status'];
 
     protected $fillable = self::FILLABLE;
@@ -20,12 +20,12 @@ class Product extends Model
         '3' =>'status',
     ];
     public function scopeFilter($q){
-        $query = @request('search')['regex'];
+        $col = @request('search')['regex'];
         $value = @request('search')['value'];
-        if($query == 'search'){
+        if($col == 'search'){
             return $q->whereRaw("concat(name_ar, ' ',name_en, ' ',description_ar, ' ',description_en, ' ',tags) like '%" . $value . "%' ");
         }
-        if($query == 'status' && $value !=''){
+        if($col == 'status' && $value !=''){
             return $q->where("status",$value);
         }
         return $q;

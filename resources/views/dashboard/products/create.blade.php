@@ -563,7 +563,7 @@
                     url: "{{route('products.remove.photo')}}",
                     data: {
                         'photo_id': photo_id,
-                        'product_id': {{isset($item['id'])}},
+                        'product_id': "{{isset($item['id'])?$item['id']:null}}",
                     },
                     headers: {
                         'X-CSRF-TOKEN':
@@ -582,7 +582,13 @@
 
             });
 
-
+            var o = document.querySelector("#kt_ecommerce_add_product_discount_slider") ;
+            var  a = document.querySelector("#kt_ecommerce_add_product_discount_label") ;
+            noUiSlider.create(o, {
+                start: [{{isset($item)?$item['discounted_price']:1}}],
+                connect: !0,
+                range: {min: 1, max: 100}
+            });
             $('#kt_ecommerce_add_product_submit').click(function() {
                 $('#discounted_percentage').val( $('#kt_ecommerce_add_product_discount_label').html())
             });
@@ -597,6 +603,10 @@
             }
             updateDiscountedPercentage();
             fillTextArea()
+
+            o.noUiSlider.on("update", (function (e, t) {
+                a.innerHTML = Math.round(e[t]); t && (a.innerHTML = Math.round(e[t]))
+            }))
         });
     </script>
     <script>
@@ -619,8 +629,8 @@
             },
             removedfile: function(file)
                 {
-                    var name = file.upload.filename;
-                    console.log("nammmmmmmmmmmmme",name)
+                    // var name = file.upload.filename;
+                    // console.log("nammmmmmmmmmmmme",name)
                     {{--$.ajax({--}}
                     {{--    type: 'POST',--}}
                     {{--    url: '{{ route('deals.upload.image') }}',--}}

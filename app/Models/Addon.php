@@ -12,7 +12,7 @@ class Addon extends Model
     use SoftDeletes;
     protected $guarded = [];
     protected $appends =['name'];
-
+    const COL_ORDERS = [];
     public function scopeFilter($q){
         $query = @request('search')['regex'];
         $value = @request('search')['value'];

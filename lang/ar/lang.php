@@ -119,6 +119,12 @@ return [
     'Published' => 'منشور',
     'Inactive' => 'معطل',
     'Filter Options' => 'خيارات البحث',
+    'add_category' => 'اضافة قسم',
+    'edit_category' => 'تعديل قسم',
+    'add_product' => 'اضافة منتج',
+    'edit_product' => 'تعديل منتج',
+    'add_addon' => 'اضافة خيار للمنتج',
+    'edit_addon' => 'تعديل خيار للمنتج',
 
 ];
 

@@ -120,6 +120,7 @@ class ProductController extends Controller
             return $this->returnBackWithSaveDone();
         } catch (\Exception $exception) {
             DB::rollBack();
+            dd($exception);
             return $this->returnBackWithSaveDoneFailed();
         }
     }

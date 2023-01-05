@@ -12,10 +12,7 @@ class Category extends Model
     use SoftDeletes;
     protected $appends =['name'];
     protected $guarded = [];
-//    const COL_ORDERS = [
-//        '0' =>'id',
-//        '1' =>'name_ar',
-//    ];
+    const COL_ORDERS = [];
     public function scopeFilter($q){
         $query = @request('search')['regex'];
         $value = @request('search')['value'];

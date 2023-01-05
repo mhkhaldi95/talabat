@@ -65,9 +65,11 @@ function getPageNumber(){
 function getColAndDirForOrderBy($model){
     $col  = 'created_at';
     $dir  = 'desc';
-    if(@request('order')[0]['dir']){
-        $dir  = @request('order')[0]['dir'];
-        $col  = $model::COL_ORDERS[@request('order')[0]['column']];
+    if(count($model::COL_ORDERS) > 0){
+        if(@request('order')[0]['dir']){
+            $dir  = @request('order')[0]['dir'];
+            $col  = $model::COL_ORDERS[@request('order')[0]['column']];
+        }
     }
     return ['col'=>$col,'dir'=>$dir];
 }
