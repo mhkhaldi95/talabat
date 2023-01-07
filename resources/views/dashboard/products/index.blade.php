@@ -66,41 +66,6 @@
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
-                                    <!--begin::Input group-->
-{{--                                    <div class="mb-10">--}}
-{{--                                        <!--begin::Label-->--}}
-{{--                                        <label class="form-label fs-5 fw-bold mb-3">Payment Type:</label>--}}
-{{--                                        <!--end::Label-->--}}
-{{--                                        <!--begin::Options-->--}}
-{{--                                        <div class="d-flex flex-column flex-wrap fw-bold" data-kt-customer-table-filter="payment_type" id="payment_type">--}}
-{{--                                            <!--begin::Option-->--}}
-{{--                                            <label class="form-check form-check-sm form-check-custom form-check-solid mb-3 me-5">--}}
-{{--                                                <input class="form-check-input" type="radio" name="payment_type" value="all" checked="checked" />--}}
-{{--                                                <span class="form-check-label text-gray-600">All</span>--}}
-{{--                                            </label>--}}
-{{--                                            <!--end::Option-->--}}
-{{--                                            <!--begin::Option-->--}}
-{{--                                            <label class="form-check form-check-sm form-check-custom form-check-solid mb-3 me-5">--}}
-{{--                                                <input class="form-check-input" type="radio" name="payment_type" value="visa" />--}}
-{{--                                                <span class="form-check-label text-gray-600">Visa</span>--}}
-{{--                                            </label>--}}
-{{--                                            <!--end::Option-->--}}
-{{--                                            <!--begin::Option-->--}}
-{{--                                            <label class="form-check form-check-sm form-check-custom form-check-solid mb-3">--}}
-{{--                                                <input class="form-check-input" type="radio" name="payment_type" value="mastercard" />--}}
-{{--                                                <span class="form-check-label text-gray-600">Mastercard</span>--}}
-{{--                                            </label>--}}
-{{--                                            <!--end::Option-->--}}
-{{--                                            <!--begin::Option-->--}}
-{{--                                            <label class="form-check form-check-sm form-check-custom form-check-solid">--}}
-{{--                                                <input class="form-check-input" type="radio" name="payment_type" value="american_express" />--}}
-{{--                                                <span class="form-check-label text-gray-600">American Express</span>--}}
-{{--                                            </label>--}}
-{{--                                            <!--end::Option-->--}}
-{{--                                        </div>--}}
-{{--                                        <!--end::Options-->--}}
-{{--                                    </div>--}}
-                                    <!--end::Input group-->
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-end">
                                         <button type="reset" class="btn btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true" data-kt-customer-table-filter="reset" id="reset">Reset</button>
@@ -144,6 +109,7 @@
                             <th class="min-w-125px">{{__('lang.name')}}</th>
                             <th class="min-w-125px">{{__('lang.price')}}</th>
                             <th class="min-w-125px">{{__('lang.Status')}}</th>
+                            <th class="min-w-125px">{{__('lang.category')}}</th>
                             <th class="text-end min-w-70px">{{__('lang.actions')}}</th>
                         </tr>
                         <!--end::Table row-->
@@ -202,6 +168,7 @@
                         { data: 'name' },
                         { data: 'price' },
                         { data: 'status' },
+                        { data: 'category' },
                         { data: 'actions' },
                     ],
                     columnDefs: [
@@ -227,6 +194,11 @@
                         },
                         {
                             targets: 4,
+                            orderable: false,
+
+                        },
+                        {
+                            targets: 5,
                             orderable: false,
                             className: 'text-end',
 

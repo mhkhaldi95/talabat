@@ -103,7 +103,7 @@
                     searchDelay: 500,
                     processing: true,
                     serverSide: true,
-                    // order: [[3, 'desc']],
+                    order: [],
                     stateSave: true,
                     select: {
                         style: 'multi',

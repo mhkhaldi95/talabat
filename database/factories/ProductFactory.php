@@ -23,7 +23,7 @@ class ProductFactory extends Factory
             'description_ar' => fake()->text(),
             'description_en' => fake()->text(),
             'master_photo' => 'default.png',
-            'price' => fake()->randomNumber(),
+            'price' => fake()->randomNumber('3'),
             'category_id' => rand(1,5),
         ];
     }

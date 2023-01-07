@@ -31,7 +31,8 @@ class Enum {
 
     const SUPER_ADMIN = 1;
     const ADMIN = 2;
-    const CUSTOMER = 3;
+    const Branch = 3;
+    const CUSTOMER = 4;
 
     // user gender
 
@@ -49,6 +50,11 @@ class Enum {
     const NO_DISCOUNT= 1;
     const DISCOUNT_PERCENTAGE  = 2;
     const DISCOUNT_FIXED = 3;
+
+
+    // branch status
+    const BRANCH_OPEN = 'open';
+    const BRANCH_CLOSED = 'closed';
 
 
 

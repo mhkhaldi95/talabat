@@ -90,6 +90,7 @@ License: For each use you must have a valid license purchased only from above li
 {{--<script src="{{asset('')}}assets/js/custom/bootstrap-datepicker.js"></script>--}}
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
+
 @yield('scripts')
 
 <script type="text/javascript">

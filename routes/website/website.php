@@ -1,13 +1,8 @@
 <?php
 
-use App\Http\Controllers\Dashboard\Addons\AddonController;
-use App\Http\Controllers\Dashboard\Auth\LoginController;
-use App\Http\Controllers\Dashboard\Categories\CategoryController;
-use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\Products\ProductController;
-use App\Http\Controllers\Dashboard\UserManagement\Admins\AdminController;
-use App\Http\Controllers\Dashboard\UserManagement\Customers\CustomerController;
-use App\Http\Controllers\Dashboard\UserManagement\Roles\RoleController;
+use App\Http\Controllers\Website\BranchController;
+use App\Http\Controllers\Website\ProductController;
+use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Website\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,10 +19,19 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('break.index');
+Route::get('/branches', [BranchController::class, 'index'])->name('break.branches.index');
+Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
+Route::post('delete-from-cart', [CartController::class, 'deleteFromCart'])->name('delete-from-cart');
 
-    Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::group(['middleware' => ['select_branch']], function () {
+        Route::get('/products', [ProductController::class, 'index'])->name('break.products.index');
 
     });
+
+//    Route::group(['middleware' => ['auth:sanctum']], function () {
+//        Route::get('/products', [ProductController::class, 'index'])->name('break.products.index');
+//
+//    });
 
 
 

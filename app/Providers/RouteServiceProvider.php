@@ -19,6 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/' ;
     public const ADMIN_HOME = '/admin' ;
+    public const BRANCH_HOME = '/branch' ;
 //    public const HOME = '/home';
 
     /**
@@ -37,6 +38,9 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/dashboard/admin.php'));
+
+            Route::middleware('web')
+                ->group(base_path('routes/dashboard/branch.php'));
 
             Route::middleware('web')
                 ->group(base_path('routes/website/website.php'));

@@ -21,6 +21,10 @@ class Category extends Model
         }
         return $q;
     }
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
+
     public function getNameAttribute(){
         if(app()->getLocale() == 'ar'){
             return $this->name_ar;

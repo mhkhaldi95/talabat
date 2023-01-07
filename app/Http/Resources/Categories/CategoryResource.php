@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Categories;
 
 use App\Constants\Enum;
+use App\Http\Resources\Website\ProductResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryResource extends JsonResource
@@ -16,9 +17,10 @@ class CategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'status' => $this->status,
+            'id' => $this['id'],
+            'name' => $this['name'],
+            'status' => $this['status'],
+            'products' => ProductResource::collection($this->products)->resolve(),
         ];
     }
 }

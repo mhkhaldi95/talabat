@@ -14,14 +14,18 @@ return [
     'roles_structure' => [
         'super_admin' => [
             'admins' => 'c,r,u,d',
+            'branches' => 'c,r,u,d',
             'products' => 'c,r,u,d',
             'roles' => 'c,r,u,d',
             'customers' => 'c,r,u,d',
             'categories' => 'c,r,u,d',
-//            'orders' => 'c,r,u,d',
+            'orders' => 'c,r,u,d',
         ],
         'admin' => [],
         'customer' => [],
+        'branch' => [
+            'orders' => 'c,r,u,d',
+        ],
     ],
 
     'permissions_map' => [

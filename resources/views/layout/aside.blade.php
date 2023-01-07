@@ -80,6 +80,39 @@
                             </div>
                         </div>
                         @endif
+                            @if(auth()->user()->isAbleTo(['branches-create', 'branches-read']))
+                                <div data-kt-menu-trigger="click" class="menu-item menu-accordion mb-1">
+											<span class="menu-link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">{{__('lang.branches')}}</span>
+												<span class="menu-arrow"></span>
+											</span>
+                                    <div class="menu-sub menu-sub-accordion">
+                                        @if(auth()->user()->isAbleTo([ 'branches-read']))
+                                            <div class="menu-item">
+                                                <a class="menu-link" href="{{route('branches.index')}}">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+                                                    <span class="menu-title">{{__('lang.branches')}}</span>
+                                                </a>
+                                            </div>
+                                        @endif
+                                        @if(auth()->user()->isAbleTo(['branches-create']))
+                                            <div class="menu-item">
+                                                <a class="menu-link" href="{{route('branches.create')}}">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+                                                    <span class="menu-title">{{__('lang.add')}}</span>
+                                                </a>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif
                         @if(auth()->user()->isAbleTo(['customers-create', 'customers-read']))
                             <div data-kt-menu-trigger="click" class="menu-item menu-accordion mb-1">
 											<span class="menu-link">

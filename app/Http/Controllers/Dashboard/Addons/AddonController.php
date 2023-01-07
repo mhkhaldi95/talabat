@@ -6,7 +6,7 @@ use App\Constants\Enum;
 use App\Constants\StatusCodes;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Addons\AddonRequest;
-use App\Http\Resources\Addons\AddonResource;
+use App\Http\Resources\Products\AddonResource;
 use App\Models\Addon;
 use App\Models\User;
 use Illuminate\Database\QueryException;

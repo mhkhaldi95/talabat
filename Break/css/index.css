@@ -37,7 +37,7 @@ p{ font-size: 20px;}
     right: 0;
     background-color: rgba(32, 31, 66, 0.6);
     z-index: 0;
-    
+
 }
 .aa{ position: relative;z-index: 20;}
 /* the End Section definition */
@@ -234,8 +234,8 @@ p{ font-size: 20px;}
 		min-width: 0;
 		height: 2.5rem;
 		line-height: 1;
-    }	
-    
+    }
+
 	.product-qty {
 		width: 50px;
 		min-width: 0;

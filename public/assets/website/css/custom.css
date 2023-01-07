@@ -1,0 +1,18 @@
+.modal-body .image{
+    height: 180px;
+    background-color: #f9f7f6;
+}
+.bg-img{
+    border-radius: 8px ;
+    background-size: contain !important;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+.text-model{
+    margin-top: unset !important;
+}

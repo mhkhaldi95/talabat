@@ -11,4 +11,8 @@ class ProductPhoto extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+    protected $appends = ['photo_path'];
+    public function getPhotoPathAttribute(){
+        return asset('storage/product-photos/'.$this->name);
+    }
 }

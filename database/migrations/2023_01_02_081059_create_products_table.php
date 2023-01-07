@@ -25,7 +25,7 @@ return new class extends Migration
             $table->double('price');
             $table->foreignId('category_id')->nullable()->index();
             $table->double('discounted_price')->default(0);
-            $table->double('max_addons')->default(1);
+            $table->double('max_addons')->default(0);
             $table->enum('discount_option',[Enum::NO_DISCOUNT,Enum::DISCOUNT_PERCENTAGE,Enum::DISCOUNT_FIXED])->default(Enum::NO_DISCOUNT);
             $table->enum('status',[Enum::PUBLISHED,Enum::INACTIVE])->default('published');
             $table->softDeletes();

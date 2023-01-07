@@ -485,9 +485,9 @@
                                                 <div class="d-flex d-flex-custom mt-2">
                                                     @foreach($item['photos'] as $photo)
                                                         <div class="parent_div_photo" id="photo_{{$photo['id']}}">
-                                                            <div class="image-input image-input-empty image-input-outline" id="avatar"
+                                                            <div class="image-input image-input-empty image-input-outline product-image" id="avatar"
                                                                  >
-                                                                <div class="image-input-wrapper" style="background-image: url({{ asset('storage/product-photos/'.$photo['name']) }})"></div>
+                                                                <div class="image-input-wrapper bg-img" style="background-image: url({{ asset('storage/product-photos/'.$photo['name']) }})"></div>
                                                                 <label
                                                                     class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow remove_photo"
                                                                     data-photo_id="{{$photo['id']}}"

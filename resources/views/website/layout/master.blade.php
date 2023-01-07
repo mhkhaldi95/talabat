@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Break</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{{asset('')}}assets/website/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{asset('')}}assets/website/css/all.min.css">
     <link rel="stylesheet" href="{{asset('')}}assets/website/css/index.css">
+    <link rel="stylesheet" href="{{asset('')}}assets/website/css/custom.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    @yield('style')
 </head>
 <body>
 <!-- the Section Start NavBar -->
@@ -32,5 +36,7 @@
 
 <script src="{{asset('')}}assets/website/js/bootstrap.bundle.min.js"></script>
 <script src="{{asset('')}}assets/website/js/all.min.js"></script>
+@yield('script')
+
 </body>
 </html>

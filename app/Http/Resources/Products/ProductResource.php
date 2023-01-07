@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Products;
 
 use App\Constants\Enum;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -34,6 +35,8 @@ class ProductResource extends JsonResource
             'status' => view('dashboard.products.partial.datatable_cols._status',[
                 'item' => $this
             ])->render(),
+            'price_after_discount' => $this->price_after_discount == $this->price? $this->price:$this->price_after_discount,
+
         ];
     }
     public function toShow(){
@@ -41,8 +44,10 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'name_ar' => $this->name_ar,
             'name_en' => $this->name_en,
+            'name' => $this->name,
             'description_ar' => $this->description_ar,
             'description_en' => $this->description_en,
+            'description' => $this->description,
             'category_id' => $this->category_id,
             'price' => $this->price,
             'discount_option' => $this->discount_option,
@@ -53,8 +58,19 @@ class ProductResource extends JsonResource
             'photos' => @$this->photos()->select('id','name')->get(),
             'tags' => $this->tags?(json_encode(convertTagsStringToObject($this->tags))):'',
             'status' => $this->status,
-
+            'price_after_discount' => $this->price_after_discount == $this->price? $this->price:$this->price_after_discount,
 
         ];
+    }
+    public function toWebSite(){
+        return [
+            'id' => $this['id'],
+            'name' => $this->name,
+            'description' => $this->description,
+            'photos' => @$this->photos()->select('id','name')->get(),
+            'master_photo' => $this->avatar,
+            'price' => $this->price,
+            'price_after_discount' => $this->price_after_discount == $this->price? $this->price:$this->price_after_discount,
+            ];
     }
 }

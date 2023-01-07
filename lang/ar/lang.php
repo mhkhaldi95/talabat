@@ -125,6 +125,18 @@ return [
     'edit_product' => 'تعديل منتج',
     'add_addon' => 'اضافة خيار للمنتج',
     'edit_addon' => 'تعديل خيار للمنتج',
+    'add_branch' => 'اضافة فرع',
+    'edit_branch' => 'تعديل فرع',
+    'branches' => 'الفروع',
+    'closed' => 'مغلق',
+    'open' => 'مفتوح',
+    'instagram_link' => 'رابط انستغرام',
+    'facebook_link' => 'رابط فيسبوك',
+    'twitter_link' => 'رابط تويتر',
+    'lat' => 'خط الطول',
+    'lng' => 'خط العرض',
+    'select_branch' => 'تحديد الفرع',
+    'request_now' => 'اطلب الان ، استلم في الفرع خلال ١٥ دقيقة'
 
 ];
 

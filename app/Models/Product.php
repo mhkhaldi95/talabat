@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Constants\Enum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,7 +15,7 @@ class Product extends Model
         ,'description_en','master_photo','tags','price','category_id','discounted_price','max_addons','discount_option','status'];
 
     protected $fillable = self::FILLABLE;
-    protected $appends =['name','description','avatar'];
+    protected $appends =['name','description','avatar','price_after_discount'];
     const COL_ORDERS = [
         '2' =>'price',
         '3' =>'status',
@@ -23,7 +24,11 @@ class Product extends Model
         $col = @request('search')['regex'];
         $value = @request('search')['value'];
         if($col == 'search'){
-            return $q->whereRaw("concat(name_ar, ' ',name_en, ' ',description_ar, ' ',description_en, ' ',tags) like '%" . $value . "%' ");
+            $q->when(true,function ($qq) use ($value){
+                return $qq->whereRaw("concat(name_ar, ' ',name_en, ' ',description_ar, ' ',description_en) like '%" . $value . "%' ")
+                    ->orWhere('tags','like',"%$value%");
+            });
+
         }
         if($col == 'status' && $value !=''){
             return $q->where("status",$value);
@@ -51,10 +56,11 @@ class Product extends Model
 
     }
     public function getDescriptionAttribute(){
+        $points = strlen($this->description_ar)>90?' ...':'';
         if(app()->getLocale() == 'ar'){
-            return $this->description_ar;
+            return substr($this->description_ar,0,90).$points;
         }
-        return $this->description_en;
+        return  substr($this->description_en,0,90).$points;
 
     }
 
@@ -63,6 +69,19 @@ class Product extends Model
             return asset('assets/media/default.png');
         }
         return asset('storage/product-photos/'.$this->master_photo);
+    }
+
+    public function getPriceAfterDiscountAttribute(){
+        $price_after_discount = $this->price;
+        if($this->discounted_price){
+            switch ($this->discount_option){
+                case Enum::DISCOUNT_PERCENTAGE :
+                    $price_after_discount = $this->price -  ($this->price * ($this->discounted_price/100));break;
+                case Enum::DISCOUNT_FIXED :
+                    $price_after_discount = $this->price -  $this->discounted_price;break;
+            }
+        }
+        return $price_after_discount;
     }
 
 

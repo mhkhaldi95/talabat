@@ -21,4 +21,22 @@
     position: relative;
     right: 30%;
 }
+.product-image{
+    height: 120px;
+    background-color: #f9f7f6;
+}
+.bg-img{
+    border-radius: 8px ;
+    background-size: contain !important;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+#map {
+    height: 100%;
+}
 

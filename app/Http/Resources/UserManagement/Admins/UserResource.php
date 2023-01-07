@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Addons;
+namespace App\Http\Resources\UserManagement\Admins;
 
-use App\Constants\Enum;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AddonResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,7 +17,8 @@ class AddonResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'status' => $this->status,
+            'email' => $this->email,
+            'phone' => $this->phone,
         ];
     }
 }

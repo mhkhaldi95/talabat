@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\Categories\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\Products\ProductController;
 use App\Http\Controllers\Dashboard\UserManagement\Admins\AdminController;
+use App\Http\Controllers\Dashboard\UserManagement\Branches\BranchController;
 use App\Http\Controllers\Dashboard\UserManagement\Customers\CustomerController;
 use App\Http\Controllers\Dashboard\UserManagement\Roles\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -30,11 +31,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('custom-login', [LoginController::class, 'login'])->name('custom-login');
     });
 
-    Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::group(['middleware' => ['auth:sanctum','admin']], function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
         Route::group(['prefix' => 'auth'], function () {
-            Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+            Route::get('logout', [LoginController::class, 'logout'])->name('logout')->withoutMiddleware('admin');
         });
 
 
@@ -45,6 +46,15 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('{id}/update', [AdminController::class, 'update'])->name('admins.update');
             Route::post('{id}/delete', [AdminController::class, 'delete'])->name('admins.delete');
             Route::post('delete-selected', [AdminController::class, 'deleteSelected'])->name('admins.deleteSelected');
+        });
+
+        Route::group(['prefix' => 'branches'], function () {
+            Route::get('/', [BranchController::class, 'index'])->name('branches.index');
+            Route::get('/create/{id?}', [BranchController::class, 'create'])->name('branches.create');
+            Route::post('/store', [BranchController::class, 'store'])->name('branches.store');
+            Route::post('{id}/update', [BranchController::class, 'update'])->name('branches.update');
+            Route::post('{id}/delete', [BranchController::class, 'delete'])->name('branches.delete');
+            Route::post('delete-selected', [BranchController::class, 'deleteSelected'])->name('branches.deleteSelected');
         });
 
 

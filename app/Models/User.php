@@ -21,7 +21,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+    const FILLABLE = [
         'name',
         'email',
         'password',
@@ -29,6 +29,7 @@ class User extends Authenticatable
         'phone',
         'gender',
     ];
+    protected $fillable = self::FILLABLE;
     const COL_ORDERS = [];
     /**
      * The attributes that should be hidden for serialization.

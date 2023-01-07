@@ -104,7 +104,7 @@ class ProductController extends Controller
                 if(!is_null($id)){
                     ProductAddon::where('product_id',$id)->whereIn('addon_id',$item->addons->pluck('id')->toArray())->delete();
                 }
-                $addons = array_filter(array_unique($addons));
+                $addons = array_unique($addons);
                 foreach ($addons as $addon){
                     ProductAddon::create([
                         'product_id' => $item->id,
@@ -120,7 +120,6 @@ class ProductController extends Controller
             return $this->returnBackWithSaveDone();
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception);
             return $this->returnBackWithSaveDoneFailed();
         }
     }
