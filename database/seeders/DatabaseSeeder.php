@@ -19,8 +19,8 @@ class DatabaseSeeder extends Seeder
     {
 
          $user = \App\Models\User::factory()->create([
-             'name' => 'Talabat User',
-             'email' => 'talabat@gmail.com',
+             'name' => 'Break',
+             'email' => 'break@gmail.com',
              'role' => Enum::SUPER_ADMIN,
              'password' => Hash::make('123456'),
          ]);
