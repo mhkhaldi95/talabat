@@ -16,3 +16,11 @@
 .text-model{
     margin-top: unset !important;
 }
+
+.selector_hide{
+    display:none !important;
+}
+.selector_show{
+    display:block !important;
+}
+

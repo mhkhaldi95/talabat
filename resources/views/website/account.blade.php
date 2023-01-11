@@ -1,55 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/all.min.css">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
-</head>
-
-<body>
-    <!-- the Section Start NavBar -->
-    <section class="NavBar d-fl">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <p class="font-s">BREAK</p>
-                </div>
-                <div>
-                    <a href="ItemsSearch2.html">
-                        <i class="fa-solid fa-magnifying-glass ps-3"></i>
-                    </a>
-                    <i class="fa-solid fa-user ps-3 size-icon"></i>
-                    <span class="fs-3 ">En</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- the Section End NavBar -->
-
-    <!-- the Section Start definition -->
-    <div class="definition text-white">
-        <div class="container aa">
-            <div>
-                <p class="center">حدد الفرع المراد استلام الطلب منه</p>
-            </div>
-            <div class="box-def d-flex align-items-center justify-content-between">
-                <p>الصفحة الرئيسية</p>
-                <p>> الصفحة الرئيسية</p>
-                <p>> الصفحة الرئيسية</p>
-            </div>
-        </div>
-        <div class="bg-def">
-        </div>
-    </div>
-    <!-- the Section End  definition -->
-
-
+@extends('website.layout.master')
+@section('content')
     <!-- the Section Start control -->
     <section class="control py-5 ">
         <div class="container">
@@ -59,11 +9,14 @@
                         بياناتي </button>
                     <button class="tablinks" onclick="openTab(event, 'secondTab')"><i class="fa-solid fa-calendar-days ps-2"></i>
                         طلباتي</button>
-                    <button class="color-out"><i class="fa-solid fa-right-from-bracket color-out ps-2"></i>
-                       <span class="color-out fs-5"> تسجيل الخروج</span>
-                    </button>
+                    <a href="{{route('break.logout',['branch_id' =>$branch->id])}}">
+                        <button class="color-out"><i class="fa-solid fa-right-from-bracket color-out ps-2"></i>
+                            <span class="color-out fs-5"> تسجيل الخروج</span>
+                        </button>
+                    </a>
+
                 </div>
-                <div id="firstTab" class="tabcontent">
+                <div id="firstTab" class="tabcontent ">
                     <div class="row">
                         <div class="col-md-12 col-lg-12">
                             <form>
@@ -94,56 +47,90 @@
                                         </button>
                                     </div>
                                 </div>
-                
+
                             </form>
                         </div>
                     </div>
                 </div>
                 <div id="secondTab" class="tabcontent">
                     <div class="">
-                        <ul class="nav nav-pills mb-2 d-flex justify-content-between" id="pills-tab" role="tablist">
+                        <ul class="nav nav-pills right-acc mb-2 d-flex justify-content-between" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <p class="text-center butt-accont2 butt-accont-rigth px-5" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
-                                    type="button" role="tab" aria-controls="pills-home" aria-selected="true"><i class="fa-solid fa-calendar-days ps-2 "></i>
-                                     رقم الطلب 05559858989 </button>
+                                <button class="btn active butt-accont butt-accont-rigth" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+                                        type="button" role="tab" aria-controls="pills-home" aria-selected="true"><i class="fa-solid fa-calendar-days ps-2 "></i> طلبات جديدة </button>
+                            </li>
+                            <li class="nav-item" role="presentation ">
+                                <button class="btn butt-accont px-3 mob" id="pills-profile-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                                        aria-selected="false"><i class="fa-sharp fa-solid fa-list  ps-2 "></i> سجل الطلبات  </button>
                             </li>
                         </ul>
 
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                 <div class="row">
-                                    <div class="col-md-12 col-lg-12">
-                                        <div class="box-apli">
-                                            <img src="img/Screenshot 2022-12-08 at 1.36.33 PM.png" alt="">
-                                        </div>
-                                        <div class="text-center py-4">
-                                            <p class="fs-4">جليز</p>
-                                            <p class="pb-2">هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى</p>
-                                            <p class="fs-4">بيانات الطلب</p>
-                                        </div>
-                                        <div>
-                                            <div class="mb-3 box-tottl box-tott2">
-                                                <label for="formGroupExampleInput" class="form-label">بيانات التوصيل</label>
-                                                <div class="box-box ">
-                                                    <p class="text-muted">الفرع المسلم</p>
-                                                    <input type="text" class="form-control colo py-2" id="formGroupExampleInput" disabled placeholder="الفرع المسلم">
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="cards text-center">
+                                            <DIV class="box-cat-img">
+                                                <IMG src="{{asset('')}}assets/website/img/Screenshot 2022-12-08 at 1.36.33 PM.png"></IMG>
+                                            </DIV>
+                                            <div class="padd-r">
+                                                <p class=" py-3 fs-3">جليز</p>
+                                                <p class="pb-3 ">هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص
+                                                    العربى
+                                                </p>
+                                                <div class="bx-but py-1">
+                                                    <p class="pt-2 ">استلام من الفرع</p>
                                                 </div>
                                             </div>
-                                            <div class="mb-3 box-tottl box-tott2">
-                                                <label for="formGroupExampleInput" class="form-label">الفاتورة</label>
-                                                <input type="text" class="form-control py-2" id="formGroupExampleInput" placeholder="المجموع" disabled>
-                                                <input type="text" class="form-control my-3 py-2" id="formGroupExampleInput" placeholder="المجموع" disabled>
-                                            </div>
-                                            <div class="mb-3 box-tottl box-tott2">
-                                                <label for="formGroupExampleInput" class="form-label">طريقة الدفع</label>
-                                                <p class="form-control py-1 fs-4 colo" id="formGroupExampleInput" ><i class="fa-solid fa-square-check fa-1x ps-2"></i> الكتروني</p>
-                                            </div>
+
                                         </div>
-                                        <div class="ok pt-3">
-                                            <button class="box-button fs-5">
-                                                تم التسليم
-                                                <i class="fa-brands fa-shopify"></i>
-                                            </button>
+                                        <div class="cards text-center">
+                                            <DIV class="box-cat-img">
+                                                <IMG src="{{asset('')}}assets/website/img/Screenshot 2022-12-08 at 1.36.33 PM.png"></IMG>
+                                            </DIV>
+                                            <div class="padd-r">
+                                                <p class=" py-3 fs-3">جليز</p>
+                                                <p class="pb-3 ">هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص
+                                                    العربى
+                                                </p>
+                                                <div class="bx-but py-1">
+                                                    <p class="pt-2 ">استلام من الفرع</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-6">
+                                        <div class="cards text-center">
+                                            <DIV class="box-cat-img">
+                                                <IMG src="{{asset('')}}assets/website/img/Screenshot 2022-12-08 at 1.36.33 PM.png"></IMG>
+                                            </DIV>
+                                            <div class="padd-r">
+                                                <p class=" py-3 fs-3">جليز</p>
+                                                <p class="pb-3 ">هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص
+                                                    العربى
+                                                </p>
+                                                <div class="bx-but py-1">
+                                                    <p class="pt-2 ">استلام من الفرع</p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="cards text-center">
+                                            <DIV class="box-cat-img">
+                                                <IMG src="{{asset('')}}assets/website/img/Screenshot 2022-12-08 at 1.36.33 PM.png"></IMG>
+                                            </DIV>
+                                            <div class="padd-r">
+                                                <p class=" py-3 fs-3">جليز</p>
+                                                <p class="pb-3 ">هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص
+                                                    العربى
+                                                </p>
+                                                <div class="bx-but py-1">
+                                                    <p class="pt-2 ">استلام من الفرع</p>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -153,69 +140,65 @@
                                     <div class="col-md-12 col-lg-6">
                                         <div class="cards text-center">
                                             <DIV class="box-cat-img">
-                                                <IMG src="img/Screenshot 2022-12-08 at 1.36.33 PM.png"></IMG>
+                                                <IMG src="{{asset('')}}assets/website/img/Screenshot 2022-12-08 at 1.36.33 PM.png"></IMG>
                                             </DIV>
                                             <div class="padd-r">
                                                 <p class=" py-3 fs-3">جليز</p>
                                                 <p class="pb-3 ">هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص
                                                     العربى
                                                 </p>
+                                                <div class="bx-but py-1">
+                                                    <p class="pt-2 gree">تم التسليم </p>
+                                                </div>
                                             </div>
-                                
-                                            <button class="box-button fs-5">
-                                                ريـــال
-                                                <i class="fa-brands fa-shopify"></i>
-                                            </button>
+
                                         </div>
                                         <div class="cards text-center">
                                             <DIV class="box-cat-img">
-                                                <IMG src="img/Screenshot 2022-12-08 at 1.36.33 PM.png"></IMG>
+                                                <IMG src="{{asset('')}}assets/website/img/Screenshot 2022-12-08 at 1.36.33 PM.png"></IMG>
                                             </DIV>
                                             <div class="padd-r">
                                                 <p class=" py-3 fs-3">جليز</p>
                                                 <p class="pb-3 ">هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص
                                                     العربى
                                                 </p>
+                                                <div class="bx-but py-1">
+                                                    <p class="pt-2 gree">تم التسليم </p>
+                                                </div>
                                             </div>
-                                
-                                            <button class="box-button fs-5">
-                                                ريـــال
-                                                <i class="fa-brands fa-shopify"></i>
-                                            </button>
+
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-lg-6">
                                         <div class="cards text-center">
                                             <DIV class="box-cat-img">
-                                                <IMG src="img/Screenshot 2022-12-08 at 1.36.33 PM.png"></IMG>
+                                                <IMG src="{{asset('')}}assets/website/img/Screenshot 2022-12-08 at 1.36.33 PM.png"></IMG>
                                             </DIV>
                                             <div class="padd-r">
                                                 <p class=" py-3 fs-3">جليز</p>
                                                 <p class="pb-3 ">هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص
                                                     العربى
                                                 </p>
+                                                <div class="bx-but py-1">
+                                                    <p class="pt-2 gree">تم التسليم </p>
+                                                </div>
                                             </div>
-                                
-                                            <button class="box-button fs-5">
-                                                ريـــال
-                                                <i class="fa-brands fa-shopify"></i>
-                                            </button>
+
                                         </div>
                                         <div class="cards text-center">
                                             <DIV class="box-cat-img">
-                                                <IMG src="img/Screenshot 2022-12-08 at 1.36.33 PM.png"></IMG>
+                                                <IMG src="{{asset('')}}assets/website/img/Screenshot 2022-12-08 at 1.36.33 PM.png"></IMG>
                                             </DIV>
                                             <div class="padd-r">
                                                 <p class=" py-3 fs-3">جليز</p>
                                                 <p class="pb-3 ">هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص
                                                     العربى
                                                 </p>
+                                                <div class="bx-but py-1">
+                                                    <p class="pt-2 gree">تم التسليم </p>
+                                                </div>
                                             </div>
-                                
-                                            <button class="box-button fs-5">
-                                                ريـــال
-                                                <i class="fa-brands fa-shopify"></i>
-                                            </button>
+
                                         </div>
                                     </div>
                                 </div>
@@ -227,29 +210,10 @@
         </div>
     </section>
     <!-- the Section End control -->
-    <!--the Section Start Footer -->
-    <section class="Footer "> 
-        <div class="container">
-            <div class="row text-center d-flex align-items-center">
-                <div class="col-4 col-lg-4">
-                    <p class="text-muted">تم بواسطة حاضرة بلس</p>
-                </div>
-                <div class="col-4 col-lg-4">
-                    <p>جميع الحقوق محفوظة 2022</p>
-                </div>
-                <div class="col-4 col-lg-4">
-                    <div class="icon">
-                        <i class="fa-brands fa-instagram icon-i "></i>
-                        <i class="fa-brands fa-twitter icon-i  px-2"></i>
-                        <i class="fa-brands fa-facebook icon-i "></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> 
-    <!-- the Section End Footer -->
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/all.min.js"></script>
+@endsection
+@section('script')
+    <script src="{{asset('')}}assets/website/js/index.js"></script>
+
     <script>
         function openTab(evt, cityName) {
             var i, tabcontent, tablinks;
@@ -267,5 +231,4 @@
 
         document.getElementById("defaultOpen").click();
     </script>
-</body>
-</html>
+@endsection

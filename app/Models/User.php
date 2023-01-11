@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Constants\Enum;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -60,7 +61,7 @@ class User extends Authenticatable
         }
         return $q;
     }
-    public function scopeCustomerFilter($q,$type){
+    public function scopeCustomerFilter($q){
 
         $q->whereIn('role',[Enum::CUSTOMER]);
 
@@ -70,5 +71,14 @@ class User extends Authenticatable
 
         }
         return $q;
+    }
+    public function codes()
+    {
+        return $this->hasMany(Code::class);
+    }
+    public function activeCode()
+    {
+        $code = $this->codes()->where('expire_at', '>', Carbon::now())->orderByDesc('expire_at')->first();
+        return $code;
     }
 }

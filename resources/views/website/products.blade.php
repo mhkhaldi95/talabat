@@ -92,10 +92,13 @@
                         @endforeach
                     </div>
                     <div class="col-md-12 col-lg-4">
-                        @if(!is_null($cart))
+                        @if(!is_null($cart) && count($cart) > 0)
                         <div id="carts">
+                            @php $total = 0 @endphp
+
                             <div class="box-card">
                                 @foreach($cart as $item)
+                                    @php $total += $item['price'] * $item['quantity'] @endphp
                                     <div class=" card-item d-flex align-items-center justify-content-between">
                                         <div class="d-flex">
                                             <div class="img-item">
@@ -104,19 +107,20 @@
                                             </div>
                                             <div class="me-2 d-flex flex-column align-items-between ">
                                                 <p>{{$item['name']}} </p>
-                                                <p class="pt-2">٥٠ ريال</p>
+                                                <p class="pt-2">{{$item['price']}}
+                                                    ريال</p>
                                             </div>
                                         </div>
                                         <div>
-                                            <p class="red">حذف</p>
+                                            <p class="red" id="delete_from_cart" data-id="{{$item['id']}}">حذف</p>
                                             <div>
                                                 <div class="qty-input mob-butt">
-                                                    <button class="qty-count qty-count--add ad" data-action="add"
+                                                    <button class="qty-count qty-count--add-in-cart ad" data-product="{{ json_encode($item,TRUE)}}"
                                                             type="button">
                                                         <span class="text-white">+</span></button>
                                                     <input class="product-qty ss" disabled type="text" name="product-qty"
                                                            value="{{$item['quantity']}}">
-                                                    <button class="qty-count qty-count--minus mi " data-action="minus"
+                                                    <button class="qty-count qty-count--minus-in-cart mi " data-product="{{ json_encode($item,TRUE)}}"
                                                             type="button">-</button>
                                                 </div>
                                             </div>
@@ -125,32 +129,45 @@
                                 @endforeach
                                 <div class="mb-3 box-tottl">
                                     <label for="formGroupExampleInput" class="form-label">الفاتورة</label>
-                                    <input type="text" class="form-control" id="formGroupExampleInput"
+                                    <input type="text" class="form-control" id="formGroupExampleInput" value="{{$total}}"
                                            placeholder="المجموع" disabled>
                                     <p class="text-muted under">* شاملة ضريبة القيمة المضافة </p>
                                 </div>
-                                <button class="box-button fs-5">
-                                    اتمام الطلب الان ٧٧ ريال
-                                    <i class="fa-brands fa-shopify"></i>
-                                </button>
+                                    @if(!\Auth::check())
+                                        <button class="box-button fs-5" id="complete_order">
+                                            اتمام الطلب الان
+                                            {{$total}}
+                                            ريال
+                                            <i class="fa-brands fa-shopify"></i>
+                                        </button>
+                                    @endif
+                                    @if( (\Auth::check() && \Auth::user()->role == \App\Constants\Enum::CUSTOMER))
+                                        <button class="box-button fs-5" >
+                                            <a href="#">
+                                                اتمام الطلب الان
+                                                {{$total}}
+                                                ريال
+                                                <i class="fa-brands fa-shopify"></i>
+                                            </a>
+                                        </button>
+
+                                    @endif
                             </div>
                         </div>
-                        @else
+                        @endif
                             <div id="carts">
+                                @if(is_null($cart) || count($cart) == 0)
                                 <div class="text-center box-sala d-flex justify-content-center align-items-center flex-column">
                                     <i class="fa-brands fa-shopify text-muted box-i"></i>
                                     <p class="text-muted f">اضف منتجات للعربة</p>
                                 </div>
+                                @endif
                                 <div>
-                                    <select class="form-select py-2" aria-label="Default select example">
-                                        <option selected class="text-muted"> استلام من : السعودية بريدة </option>
-                                        <option value="1" class="text-muted">استلام من : السعودية بريدة</option>
-                                        <option value="2" class="text-muted">استلام من : السعودية بريدة</option>
-                                        <option value="3" class="text-muted">استلام من : السعودية بريدة</option>
+                                    <select class="form-select py-2" >
+                                        <option value="{{$branch->id}}" selected class="text-muted" disabled>استلام من : {{$branch->address}}</option>
                                     </select>
                                 </div>
                             </div>
-                        @endif
                     </div>
                 </div>
 
@@ -165,12 +182,12 @@
     <script>
 
         $(window).ready(function () {
-            $( ".open_product_modal" ).on( "click", function() {
+            $( ".open_product_modal" ).on("click", function() {
                 var product = $(this).data('product');
                 var product_photo = $(this).data('product_photo');
                 var max_addons = product.max_addons;
+                console.log("")
                 var addons_html = ``;
-                console.log("product",$(this).data('product'))
                 if(product.product_addons.length > 0){
                     product.product_addons.forEach(function(addon) {
                         addons_html+=`
@@ -204,6 +221,7 @@
 
 
                 var addon_ids = [];
+                var qty_addons = [];
 
 
                 $('.addon_check').on( "click", function() {
@@ -224,10 +242,13 @@
                 function  isGreaterThanMaxAddons(max_addons){
                     var qty = 0;
                     addon_ids = [];
+                    qty_addons = [];
                     $('.addon_check').each(function() {
                         if($(this).is(":checked")){
+                            qty_addon = parseInt($(this).parent().parent().find('.product-qty').val());
                             qty += parseInt($(this).parent().parent().find('.product-qty').val());
                             addon_ids.push($(this).val());
+                            qty_addons.push(qty_addon);
                         }
                     });
                     if(qty >= max_addons ){
@@ -269,18 +290,101 @@
                 //add to cart
                 $('#modal-box-button').on( "click", function() {
                     var product_qty = parseInt($('#product_qty').html());
-                    axios.post('{{route('add-to-cart')}}',{product_id:product.id,product_qty:product_qty}).then(function (response) {
+                    axios.post('{{route('add-to-cart')}}',{product_id:product.id,product_qty:product_qty,qty_addons:qty_addons,addon_ids:addon_ids}).then(function (response) {
                         if(response.data.data){
                             $('#carts').html(response.data.data)
                             $('#modal-subscribe').modal("hide")
                         }
                     })
-
                     })
+
 
 
             });
 
+
+            $('.qty-count--add-in-cart').click("on",function() {
+                var qty = parseInt($(this).parent().find("input").val())+1;
+                var product = $(this).data('product')
+                console.log("product",product)
+                $(this).parent().find("input").val(qty)
+                   axios.post('{{route('add-to-cart')}}',{product_id:product.id,product_qty:qty,plus_one:true}).then(function (response) {
+                       if(response.data.data){
+                           $('#carts').html(response.data.data)
+                       }
+                })
+            })
+            $('.qty-count--minus-in-cart').click("on",function() {
+                var qty = parseInt($(this).parent().find("input").val())-1;
+                var product = $(this).data('product')
+                $(this).parent().find("input").val(qty)
+                   axios.post('{{route('minus')}}',{product_id:product.id,product_qty:qty,minus_one:true}).then(function (response) {
+                       if(response.data.data){
+                           $('#carts').html(response.data.data)
+                       }
+                })
+            })
+        $('#delete_from_cart').click("on",function() {
+                var id = $(this).data('id')
+                   axios.post('{{route('delete-from-cart')}}',{id:id}).then(function (response) {
+                       if(response.data.data){
+                           $('#carts').html(response.data.data)
+                       }
+                })
+            })
+
+
+        $('#complete_order').click("on",function() {
+            $('#mobile_hide').removeClass( "selector_show" ).addClass( "selector_hide" );
+            $('#modal-mobile-login').modal("show")
+         })
+        $('#modal-mobile-login-next').click("on",function() {
+
+           var phone =  $('#modal-mobile-input').val();
+           if(!phone || phone == ''){
+             $('#mobile_hide').removeClass( "selector_hide" ).addClass( "selector_show" );
+             return;
+           }
+            axios.post('{{route('check-phone')}}',{phone:phone}).then(response => {
+                if(response.data.data.phone){
+                    localStorage.setItem("phone",response.data.data.phone)
+                    localStorage.setItem("is_new",response.data.data.is_new)
+                    $('#modal-content').html(response.data.data.check_code_modal)
+                }
+
+            }).catch(error => {
+
+                });
+
+        })
+
+        $('#modal-check-code-next').click("on",function() {
+
+           var check_input_1 =  $('#check_input_1').val();
+           var check_input_2 =  $('#check_input_2').val();
+           var check_input_3 =  $('#check_input_3').val();
+           var check_input_4 =  $('#check_input_4').val();
+           var check_input_5 =  $('#check_input_5').val();
+           if(
+               !check_input_1 || check_input_1 == '' ||
+               !check_input_2 || check_input_2 == '' ||
+               !check_input_3 || check_input_3 == '' ||
+               !check_input_4 || check_input_4 == '' ||
+               !check_input_5 || check_input_5 == ''
+           ){
+             $('#mobile_hide').removeClass( "selector_hide" ).addClass( "selector_show" );
+             alert("xx")
+                return;
+            }
+           var code = check_input_1+check_input_2+check_input_3+check_input_4+check_input_5
+            axios.post('{{route('checkCodeSms')}}',{phone:localStorage.getItem('phone'),code:code}).then(response => {
+               console.log("response.data.data",response.data.data)
+
+            }).catch(error => {
+
+                });
+
+        })
 
 
 

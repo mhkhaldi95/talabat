@@ -72,6 +72,7 @@ p{ font-size: 20px;}
 .img-item {height: 100px; width: 100px;}
 .img-item img{ border-radius: 10px; height: 100%; width: 100%;}
 .box-card button{width:375px ;margin: 10px;}
+.box-card a{width:375px !important;margin: 10px !important;}
 .modal-header{ direction: ltr;}
 .right{ margin-right: 60% !important;}
 .button-next button{ width: 100%;}
@@ -253,8 +254,11 @@ p{ font-size: 20px;}
         position: relative;
     }
 .qty-count--minus{     border-right: 1px solid #e2e2e2;; }
+.qty-count--minus-in-cart{     border-right: 1px solid #e2e2e2;; }
 .qty-count--add {    border-left: 1px solid #e2e2e2; }
+.qty-count--add-in-cart {    border-left: 1px solid #e2e2e2; }
 .qty-count--add::after{    transform: rotate(90deg);}
+.qty-count--add-in-cart::after{    transform: rotate(90deg);}
 .qty-count::before ,.qty-count::after{
     content: "";
     height: 2px;
