@@ -42,6 +42,7 @@ Route::post('resend-code-sms', [LogingController::class, 'resendCodeSms'])->name
         Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('/break/logout', [LogingController::class, 'logout'])->name('break.logout');
             Route::post('customer-complete-register', [LogingController::class, 'completeRegister'])->name('customer-complete-register')->withoutMiddleware('select_branch');
+            Route::post('customer-update/{id}', [CustomerAccountController::class, 'update'])->name('customer.update')->withoutMiddleware('select_branch');
         });
 
     });

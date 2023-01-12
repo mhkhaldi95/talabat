@@ -18,27 +18,32 @@
                 </div>
                 <div id="firstTab" class="tabcontent ">
                     <div class="row">
+                        @include('validation.alerts')
                         <div class="col-md-12 col-lg-12">
-                            <form>
+                            <form method="post" action="{{route('customer.update',auth()->user()->id)}}">
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-12 col-lg-6">
                                         <label for="inputEmail4" class="fw-bold text-muted py-2"> الاسم الأول</label>
-                                        <input type="text" class="form-control py-2" placeholder="الاسم الأول">
+                                        <input type="text" class="form-control py-2" name="name" value="{{auth()->user()->name}}" placeholder="الاسم الأول">
                                     </div>
                                     <div class="col-md-12 col-lg-6">
                                         <label for="inputEmail4" class="fw-bold text-muted py-2"> رقم الهاتف</label>
-                                        <input type="text" class="form-control py-2" placeholder=" رقم الهاتف">
+                                        <input type="text" class="form-control py-2" name="phone"  value="{{auth()->user()->phone}}" placeholder=" رقم الهاتف">
                                     </div>
                                     <div class="col-md-12 col-lg-6">
                                         <div class="my-3">
                                             <label for="inputEmail4" class="fw-bold text-muted py-2"> البريد الإلكترونى</label>
-                                            <input type="text" class="form-control py-2" placeholder="البريد الإلكترونى">
+                                            <input type="email" class="form-control py-2" name="email"  value="{{auth()->user()->email}}" placeholder="البريد الإلكترونى">
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-lg-6">
                                         <div class="my-3">
                                             <label for="inputEmail4" class="fw-bold text-muted py-2"> الجنس</label>
-                                            <input type="text" class="form-control py-2" placeholder="الجنس">
+                                            <select class="form-control  py-2"  name="gender">
+                                                <option value="{{\App\Constants\Enum::MALE}}" {{auth()->user()->gender == \App\Constants\Enum::MALE ?'selected':''}} >{{__('lang.male')}}</option>
+                                                <option value="{{\App\Constants\Enum::FEMALE}}" {{auth()->user()->gender == \App\Constants\Enum::FEMALE ?'selected':''}} >{{__('lang.female')}}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="button-profile">
