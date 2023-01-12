@@ -16,7 +16,7 @@
             </div>
         </div>
         <div>
-            <p class="red" id="delete_from_cart" data-id="{{$item['id']}}">حذف</p>
+            <p class="red delete_from_cart"  data-id="{{$item['id']}}">حذف</p>
             <div>
                 <div class="qty-input mob-butt">
                     <button class="qty-count qty-count--add-in-cart ad" data-product="{{ json_encode($item,TRUE)}}"
@@ -47,7 +47,7 @@
         @endif
 </div>
 @endif
-<div id="carts">
+<div id="cartsss">
     @if(is_null($cart) || count($cart) == 0)
         <div class="text-center box-sala d-flex justify-content-center align-items-center flex-column">
             <i class="fa-brands fa-shopify text-muted box-i"></i>
@@ -55,43 +55,4 @@
         </div>
     @endif
 </div>
-<script>
-    $(window).ready(function () {
 
-
-        $('.qty-count--add-in-cart').click("on",function() {
-            var qty = parseInt($(this).parent().find("input").val())+1;
-            var product = $(this).data('product')
-            console.log("product",product)
-            $(this).parent().find("input").val(qty)
-            axios.post('{{route('add-to-cart')}}',{product_id:product.id,product_qty:qty,plus_one:true}).then(function (response) {
-                if(response.data.data){
-                    $('#carts').html(response.data.data)
-                }
-            })
-        })
-        $('.qty-count--minus-in-cart').click("on",function() {
-            var qty = parseInt($(this).parent().find("input").val())-1;
-            var product = $(this).data('product')
-            $(this).parent().find("input").val(qty)
-            axios.post('{{route('minus')}}',{product_id:product.id,product_qty:qty,minus_one:true}).then(function (response) {
-                if(response.data.data){
-                    $('#carts').html(response.data.data)
-                }
-            })
-        })
-        $('#delete_from_cart').click("on",function() {
-            var id = $(this).data('id')
-            axios.post('{{route('delete-from-cart')}}',{id:id}).then(function (response) {
-                if(response.data.data){
-                    $('#carts').html(response.data.data)
-                }
-            })
-        })
-        $('#complete_order').click("on",function() {
-            $('#modal-mobile-login').modal("show")
-        })
-
-
-    })
-</script>

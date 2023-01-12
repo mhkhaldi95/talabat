@@ -72,7 +72,8 @@ class LogingController extends Controller
         if ($user && $code && $code->code == $request->code) {
                 Auth::login($user);
             return $this->response_json(true, StatusCodes::OK, Enum::_SUCCESSFULLY,[
-                'is_logged_in' => Auth::check()
+                'is_logged_in' => Auth::check(),
+                'complete_register_name' =>view('website._complete_register_name')->render()
             ]);
 
         } else {
@@ -83,15 +84,15 @@ class LogingController extends Controller
         }
     }
 
-    public function codeAgain(Request $request)
+    public function resendCodeSms(Request $request)
     {
         $request->validate([
-            'phoneNumber' => 'required',
+            'phone' => ['required','numeric']
         ]);
-        $user = User::clients()->where('phone', $request->phoneNumber)->first();
+        $user = User::customerFilter()->where('phone', $request->phone)->first();
         if ($user) {
             if (!$user->activeCode()) {
-                $code = $user->codes->orderBy('created_at', 'desc')->first();
+                $code = $user->codes()->orderBy('created_at', 'desc')->first();
                 if ($code) {
                     $code->update(['expire_at' => Carbon::now()->addSeconds(30)]);
                 }
@@ -104,7 +105,7 @@ class LogingController extends Controller
         }
         return response()->json([
             'status' => false,
-            'message' => __('Invalid data'),
+            'message' => __('lang.Enter Active code'),
         ]);
 
 
@@ -119,6 +120,22 @@ class LogingController extends Controller
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+    public function completeRegister(Request $request)
+    {
+        $request->validate([
+            'name' => ['required','string','max:255'],
+            'phone' => ['required','numeric']
+        ]);
+        $user = User::customerFilter()->where('phone', $request->phone)->first();
+        if($user){
+            $user->update([
+               'name' =>  $request->name
+            ]);
+            return  $this->response_json(true,StatusCodes::OK,Enum::DONE_SUCCESSFULLY);
+        }
+        return $this->response_json(false, StatusCodes::INTERNAL_ERROR, Enum::GENERAL_ERROR);
+
     }
 
     public function logout(){

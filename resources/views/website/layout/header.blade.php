@@ -5,7 +5,7 @@
                 <p class="font-s">BREAK</p>
             </div>
             <div>
-                <a href="#">
+                <a href="{{route('products.search',['branch_id' =>@$branch->id])}}">
                     <i class="fa-solid fa-magnifying-glass ps-3"></i>
                 </a>
                 @if(\Illuminate\Support\Facades\Auth::check())

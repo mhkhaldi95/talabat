@@ -6,6 +6,7 @@ use App\Constants\Enum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Product extends Model
 {
@@ -21,8 +22,14 @@ class Product extends Model
         '3' =>'status',
     ];
     public function scopeFilter($q){
-        $col = @request('search')['regex'];
-        $value = @request('search')['value'];
+
+        if(!Auth::check() || Auth::user()->role == Enum::CUSTOMER){
+            $col = 'search';
+            $value = @request('search');
+        }else{
+            $col = @request('search')['regex'];
+            $value = @request('search')['value'];
+        }
         if($col == 'search'){
             $q->when(true,function ($qq) use ($value){
                 return $qq->whereRaw("concat(name_ar, ' ',name_en, ' ',description_ar, ' ',description_en) like '%" . $value . "%' ")

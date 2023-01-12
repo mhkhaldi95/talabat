@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="{{asset('')}}assets/website/css/custom.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     @yield('style')
 </head>
 <body>
@@ -65,7 +67,9 @@
 <!-- the Section End model -->
 <script src="{{asset('')}}assets/website/js/bootstrap.bundle.min.js"></script>
 <script src="{{asset('')}}assets/website/js/all.min.js"></script>
-@yield('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+@yield('script')
+@include('website.layout.script')
 </body>
 </html>

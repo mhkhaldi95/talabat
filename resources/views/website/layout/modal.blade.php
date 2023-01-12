@@ -44,4 +44,5 @@
         </div>
     </div>
 </div>
+{{--<input type="hidden" id="product_hidden" value="">--}}
 <!-- the Section End model -->

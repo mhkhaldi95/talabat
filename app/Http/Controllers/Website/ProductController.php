@@ -22,8 +22,8 @@ class ProductController extends Controller
         if (isset($request->branch_id)) {
             try {
                $branch =  Branch::query()->findOrFail($request->branch_id);
-                $categories = Category::with(['products','products.photos'])->get();
-                $products= Product::with(['photos'])->get();
+                $categories = Category::with(['products','products.photos','products.addons'])->get();
+                $products= Product::with(['photos','addons'])->get();
                 return view('website.products',[
                     'categories' => CategoryResource::collection($categories)->resolve(),
                     'products' => ProductResource::collection($products)->resolve(),
