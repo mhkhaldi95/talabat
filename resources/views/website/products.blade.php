@@ -38,6 +38,7 @@
                                                         </div>
                                                         <button
                                                             data-product="{{ json_encode($product,TRUE)}}"
+                                                            data-qty="{{ $branch->getQty($product['id'])}}"
                                                             data-product_photo="{{$product['has_photo']?@$product['photos'][0]['photo_path']:$product['master_photo']}}"
                                                             class="open_product_modal box-button butt-mobile fs-5">
                                                             ريـــال <span class="mx-2">
@@ -73,6 +74,7 @@
                                                             </div>
                                                             <button
                                                                 data-product="{{ json_encode($product,TRUE)}}"
+                                                                data-qty="{{ $branch->getQty($product['id'])}}"
                                                                 data-product_photo="{{$product['has_photo']?@$product['photos'][0]['photo_path']:$product['master_photo']}}"
                                                                 class="open_product_modal box-button butt-mobile fs-5">
                                                                 ريـــال <span class="mx-2">
@@ -115,7 +117,7 @@
                                             <p class="red delete_from_cart"  data-id="{{$item['id']}}">حذف</p>
                                             <div>
                                                 <div class="qty-input mob-butt">
-                                                    <button class="qty-count qty-count--add-in-cart ad" data-product="{{ json_encode($item,TRUE)}}"
+                                                    <button class="qty-count qty-count--add-in-cart ad" data-product="{{ json_encode($item,TRUE)}}" data-qty="{{ $branch->getQty($product['id'])}}"
                                                             type="button">
                                                         <span class="text-white">+</span></button>
                                                     <input class="product-qty ss" disabled type="text" name="product-qty"

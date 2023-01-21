@@ -14,7 +14,7 @@ License: For each use you must have a valid license purchased only from above li
 <html lang="{{app()->getLocale() == 'ar'?'ar':'en'}}" dir="{{app()->getLocale() == 'ar'?'rtl':'ltr'}}">
 <!--begin::Head-->
 <head><base href="">
-    @include('layout.head')
+    @include('branch.layout.head')
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -25,12 +25,12 @@ License: For each use you must have a valid license purchased only from above li
     <!--begin::Page-->
     <div class="page d-flex flex-row flex-column-fluid">
         <!--begin::Aside-->
-        @include('layout.aside')
+        @include('branch.layout.aside')
         <!--end::Aside-->
         <!--begin::Wrapper-->
         <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
             <!--begin::Header-->
-           @include('layout.header')
+           @include('branch.layout.header')
             <!--end::Header-->
             <!--begin::Content-->
             <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -47,7 +47,7 @@ License: For each use you must have a valid license purchased only from above li
                             <span class="h-20px border-gray-200 border-start mx-4"></span>
                             <!--end::Separator-->
                             <!--begin::Breadcrumb-->
-                            @include('layout.breadcrumb')
+                            @include('branch.layout.breadcrumb')
                             <!--end::Breadcrumb-->
                         </div>
                         <!--end::Page title-->
@@ -60,7 +60,7 @@ License: For each use you must have a valid license purchased only from above li
             </div>
             <!--end::Content-->
             <!--begin::Footer-->
-           @include('layout.footer')
+           @include('branch.layout.footer')
             <!--end::Footer-->
         </div>
         <!--end::Wrapper-->
@@ -90,6 +90,7 @@ License: For each use you must have a valid license purchased only from above li
 {{--<script src="{{asset('')}}assets/js/custom/bootstrap-datepicker.js"></script>--}}
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
+
 @yield('scripts')
 
 <script type="text/javascript">

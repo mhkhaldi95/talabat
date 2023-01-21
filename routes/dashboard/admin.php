@@ -5,6 +5,8 @@ use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\Categories\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\Products\ProductController;
+use App\Http\Controllers\Dashboard\Settings\SettingsController;
+use App\Http\Controllers\Dashboard\UserManagement\Admins\AccountSettingsController;
 use App\Http\Controllers\Dashboard\UserManagement\Admins\AdminController;
 use App\Http\Controllers\Dashboard\UserManagement\Branches\BranchController;
 use App\Http\Controllers\Dashboard\UserManagement\Customers\CustomerController;
@@ -37,7 +39,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::group(['prefix' => 'auth'], function () {
             Route::get('logout', [LoginController::class, 'logout'])->name('logout')->withoutMiddleware('admin');
         });
-
+        Route::get('{id}/account', [AccountSettingsController::class, 'create'])->name('admins.account.create');
+        Route::post('account/update-info', [AccountSettingsController::class, 'updateInfo'])->name('admins.account.update-info');
+        Route::post('account/update-email', [AccountSettingsController::class, 'updateEmail'])->name('admins.account.update-email');
+        Route::post('account/update-password', [AccountSettingsController::class, 'updatePassword'])->name('admins.account.update-password');
 
         Route::group(['prefix' => 'admins'], function () {
             Route::get('/', [AdminController::class, 'index'])->name('admins.index');
@@ -46,6 +51,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('{id}/update', [AdminController::class, 'update'])->name('admins.update');
             Route::post('{id}/delete', [AdminController::class, 'delete'])->name('admins.delete');
             Route::post('delete-selected', [AdminController::class, 'deleteSelected'])->name('admins.deleteSelected');
+
         });
 
         Route::group(['prefix' => 'branches'], function () {
@@ -55,6 +61,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('{id}/update', [BranchController::class, 'update'])->name('branches.update');
             Route::post('{id}/delete', [BranchController::class, 'delete'])->name('branches.delete');
             Route::post('delete-selected', [BranchController::class, 'deleteSelected'])->name('branches.deleteSelected');
+
+
         });
 
 
@@ -103,10 +111,14 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('remove-photo', [ProductController::class, 'removePhoto'])->name('products.remove.photo');
         });
 
+        Route::group(['prefix' => 'settings'], function () {
+            Route::get('/create/{id?}', [SettingsController::class, 'create'])->name('settings.create');
+            Route::post('/store/{id?}', [SettingsController::class, 'store'])->name('settings.store');
+        });
+
 
 
     });
-
 
 
 

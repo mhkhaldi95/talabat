@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Break</title>
+    <title>{{$settings->site_name}} | {{isset($page_title)?$page_title:'بريك'}}</title>
+    <meta name="description" content="{{$settings->site_description}}" />
+    <meta name="keywords" content="{{$settings->tags}}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <meta property="og:locale" content="{{app()->getLocale()}}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{isset($page_title)?$page_title:'بريك'}}" />
+    <meta property="og:url" content="{{isset($page_url)?$page_url:route('break.index')}}" />
+    <meta property="og:site_name" content="{{$settings->site_name}}" />
+    <meta name="twitter:description" content="{{$settings->site_description}}" />
+    <meta name="twitter:title" content="{{isset($page_url)?$page_url:route('break.index')}}" />
+    <meta name="twitter:url" content="{{isset($page_url)?$page_url:route('break.index')}}" />
+    <meta name="twitter:image" content="{{$settings->icon}}" />
+    <link rel="canonical" href="{{isset($page_url)?$page_url:route('break.index')}}" />
+    <link rel="shortcut icon" href="{{$settings->icon}}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{{asset('')}}assets/website/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{asset('')}}assets/website/css/all.min.css">

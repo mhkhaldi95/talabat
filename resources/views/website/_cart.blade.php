@@ -19,7 +19,7 @@
             <p class="red delete_from_cart"  data-id="{{$item['id']}}">حذف</p>
             <div>
                 <div class="qty-input mob-butt">
-                    <button class="qty-count qty-count--add-in-cart ad" data-product="{{ json_encode($item,TRUE)}}"
+                    <button class="qty-count qty-count--add-in-cart ad" data-product="{{ json_encode($item,TRUE)}}" data-qty="{{ $branch->getQty($item['id'])}}"
                             type="button">
                         <span class="text-white">+</span></button>
                     <input class="product-qty ss" disabled type="text" name="product-qty"

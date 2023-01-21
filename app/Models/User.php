@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laratrust\Traits\LaratrustUserTrait;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -29,6 +30,7 @@ class User extends Authenticatable
         'role',
         'phone',
         'gender',
+        'photo',
     ];
     protected $fillable = self::FILLABLE;
     const COL_ORDERS = [];
@@ -41,6 +43,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    protected $appends = ['photo_path'];
 
     /**
      * The attributes that should be cast.
@@ -53,7 +56,7 @@ class User extends Authenticatable
 
     public function scopeAdminFilter($q,$type){
 
-        $q->whereNotIn('role',[Enum::CUSTOMER]);
+        $q->where('id','!=',Auth::id())->whereIn('role',[Enum::ADMIN,Enum::SUPER_ADMIN]);
 
         if(@request('search')['value']){
             $value = request('search')['value'];
@@ -72,6 +75,9 @@ class User extends Authenticatable
         }
         return $q;
     }
+    public function branch(){
+        return $this->hasOne(Branch::class);
+    }
     public function codes()
     {
         return $this->hasMany(Code::class);
@@ -80,5 +86,11 @@ class User extends Authenticatable
     {
         $code = $this->codes()->where('expire_at', '>', Carbon::now())->orderByDesc('expire_at')->first();
         return $code;
+    }
+    public function getPhotoPathAttribute(){
+        if($this->photo == 'blank.png'){
+            return asset('assets/media/avatars/'.$this->photo);
+        }
+        return asset('storage/user-photos/'.$this->photo);
     }
 }

@@ -26,6 +26,7 @@ class Product extends Model
         if(!Auth::check() || Auth::user()->role == Enum::CUSTOMER){
             $col = 'search';
             $value = @request('search');
+            return $q->where("status",Enum::PUBLISHED); // show just PUBLISHED for customers
         }else{
             $col = @request('search')['regex'];
             $value = @request('search')['value'];
@@ -41,6 +42,13 @@ class Product extends Model
             return $q->where("status",$value);
         }
         return $q;
+    }
+    public function scopePublished($q){
+        $q->where('status',Enum::PUBLISHED)->whereIn('id',$this->getBranchProductsIdsPublished());
+    }
+    public function getBranchProductsIdsPublished(){
+        $items = ProductBranch::where('branch_id',request('branch_id'))->where('status',Enum::PUBLISHED)->get();
+        return $items->pluck('product_id')->toArray();
     }
 
     public function addons(){
@@ -62,6 +70,8 @@ class Product extends Model
         return $this->name_en;
 
     }
+
+
     public function getDescriptionAttribute(){
         $points = strlen($this->description_ar)>90?' ...':'';
         if(app()->getLocale() == 'ar'){

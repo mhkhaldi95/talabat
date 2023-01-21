@@ -7,10 +7,13 @@ use App\Constants\StatusCodes;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Products\ProductRequest;
 use App\Http\Resources\Products\ProductResource;
+use App\Http\Resources\Website\BranchResource;
 use App\Models\Addon;
+use App\Models\Branch;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductAddon;
+use App\Models\ProductBranch;
 use App\Models\ProductPhoto;
 use App\Models\Role;
 use App\Models\User;
@@ -63,6 +66,7 @@ class ProductController extends Controller
             'item' => @$item?(new ProductResource($item))->toShow():null ,
             'categories' => Category::query()->filter()->get(),
             'addons' => Addon::query()->filter()->get(),
+            'branches' => Branch::with(['user'])->get(),
         ]);
     }
     public function store(ProductRequest $request, $id = null)
@@ -91,6 +95,13 @@ class ProductController extends Controller
                 'id' => $id,
             ], $data);
 
+            foreach ($request->qty as $key=>$qty) {
+                $data = ['qty' => $qty[0]];
+                ProductBranch::query()->updateOrCreate([
+                    'product_id' => $item->id,
+                    'branch_id' => $key,
+                ],$data);
+            }
 
             if(isset($photos)){
                 foreach ($photos as $photo){
@@ -106,11 +117,12 @@ class ProductController extends Controller
                 }
                 $addons = array_unique($addons);
                 foreach ($addons as $addon){
-                    ProductAddon::create([
+                     ProductAddon::create([
                         'product_id' => $item->id,
                         'addon_id' => $addon
                     ]);
                 }
+
 
             }
 

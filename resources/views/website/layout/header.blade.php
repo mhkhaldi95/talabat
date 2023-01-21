@@ -2,7 +2,7 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
             <div>
-                <p class="font-s">BREAK</p>
+                <p class="font-s">{{$settings->site_name}}</p>
             </div>
             <div>
                 <a href="{{route('products.search',['branch_id' =>@$branch->id])}}">

@@ -18,7 +18,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check() && !in_array(\auth()->user()->role,[Enum::CUSTOMER]))
+        if(Auth::check() && in_array(\auth()->user()->role,[Enum::ADMIN,Enum::SUPER_ADMIN]))
                  return $next($request);
              return abort(403);
     }

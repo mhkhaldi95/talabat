@@ -52,6 +52,7 @@ function datatable_response($data,$request = null,$resource = null,$notification
 
     if(!is_null($resource))
         $items =  $resource::collection($items);
+
     return response()->json([
         'recordsTotal'    => $data->total(),
         'recordsFiltered' => $data->total(),

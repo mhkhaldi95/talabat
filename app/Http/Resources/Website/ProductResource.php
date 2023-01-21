@@ -25,6 +25,7 @@ class ProductResource extends JsonResource
             'category_id' => $this->category_id,
             'price' => $this->price,
             'discount_option' => $this->discount_option,
+            'qty' => $this->discount_option,
             'discounted_price' => $this->discounted_price,
             'max_addons' => $this->max_addons,
             'master_photo' => $this->avatar,

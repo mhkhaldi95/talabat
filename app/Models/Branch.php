@@ -22,7 +22,20 @@ class Branch extends Model
     {
         return $this->belongsTo(User::class);
     }
-
+    public function getQty($product_id){
+        $item =  ProductBranch::where('product_id',$product_id)->where('branch_id',$this->id)->first();
+        if($item){
+            return ProductBranch::where('product_id',$product_id)->where('branch_id',$this->id)->first()->qty;
+        }
+        return  0;
+    }
+    public function productStatus($product_id){
+        $item =  ProductBranch::where('product_id',$product_id)->where('branch_id',$this->id)->first();
+        if($item){
+            return ProductBranch::where('product_id',$product_id)->where('branch_id',$this->id)->first()->status;
+        }
+        return  null;
+    }
     public function scopeFilter($q){
         $col = @request('search')['regex'];
         $value = @request('search')['value'];

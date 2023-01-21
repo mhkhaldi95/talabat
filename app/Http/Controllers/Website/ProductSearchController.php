@@ -32,7 +32,7 @@ class ProductSearchController extends Controller
     public function index(Request $request)
     {
 
-        $products = Product::with(['photos', 'addons'])->get();
+        $products = Product::query()->filter()->published()->with(['photos', 'addons'])->get();
         return view('website.products_search', [
             'products' => ProductResource::collection($products)->resolve(),
             'cart' => session()->get('cart') ?? null,
@@ -45,7 +45,7 @@ class ProductSearchController extends Controller
     public function filter(Request $request)
     {
 
-        $products = Product::filter()->with(['photos', 'addons'])->get();
+        $products = Product::query()->filter()->published()->with(['photos', 'addons'])->get();
         $data = view('website._product_search', ['products' => ProductResource::collection($products)->resolve(), 'branch' => $this->branch])->render();
         return $this->response_json(true, StatusCodes::OK, Enum::_SUCCESSFULLY, [
             'products' => $data,

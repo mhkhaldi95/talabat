@@ -39,4 +39,7 @@
 #map {
     height: 100%;
 }
+.ql-toolbar.ql-snow + .ql-container.ql-snow{
+    height: auto; !important;
+}
 

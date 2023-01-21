@@ -23,7 +23,7 @@ class ProductController extends Controller
             try {
                $branch =  Branch::query()->findOrFail($request->branch_id);
                 $categories = Category::with(['products','products.photos','products.addons'])->get();
-                $products= Product::with(['photos','addons'])->get();
+                $products= Product::query()->filter()->published()->with(['photos','addons'])->get();
                 return view('website.products',[
                     'categories' => CategoryResource::collection($categories)->resolve(),
                     'products' => ProductResource::collection($products)->resolve(),

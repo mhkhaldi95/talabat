@@ -39,6 +39,7 @@ class ProductRequest extends FormRequest
             'product_options' => ['nullable','array'],
             'tags' => ['nullable'],
             'photos' => 'nullable|array',
+            'qty' => 'required|array',
             'photos.*' => 'required|string|max:255',
             'price' => 'required|numeric',
             'discount_option' => ['nullable','numeric',Rule::in([Enum::NO_DISCOUNT,Enum::DISCOUNT_PERCENTAGE,Enum::DISCOUNT_FIXED])],

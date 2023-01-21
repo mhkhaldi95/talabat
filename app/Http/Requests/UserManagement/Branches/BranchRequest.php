@@ -37,7 +37,7 @@ class BranchRequest extends FormRequest
             'lng' => 'nullable|string|max:255',
             'twitter_link' => 'nullable|string|max:255',
             'instagram_link' => 'nullable|string|max:255',
-            'phone' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email,'.$id.',id',
             'password' => $password_validation,
         ];

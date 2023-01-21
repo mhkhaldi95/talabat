@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard\Auth;
 
+use App\Constants\Enum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\LoginRequest;
 use Illuminate\Http\Request;
@@ -17,9 +18,16 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard.index')->with([
-                'success' => 'Signed in'
-            ]);
+            if(in_array(auth()->user()->role,[Enum::SUPER_ADMIN,Enum::ADMIN]) ){
+                return redirect()->route('dashboard.index')->with([
+                    'success' => 'Signed in'
+                ]);
+            }elseif(auth()->user()->role == Enum::Branch){
+                return redirect()->route('branch.dashboard')->with([
+                    'success' => 'Signed in'
+                ]);
+            }
+
         }
         return redirect()->route('login')->with([
             'error' => __('lang.login_not_valid')

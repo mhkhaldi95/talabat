@@ -1,13 +1,7 @@
 <?php
 
-use App\Http\Controllers\Dashboard\Addons\AddonController;
-use App\Http\Controllers\Dashboard\Auth\LoginController;
-use App\Http\Controllers\Dashboard\Categories\CategoryController;
-use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\Products\ProductController;
-use App\Http\Controllers\Dashboard\UserManagement\Admins\AdminController;
-use App\Http\Controllers\Dashboard\UserManagement\Customers\CustomerController;
-use App\Http\Controllers\Dashboard\UserManagement\Roles\RoleController;
+use App\Http\Controllers\Branch\DashboardController;
+use App\Http\Controllers\Branch\Products\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,10 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['prefix' => 'branch'], function () {
-    Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['prefix' => 'branch','middleware' => ['auth:sanctum','branch']], function () {
         Route::get('/', [DashboardController::class, 'index'])->name('branch.dashboard');
-    });
-
-
+        Route::group(['prefix' => 'products'], function () {
+            Route::get('/', [ProductController::class, 'index'])->name('branch.products.index');
+            Route::get('/create/{id?}', [ProductController::class, 'create'])->name('branch.products.create');
+            Route::post('change-status', [ProductController::class, 'changeStatus'])->name('change-status');
+        });
 });

@@ -57,7 +57,7 @@ class AdminController extends Controller
         return view('dashboard.user_management.admins.create', [
             'page_title' =>$page_title,
             'page_breadcrumbs' => $page_breadcrumbs,
-            'roles' => Role::where('name','!=','customer')->get(),
+            'roles' => Role::where('name','like','%'.'admin'.'%')->get(),
             'item' => @$item,
             'role_user' => @$roles,
         ]);

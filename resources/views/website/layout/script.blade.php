@@ -49,6 +49,7 @@
 
 
         var product = null;
+        var stoke = 0;
         var product_photo = null;
         var max_addons = null;
         var addons_html = ``;
@@ -57,6 +58,7 @@
         $(document).on('click','.open_product_modal',function (e) {
             product = $(this).data('product');
             product_photo = $(this).data('product_photo');
+            stoke = $(this).data('qty');
             max_addons = product.max_addons;
             addons_html = ``;
             if(product.product_addons.length > 0){
@@ -161,25 +163,33 @@
         });
 
         $(document).on('click','.qty-count--add-in-cart',function (e) {
+            stoke = $(this).data('qty');
             var qty = parseInt($(this).parent().find("input").val())+1;
-            var product = $(this).data('product')
-            console.log("product",product)
-            $(this).parent().find("input").val(qty)
-            axios.post('{{route('add-to-cart')}}',{product_id:product.id,product_qty:qty,plus_one:true}).then(function (response) {
-                if(response.data.data){
-                    $('#carts').html(response.data.data)
-                    toastr.success("تمت الاضافة الى السلة بنجاح");
-                }
-            })
+            if(stoke > 0){
+                var product = $(this).data('product')
+                $(this).parent().find("input").val(qty)
+                axios.post('{{route('add-to-cart')}}',{product_id:product.id,product_qty:qty,plus_one:true,branch_id:"{{$branch->id}}"}).then(function (response) {
+                    if(response.data.data){
+                        $('#carts').html(response.data.data)
+                        toastr.success("تمت الاضافة الى السلة بنجاح");
+                    }
+
+                })
+            }else{
+                toastr.warning("لا تتوفر الكمية المطلوبة");
+            }
+
         })
         $(document).on('click','.qty-count--minus-in-cart',function (e) {
             var qty = parseInt($(this).parent().find("input").val())-1;
             if(qty<1){
                 qty = 1
+                $(this).parent().find("input").val(qty)
+                return;
             }
             var product = $(this).data('product')
-            $(this).parent().find("input").val(qty)
-            axios.post('{{route('minus')}}',{product_id:product.id,product_qty:qty,minus_one:true}).then(function (response) {
+
+            axios.post('{{route('minus')}}',{product_id:product.id,product_qty:qty,minus_one:true,branch_id:"{{$branch->id}}"}).then(function (response) {
                 if(response.data.data){
                     $('#carts').html(response.data.data)
                 }
@@ -187,7 +197,7 @@
         })
         $(document).on('click','.delete_from_cart',function (e) {
             var id = $(this).data('id')
-            axios.post('{{route('delete-from-cart')}}',{id:id}).then(function (response) {
+            axios.post('{{route('delete-from-cart')}}',{product_id:id,branch_id:"{{$branch->id}}"}).then(function (response) {
                 if(response.data.data){
                     $('#carts').html(response.data.data)
                 }
@@ -226,14 +236,22 @@
         //add to cart
         $(document).on('click','#modal-box-button',function (e) {
             var product_qty = parseInt($('#product_qty').html());
-            axios.post('{{route('add-to-cart')}}',{product_id:product.id,product_qty:product_qty,qty_addons:qty_addons,addon_ids:addon_ids}).then(function (response) {
-                if(response.data.data){
-                    console.log("1")
-                    $('#carts').html(response.data.data)
-                    $('#modal-subscribe').modal("hide")
-                    toastr.success("تمت الاضافة الى السلة بنجاح");
-                }
-            })
+            console.log("stoke",stoke)
+            console.log("product_qty",product_qty)
+            if(product_qty <= stoke){
+                axios.post('{{route('add-to-cart')}}',{product_id:product.id,product_qty:product_qty,qty_addons:qty_addons,addon_ids:addon_ids,branch_id:"{{$branch->id}}"}).then(function (response) {
+                    if(response.data.data){
+                        $('#carts').html(response.data.data)
+                        $('#modal-subscribe').modal("hide")
+                        toastr.success("تمت الاضافة الى السلة بنجاح");
+                    }else{
+                        toastr.warning("لا تتوفر الكمية المطلوبة");
+                    }
+                })
+            }else{
+                toastr.warning("لا تتوفر الكمية المطلوبة");
+            }
+
         })
 
         $(document).on('click','#modal-check-code-next',function (e) {
@@ -253,7 +271,7 @@
                 return;
             }
             var code = check_input_1+check_input_2+check_input_3+check_input_4+check_input_5
-            axios.post('{{route('checkCodeSms')}}',{phone:localStorage.getItem('phone'),code:code}).then(response => {
+            axios.post('{{route('checkCodeSms')}}',{phone:localStorage.getItem('phone'),code:code,branch_id:"{{$branch->id}}"}).then(response => {
                 if( response.data.data && localStorage.getItem("is_new")){
                     $('#modal-content').html(response.data.data.complete_register_name)
 
