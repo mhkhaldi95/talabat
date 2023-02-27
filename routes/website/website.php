@@ -3,6 +3,7 @@
 use App\Http\Controllers\Website\BranchController;
 use App\Http\Controllers\Website\CustomerAccountController;
 use App\Http\Controllers\Website\LogingController;
+use App\Http\Controllers\Website\OrderController;
 use App\Http\Controllers\Website\ProductController;
 use App\Http\Controllers\Website\CartController;
 use App\Http\Controllers\Website\HomeController;
@@ -32,7 +33,6 @@ Route::post('resend-code-sms', [LogingController::class, 'resendCodeSms'])->name
 
     Route::group(['middleware' => ['select_branch']], function () {
         Route::get('/products', [ProductController::class, 'index'])->name('break.products.index');
-        Route::get('/customer-account', [CustomerAccountController::class, 'index'])->name('customer.account');
         Route::get('/products_search', [ProductSearchController::class, 'index'])->name('products.search');
         Route::post('/products_filter', [ProductSearchController::class, 'filter'])->name('products.filter');
 
@@ -40,12 +40,17 @@ Route::post('resend-code-sms', [LogingController::class, 'resendCodeSms'])->name
 
 
         Route::group(['middleware' => ['auth:sanctum']], function () {
-            Route::get('/break/logout', [LogingController::class, 'logout'])->name('break.logout');
+            Route::get('/break/logout', [LogingController::class, 'logout'])->name('break.logout')->withoutMiddleware('select_branch');
             Route::post('customer-complete-register', [LogingController::class, 'completeRegister'])->name('customer-complete-register')->withoutMiddleware('select_branch');
             Route::post('customer-update/{id}', [CustomerAccountController::class, 'update'])->name('customer.update')->withoutMiddleware('select_branch');
+            Route::get('/customer-account', [CustomerAccountController::class, 'index'])->name('customer.account')->withoutMiddleware('select_branch');
+            Route::get('/orders', [OrderController::class, 'index'])->name('orders.index')->withoutMiddleware('select_branch');
+            Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
+
         });
 
     });
+
 
 
 

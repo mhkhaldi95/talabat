@@ -77,6 +77,10 @@
         </div>
     </div>
 </div>
+{{--<audio controls id="audio" class="">--}}
+{{--    <source src="https://server6.mp3quran.net/thubti/001.mp3" type="audio/mpeg">--}}
+{{--</audio>--}}
+
 <!-- the Section End model -->
 <script src="{{asset('')}}assets/website/js/bootstrap.bundle.min.js"></script>
 <script src="{{asset('')}}assets/website/js/all.min.js"></script>

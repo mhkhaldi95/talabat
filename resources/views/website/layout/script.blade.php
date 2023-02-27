@@ -1,5 +1,6 @@
 <script>
-
+    // const audio = new Audio('https://waveform.customer.envato.com/tsunami/156322809/preview.mp3');
+    // audio.play();
     toastr.options = {
         "closeButton": false,
         "debug": false,
@@ -39,8 +40,10 @@
     }
     @endif
     $(window).ready(function () {
+
+
         $("#product_search" ).on("keyup", function(event) {
-            axios.post('{{route('products.filter')}}',{search:event.target.value,branch_id:{{@$branch->id}}}).then(function (response) {
+            axios.post('{{route('products.filter')}}',{search:event.target.value,branch_id:"{{@$branch->id}}"}).then(function (response) {
                 if(response.data.data){
                     $('#products').html(response.data.data.products)
                 }
@@ -49,16 +52,16 @@
 
 
         var product = null;
-        var stoke = 0;
         var product_photo = null;
         var max_addons = null;
         var addons_html = ``;
         var addon_ids = [];
         var qty_addons = [];
         $(document).on('click','.open_product_modal',function (e) {
+            // play()
+
             product = $(this).data('product');
             product_photo = $(this).data('product_photo');
-            stoke = $(this).data('qty');
             max_addons = product.max_addons;
             addons_html = ``;
             if(product.product_addons.length > 0){
@@ -163,21 +166,17 @@
         });
 
         $(document).on('click','.qty-count--add-in-cart',function (e) {
-            stoke = $(this).data('qty');
             var qty = parseInt($(this).parent().find("input").val())+1;
-            if(stoke > 0){
                 var product = $(this).data('product')
                 $(this).parent().find("input").val(qty)
-                axios.post('{{route('add-to-cart')}}',{product_id:product.id,product_qty:qty,plus_one:true,branch_id:"{{$branch->id}}"}).then(function (response) {
+                axios.post('{{route('add-to-cart')}}',{product_id:product.id,product_qty:qty,plus_one:true,branch_id:"{{@$branch->id}}"}).then(function (response) {
                     if(response.data.data){
                         $('#carts').html(response.data.data)
                         toastr.success("تمت الاضافة الى السلة بنجاح");
                     }
 
                 })
-            }else{
-                toastr.warning("لا تتوفر الكمية المطلوبة");
-            }
+
 
         })
         $(document).on('click','.qty-count--minus-in-cart',function (e) {
@@ -189,7 +188,7 @@
             }
             var product = $(this).data('product')
 
-            axios.post('{{route('minus')}}',{product_id:product.id,product_qty:qty,minus_one:true,branch_id:"{{$branch->id}}"}).then(function (response) {
+            axios.post('{{route('minus')}}',{product_id:product.id,product_qty:qty,minus_one:true,branch_id:"{{@$branch->id}}"}).then(function (response) {
                 if(response.data.data){
                     $('#carts').html(response.data.data)
                 }
@@ -197,14 +196,22 @@
         })
         $(document).on('click','.delete_from_cart',function (e) {
             var id = $(this).data('id')
-            axios.post('{{route('delete-from-cart')}}',{product_id:id,branch_id:"{{$branch->id}}"}).then(function (response) {
+            axios.post('{{route('delete-from-cart')}}',{product_id:id,branch_id:"{{@$branch->id}}"}).then(function (response) {
                 if(response.data.data){
                     $('#carts').html(response.data.data)
                 }
             })
         })
 
+
+
+
         $(document).on('click','#complete_order',function (e) {
+            $('#mobile_hide').removeClass( "selector_show" ).addClass( "selector_hide" );
+            $('#modal-mobile-login').modal("show")
+        })
+
+        $(document).on('click','#customer_login',function (e) {
             $('#mobile_hide').removeClass( "selector_show" ).addClass( "selector_hide" );
             $('#modal-mobile-login').modal("show")
         })
@@ -236,21 +243,13 @@
         //add to cart
         $(document).on('click','#modal-box-button',function (e) {
             var product_qty = parseInt($('#product_qty').html());
-            console.log("stoke",stoke)
-            console.log("product_qty",product_qty)
-            if(product_qty <= stoke){
-                axios.post('{{route('add-to-cart')}}',{product_id:product.id,product_qty:product_qty,qty_addons:qty_addons,addon_ids:addon_ids,branch_id:"{{$branch->id}}"}).then(function (response) {
+                axios.post('{{route('add-to-cart')}}',{product_id:product.id,product_qty:product_qty,qty_addons:qty_addons,addon_ids:addon_ids,branch_id:"{{@$branch->id}}"}).then(function (response) {
                     if(response.data.data){
                         $('#carts').html(response.data.data)
                         $('#modal-subscribe').modal("hide")
                         toastr.success("تمت الاضافة الى السلة بنجاح");
-                    }else{
-                        toastr.warning("لا تتوفر الكمية المطلوبة");
                     }
-                })
-            }else{
-                toastr.warning("لا تتوفر الكمية المطلوبة");
-            }
+
 
         })
 
@@ -271,7 +270,7 @@
                 return;
             }
             var code = check_input_1+check_input_2+check_input_3+check_input_4+check_input_5
-            axios.post('{{route('checkCodeSms')}}',{phone:localStorage.getItem('phone'),code:code,branch_id:"{{$branch->id}}"}).then(response => {
+            axios.post('{{route('checkCodeSms')}}',{phone:localStorage.getItem('phone'),code:code,branch_id:"{{@$branch->id}}"}).then(response => {
                 if( response.data.data && localStorage.getItem("is_new")){
                     $('#modal-content').html(response.data.data.complete_register_name)
 
@@ -325,7 +324,15 @@
 
         })
 
+        // $('#audio').play()
 
 
+
+
+    })
     });
+    // function  play(){
+    //     var aud = document.getElementById("audio");
+    //     aud.play()
+    // }
 </script>

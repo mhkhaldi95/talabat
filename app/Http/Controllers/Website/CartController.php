@@ -23,8 +23,11 @@ class CartController extends Controller
     {
         try {
             $this->branch =  Branch::query()->findOrFail(intval($request->branch_id));
-            $this->product = Product::query()->published()->findOrFail($request->product_id);
-            $this->product_branch =  ProductBranch::query()->where('branch_id',$this->branch->id)->where('product_id',$this->product->id)->firstOrFail();
+            if($request->product_id){
+                $this->product = Product::query()->published()->findOrFail($request->product_id);
+                $this->product_branch =  ProductBranch::query()->where('branch_id',$this->branch->id)->where('product_id',$this->product->id)->firstOrFail();
+
+            }
         } catch (QueryException $exception) {
             return $this->invalidIntParameterJson();
         }
@@ -43,13 +46,7 @@ class CartController extends Controller
         }
         // if cart is empty then this the first product
         if(!$cart) {
-            if($this->product_branch->qty == 0 || $this->product_branch->qty < ($this->product_branch->qty + $product_qty) ){
-                return response()->json([
-                    'status' => false,
-                    'message' => 'لا تتوفر الكمية المطلوبة'
-                ]);
-            }
-            $this->product_branch->update(['qty' => $this->product_branch->qty - $product_qty]);
+//            $this->product_branch->update(['qty' => $this->product_branch->qty - $product_qty]);
             $cart = [
                 $this->product->id => [
                     "name" => $this->product->name,
@@ -72,13 +69,8 @@ class CartController extends Controller
 
         // if cart not empty then check if this product exist then increment quantity
         if(isset($cart[$this->product->id]) && !$request->plus_one) {
-            if($this->product_branch->qty == 0 || $this->product_branch->qty < $product_qty ){
-                return response()->json([
-                    'status' => false,
-                    'message' => 'لا تتوفر الكمية المطلوبة'
-                ]);
-            }
-            $this->product_branch->update(['qty' => $this->product_branch->qty - $product_qty]);
+
+//            $this->product_branch->update(['qty' => $this->product_branch->qty - $product_qty]);
             $cart[$this->product->id]['quantity'] += $product_qty;
 
             session()->put('cart', $cart);
@@ -91,7 +83,7 @@ class CartController extends Controller
         }
 
         // if item not exist in cart then add to cart with quantity = 1
-        $this->product_branch->update(['qty' => $this->product_branch->qty - 1]);
+//        $this->product_branch->update(['qty' => $this->product_branch->qty - 1]);
         $cart[$this->product->id] = [
             "name" => $this->product->name,
             "quantity" => $product_qty,
@@ -116,7 +108,7 @@ class CartController extends Controller
 
         $cart = session()->get('cart');
 
-        $this->product_branch->update(['qty' => $this->product_branch->qty + 1]);
+//        $this->product_branch->update(['qty' => $this->product_branch->qty + 1]);
 
         // if item not exist in cart then add to cart with quantity = 1
         $cart[$this->product->id] = [
@@ -150,4 +142,12 @@ class CartController extends Controller
 
         }
     }
+
+
+//if($this->product_branch->qty == 0 || $this->product_branch->qty < $product_qty ){
+//return response()->json([
+//'status' => false,
+//'message' => 'لا تتوفر الكمية المطلوبة'
+//]);
+//}
 }

@@ -40,6 +40,7 @@
     </style>
 @endsection
 @section('content')
+
     <!-- the Section End NavBar -->
     <div class="box-index">
         <div class="box-in-img">

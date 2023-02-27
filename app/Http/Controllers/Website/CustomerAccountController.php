@@ -18,18 +18,15 @@ use Illuminate\Support\Facades\DB;
 class CustomerAccountController extends Controller
 {
     public function index(Request $request){
-        if (isset($request->branch_id)) {
             try {
-                $branch =  Branch::query()->findOrFail($request->branch_id);
+//                $branch =  Branch::query()->findOrFail($request->branch_id);
                 return view('website.account',[
                     'cart' =>session()->get('cart')??null,
-                    'branch' =>$branch
+//                    'branch' =>$branch
                ]);
             } catch (QueryException $exception) {
                 return $this->invalidIntParameter();
             }
-        }
-
     }
     public function update(CustomerRequest $request, $id)
     {

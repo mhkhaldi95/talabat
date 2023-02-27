@@ -12,6 +12,8 @@
                    <a href="{{route('customer.account',['branch_id' =>@$branch->id])}}">
                        <i class="fa-solid fa-user ps-3 size-icon"></i>
                    </a>
+                    @else
+                    <i class="fa-solid fa-user ps-3 size-icon" id="customer_login"></i>
                 @endif
                 <span class="fs-3 ">En</span>
             </div>

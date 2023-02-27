@@ -9,7 +9,7 @@
                         بياناتي </button>
                     <button class="tablinks" onclick="openTab(event, 'secondTab')"><i class="fa-solid fa-calendar-days ps-2"></i>
                         طلباتي</button>
-                    <a href="{{route('break.logout',['branch_id' =>$branch->id])}}">
+                    <a href="{{route('break.logout')}}">
                         <button class="color-out"><i class="fa-solid fa-right-from-bracket color-out ps-2"></i>
                             <span class="color-out fs-5"> تسجيل الخروج</span>
                         </button>
