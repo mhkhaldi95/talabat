@@ -77,7 +77,7 @@ class ProductController extends Controller
         $photos = $request->get('photos',[]);
         $addons = $request->get('product_options')?
             array_column($request->get('product_options'),'addon_id'):[];
-        if($data['discount_option'] == Enum::DISCOUNT_PERCENTAGE){
+        if(isset($data['discount_option']) && $data['discount_option'] == Enum::DISCOUNT_PERCENTAGE){
             $data['discounted_price'] = $request->get('discounted_percentage');
         }else{
             $data['discounted_price'] = $data['discounted_price']??0;
