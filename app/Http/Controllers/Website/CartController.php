@@ -50,6 +50,7 @@ class CartController extends Controller
             $cart = [
                 $this->product->id => [
                     "name" => $this->product->name,
+                    "cashback" => $this->product->cashback,
                     "id" => $this->product->id,
                     "quantity" => $product_qty,
                     "addon_ids" => $addon_ids,
@@ -86,6 +87,7 @@ class CartController extends Controller
 //        $this->product_branch->update(['qty' => $this->product_branch->qty - 1]);
         $cart[$this->product->id] = [
             "name" => $this->product->name,
+            "cashback" => $this->product->cashback,
             "quantity" => $product_qty,
             "addon_ids" => $addon_ids,
             "qty_addons" => $qty_addons,
@@ -113,6 +115,7 @@ class CartController extends Controller
         // if item not exist in cart then add to cart with quantity = 1
         $cart[$this->product->id] = [
             "name" => $this->product->name,
+            "cashback" => $this->product->cashback,
             "quantity" => $product_qty,
             "id" => $this->product->id,
             "price" => $this->product->price,

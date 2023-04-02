@@ -165,6 +165,23 @@ return [
     'site_icon' => 'أيقونة الموقع',
     'products_management' => 'ادارة المنتجات',
     'Welcome to Break' => 'مرحبا بكم في بريك',
+    'coupons' => 'الكوبونات',
+    'code' => 'الكود',
+    'discount' => 'الخصم',
+    'type' => 'النوع',
+    'max_uses' => 'الحد الاقصى للاستخدام',
+    'times_used' => 'عدد مرات الاستخدام',
+    'fixed' => 'ثابت',
+    'percentage' => 'نسبة',
+    'days' => 'الايام',
+    'cashback' => 'رصيد مسترجع',
+    'orders' => 'الطلبات',
+    'user' => 'الزبون',
+    'date' => 'التاريخ',
+    'status' => 'الحالة',
+    'initiated' => 'بدأت',
+    'paid' => 'مدفوعة',
+    'show' => 'عرض',
 
 ];
 

@@ -57,6 +57,16 @@ class Enum {
     const BRANCH_CLOSED = 'closed';
 
 
+    // type discount coupon
+     const FIXED = 'fixed';
+     const PERCENTAGE = 'percentage';
+
+
+    // type discount coupon
+     const PAID = 'paid';
+     const INITIATED  = 'initiated';
+
+
 
 
 }

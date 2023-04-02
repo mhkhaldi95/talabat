@@ -46,6 +46,18 @@ class Controller extends BaseController
             'alert-type' => 'success'
         ]);
     }
+    public function returnBackWithPaymentDone(){
+       return redirect()->route('break.index')->with([
+            'message' => __('lang.payment_done'),
+            'alert-type' => 'success'
+        ]);
+    }
+    public function returnBackWithPaymentFailed(){
+       return redirect()->route('break.index')->with([
+            'message' => __('lang.payment_failed'),
+            'alert-type' => 'error'
+        ]);
+    }
     public function returnBackWithSaveDoneFailed(){
         return back()->with([
             'message' => __('lang.save_failed'),

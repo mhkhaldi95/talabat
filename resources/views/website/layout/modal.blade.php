@@ -1,48 +1,103 @@
-<!-- the Section Start model -->
-<div class="modal fade" id="modal-subscribe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" >
 
+<!-- the Section End model -->
+
+
+<div class="modal" id="productModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
             <div class="modal-body">
-                <div class="image">
-                    <div class="bg-img" id="photo_modal">
-
-                    </div>
-                </div>
-                <i class="fa-solid fa-rectangle-xmark  icon-model" data-bs-dismiss="modal" aria-label="Close"></i>
-                <div class="img-model">
-                    <!-- <img src="img/Screenshot 2022-12-08 at 1.36.33 PM.png" alt=""> -->
-                </div>
-                <div class="text-center p-3 text-model">
-                    <p id="name_modal">
-
-                    </p>
-                    <p class="text-muted fs-5 py-4"  id="description_modal">
-
-                    </p>
-                    <div class="box-tiem-3 " id="parent_addon">
-                        <p class="text-center fs-3 text-muted"> النكهات</p>
-                        <small>بحد أقصى <span id="max_addons"></span></small>
-                        <div id="check_box">
+                <div class="product-item">
+                    <div class="card h-100 w-100">
+                        <img id="photo_modal" src="{{asset('')}}assets/website/images/product.png" class="card-img-top" alt="product">
+                        <div class="card-body text-center">
+                            <h5 class="card-title" data-i18n="productName" id="name_modal">donats</h5>
+                            <p class="card-text" data-i18n="productText" id="description_modal">
+                                Some quick example text to build on
+                                the card title and
+                                make up the bulk of the card's content.
+                            </p>
+                        </div>
+                        <div id="addons">
 
                         </div>
 
-                    </div>
-                    <div class="d-flex align-items-center pt-4">
-                        <div class="quan d-flex mx-2">
-                            <span class="plus"><i class="fa-solid fa-plus pl-icon"></i></span>
-                            <span class="num" id="product_qty"></span>
-                            <span class="minus"><i class="fa-solid fa-minus pl-icon"></i></span>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <div class="d-flex justify-content-center align-items-center h-100 p-3">
+                                <button class="btn w25 bg-main increment plus"  fdprocessedid="5l4yfr">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                                <span id="product_qty" class="counter-container num">01</span>
+                                <button class="btn w25 decrement minus"  fdprocessedid="4aox6r">
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                            </div>
+                            <div class="w-100">
+                                <a href="#" class="btn btn-product w-100 " id="modal-box-button">
+                                    <span class="mx-1" data-i18n="productPrice"><span id="price_modal"></span> ريال</span>
+                                    <img src="{{asset('')}}assets/website/images/sal-i.png" alt="" class="w-20px">
+                                </a>
+                            </div>
                         </div>
-                        <button class="box-button fs-5 " id="modal-box-button">
-                            {{__('lang.add')}}
-                            <i class="fa-brands fa-shopify"></i>
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Modal footer -->
     </div>
 </div>
-{{--<input type="hidden" id="product_hidden" value="">--}}
-<!-- the Section End model -->
+
+<div class="modal" id="loginModal">
+    <div class="modal-dialog">
+        <div class="modal-content" id="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p>{{__('login or register')}}</p>
+
+                <div class="w-100 phone-input my-2">
+                    <input class="form-control " name="phone" type="text" id="phone" />
+
+                </div>
+                <div style="padding-right: 9%" id="mobile_hide"  class="selector_hide">
+                    <span class="text-danger hide "> يجب ادخال رقم الجوال</span>
+                </div>
+                <button class="w-100 btn  bg-main" id="modal-mobile-login-next" >
+                    Next
+                </button>
+            </div>
+        </div>
+        <!-- Modal footer -->
+    </div>
+</div>
+<div class="modal" id="invoice">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body" id="invoice-modal-body">
+
+
+            </div>
+        </div>
+        <!-- Modal footer -->
+    </div>
+</div>
+<script>
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+        separateDialCode: true,
+        excludeCountries: ["in", "il"],
+        preferredCountries: ["ru", "jp", "pk", "no"]
+    });
+</script>

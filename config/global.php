@@ -4,6 +4,10 @@ return [
         'message' => 'Add Successfully',
         'alert-type' => 'success'
     ),
+    'payment_done' => array(
+        'message' => 'Payment Successfully',
+        'alert-type' => 'success'
+    ),
     'add_successfully' => array(
         'message' => 'Add Successfully',
         'alert-type' => 'success'

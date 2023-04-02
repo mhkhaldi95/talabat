@@ -13,7 +13,7 @@ class Product extends Model
     use HasFactory;
     use SoftDeletes;
     const FILLABLE = ['name_ar','name_en','description_ar'
-        ,'description_en','master_photo','tags','price','category_id','discounted_price','max_addons','discount_option','status'];
+        ,'description_en','master_photo','tags','price','category_id','discounted_price','max_addons','discount_option','status','cashback'];
 
     protected $fillable = self::FILLABLE;
     protected $appends =['name','description','avatar','price_after_discount'];
@@ -23,21 +23,23 @@ class Product extends Model
     ];
     public function scopeFilter($q){
 
+
         if(!Auth::check() || Auth::user()->role == Enum::CUSTOMER){
             $col = 'search';
             $value = @request('search');
-            return $q->where("status",Enum::PUBLISHED); // show just PUBLISHED for customers
+           $q->where("status",Enum::PUBLISHED); // show just PUBLISHED for customers
         }else{
             $col = @request('search')['regex'];
             $value = @request('search')['value'];
         }
         if($col == 'search'){
             $q->when(true,function ($qq) use ($value){
-                return $qq->whereRaw("concat(name_ar, ' ',name_en, ' ',description_ar, ' ',description_en) like '%" . $value . "%' ")
+                 $qq->whereRaw("concat(name_ar, ' ',name_en, ' ',description_ar, ' ',description_en) like '%" . $value . "%' ")
                     ->orWhere('tags','like',"%$value%");
             });
 
         }
+
         if($col == 'status' && $value !=''){
             return $q->where("status",$value);
         }

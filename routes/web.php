@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\Dashboard\Auth\LoginController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/setLocale/{locale}', function ($locale){
+    $langs = ['ar','en'];
+    if (isset($locale) && in_array($locale, $langs)) {
+        App::setLocale($locale);
+        session(['locale' => $locale]);
+    }
+    return back();
+})->name('setLocale');
+Route::get('clear', [Controller::class, 'clear']);
 
+
+Route::get('/test-payment', function (){
+
+    return view('welcome');
+})->name('test-payment');
 

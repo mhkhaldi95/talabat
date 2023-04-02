@@ -238,6 +238,7 @@
                     </div>
                         <!--begin::Pricing-->
                         <div class="card card-flush py-4  mt-4">
+
                             <!--begin::Card header-->
                             <div class="card-header">
                                 <div class="card-title">
@@ -247,6 +248,16 @@
                             <!--end::Card header-->
                             <!--begin::Card body-->
                             <div class="card-body pt-0">
+                                <!--begin::Input group-->
+                                <div class="mb-10 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="required form-label">{{__('lang.cashback')}}</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <input type="text" name="cashback" class="form-control mb-2" placeholder="{{__('lang.cashback')}}" value="{{isset($item)?$item['cashback']:old('cashback')}}" />
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="mb-10 fv-row">
                                     <!--begin::Label-->

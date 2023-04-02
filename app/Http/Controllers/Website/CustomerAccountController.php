@@ -18,10 +18,15 @@ use Illuminate\Support\Facades\DB;
 class CustomerAccountController extends Controller
 {
     public function index(Request $request){
+        $page_breadcrumbs = [
+            ['page' => route('break.index') , 'title' =>__('lang.home'),'active' => false],
+            ['page' => '#' , 'title' =>__('breadCrumbUser'),'active' => true],
+        ];
             try {
 //                $branch =  Branch::query()->findOrFail($request->branch_id);
                 return view('website.account',[
                     'cart' =>session()->get('cart')??null,
+                    'page_breadcrumbs' =>$page_breadcrumbs,
 //                    'branch' =>$branch
                ]);
             } catch (QueryException $exception) {

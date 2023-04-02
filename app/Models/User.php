@@ -12,12 +12,14 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Laratrust\Traits\LaratrustUserTrait;
 use Laravel\Sanctum\HasApiTokens;
-
-class User extends Authenticatable
+use Bavix\Wallet\Traits\HasWallet;
+use Bavix\Wallet\Interfaces\Wallet;
+class User extends Authenticatable implements Wallet
 {
     use HasApiTokens, HasFactory, Notifiable;
     use LaratrustUserTrait;
     use SoftDeletes;
+    use HasWallet;
     /**
      * The attributes that are mass assignable.
      *

@@ -1,6 +1,8 @@
 <?php
 
 use App\Classes\Timeout;
+use App\Http\Resources\Branch\ProductResource;
+use App\Models\Order;
 use App\Models\Permission;
 
 if (!function_exists('setTimeout')) {
@@ -97,6 +99,29 @@ function convertTagsStringToObject($tags){
         $data[$index]['value'] = $tag;
     }
     return $data;
+}
+ function lastOrderNumber($col='id',$model=Order::class){
+    $col = 'id';
+    $query = "CAST($col AS DECIMAL(10)) DESC";
+    $r = $model::query()->orderByRaw($query)->first();
+    return intval(@$r->{$col}) + 1;
+}
+function calculateOrderTotal(){
+    $total = 0;
+    $cart = session()->get('cart');
+    $coupon = session()->get('coupon');
+    $discount= $coupon?$coupon->discount:0;
+    if(!is_null($cart) && count($cart) > 0){
+        foreach($cart as $item){
+            $total += $item['price'] * $item['quantity'];
+        }
+
+    }
+    $total = $total -  (($total * $discount)/100);
+    $total = round($total);
+    return $total;
+
+
 }
 
 

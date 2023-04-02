@@ -69,7 +69,9 @@
                             </div>
                         </div>
                     @endif
+
                 </div>
+
                 <div class="menu-item">
 
                     @if(auth()->user()->isAbleTo(['products-create', 'products-read']))
@@ -108,6 +110,36 @@
                 </div>
                 <div class="menu-item">
 
+                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+											<span class="menu-link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">{{__('lang.coupons')}}</span>
+												<span class="menu-arrow"></span>
+											</span>
+                            <div class="menu-sub menu-sub-accordion">
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{route('coupons.index')}}">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+                                            <span class="menu-title">{{__('lang.coupons')}}</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{route('coupons.create')}}">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+                                            <span class="menu-title">{{__('lang.add')}}</span>
+                                        </a>
+                                    </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="menu-item">
+
                     @if(auth()->user()->isAbleTo(['products-create', 'products-read']))
                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
 											<span class="menu-link">
@@ -138,6 +170,38 @@
                                         </a>
                                     </div>
                                 @endif
+                            </div>
+                        </div>
+                    @endif
+                </div>
+                <div class="menu-item">
+                    <div class="menu-content pb-2">
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{__('lang.products_management')}}</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+
+                    @if(auth()->user()->isAbleTo(['orders-create', 'orders-read']))
+                        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+											<span class="menu-link">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+												<span class="menu-title">{{__('lang.orders')}}</span>
+												<span class="menu-arrow"></span>
+											</span>
+                            <div class="menu-sub menu-sub-accordion">
+                                @if(auth()->user()->isAbleTo(['orders-read']))
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{route('admin.orders.index')}}">
+														<span class="menu-bullet">
+															<span class="bullet bullet-dot"></span>
+														</span>
+                                            <span class="menu-title">{{__('lang.orders')}}</span>
+                                        </a>
+                                    </div>
+                                @endif
+
                             </div>
                         </div>
                     @endif

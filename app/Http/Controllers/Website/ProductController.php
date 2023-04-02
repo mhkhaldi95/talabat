@@ -15,10 +15,11 @@ use Illuminate\Support\Facades\Auth;
 class ProductController extends Controller
 {
     public function index(Request $request){
-
-
-//        session()->put('cart', null);
-//        dd(session()->get('cart'));
+        $page_breadcrumbs = [
+            ['page' => route('break.index') , 'title' =>__('lang.home'),'active' => false],
+            ['page' => route('break.branches.index') , 'title' =>__('lang.branches'),'active' => false],
+            ['page' => '#' , 'title' =>__('lang.products'),'active' => true],
+        ];
         if (isset($request->branch_id)) {
             try {
                $branch =  Branch::query()->findOrFail($request->branch_id);
@@ -28,7 +29,8 @@ class ProductController extends Controller
                     'categories' => CategoryResource::collection($categories)->resolve(),
                     'products' => ProductResource::collection($products)->resolve(),
                     'cart' =>session()->get('cart')??null,
-                    'branch' =>$branch
+                    'branch' =>$branch,
+                    'page_breadcrumbs' =>$page_breadcrumbs
                ]);
             } catch (QueryException $exception) {
                 return $this->invalidIntParameter();

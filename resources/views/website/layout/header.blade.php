@@ -1,22 +1,40 @@
-<section class="NavBar d-fl">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
-            <div>
-                <p class="font-s">{{$settings->site_name}}</p>
+
+<!-- navbar -->
+<nav class="bg-custom ">
+    <div class="container nav-container">
+        <div class="row align-items-center">
+            <div class="col-6">
+                <div class="logo">
+                    <a href="{{route('break.index')}}">{{$settings->site_name}}</a>
+                </div>
             </div>
-            <div>
-                <a href="{{route('products.search',['branch_id' =>@$branch->id])}}">
-                    <i class="fa-solid fa-magnifying-glass ps-3"></i>
-                </a>
+            <div class="col-6 d-flex align-items-baseline justify-content-end">
+
                 @if(\Illuminate\Support\Facades\Auth::check())
-                   <a href="{{route('customer.account',['branch_id' =>@$branch->id])}}">
-                       <i class="fa-solid fa-user ps-3 size-icon"></i>
-                   </a>
-                    @else
-                    <i class="fa-solid fa-user ps-3 size-icon" id="customer_login"></i>
+
+                    <a href="{{route('products.search',['branch_id' =>@$branch->id])}}" class="search-icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </a>
+                    <a href="{{route('customer.account',['branch_id' =>@$branch->id])}}" class="user mx-4">
+                        <i class="fa-regular fa-user fa-lg"></i>
+                    </a>
+                @else
+                    <a href="javascript:void(0)" id="customer_login" class="user mx-4">
+                        <i class="fa-regular fa-user fa-lg"></i>
+                    </a>
                 @endif
-                <span class="fs-3 ">En</span>
+                <div class="lang-select">
+                    <select name="format" id="format"
+                            onchange="javascript:handleSelect(this)">
+                        <option id="select_en" value="{{route('setLocale','en')}}" {{app()->getLocale() != 'ar'?'selected':''}} >En</option>
+                        <option id="select_ar" value="{{route('setLocale','ar')}}" {{app()->getLocale() == 'ar'?'selected':''}} >Ar</option>
+                    </select>
+                </div>
+
+
             </div>
+
         </div>
     </div>
-</section>
+</nav>
+<!-- ../navbar -->

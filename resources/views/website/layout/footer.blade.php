@@ -1,25 +1,29 @@
-<section class="Footer ">
-    <div class="container">
-        <div class="row text-center d-flex align-items-center">
-            <div class="col-4 col-lg-4">
-                <p class="text-muted">{{$settings->done_by}}</p>
+
+<!-- Footer -->
+<footer class="footer text-center text-lg-start py-4 bg-custom">
+    <!-- Section: Social media -->
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-4 " data-i18n="creator">
+                {{__('creator')}}
             </div>
-            <div class="col-4 col-lg-4">
-                <p>جميع الحقوق محفوظة 2023</p>
+            <div class="col-md-4" data-i18n="Copyright">
+                {{__('Copyright')}}
             </div>
-            <div class="col-4 col-lg-4">
-                <div class="icon">
-                    <a href="{{$settings->instagram_link}}">
-                        <i class="fa-brands fa-instagram icon-i "></i>
+            <div class="col-md-4 socail">
+                <div>
+                    <a href="{{$settings->facebook_link}}" class="me-4 text-reset" >
+                        <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="{{$settings->twitter_link}}">
-                        <i class="fa-brands fa-twitter icon-i  px-2"></i>
+                    <a href="{{$settings->twitter_link}}" class="me-4 text-reset">
+                        <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="{{$settings->facebook_link}}">
-                        <i class="fa-brands fa-facebook icon-i "></i>
+                    <a href="{{$settings->instagram_link}}" class="me-4 text-reset">
+                        <i class="fab fa-instagram"></i>
                     </a>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</footer>

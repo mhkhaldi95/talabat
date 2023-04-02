@@ -25,14 +25,14 @@ class Branch extends Model
     public function getQty($product_id){
         $item =  ProductBranch::where('product_id',$product_id)->where('branch_id',$this->id)->first();
         if($item){
-            return ProductBranch::where('product_id',$product_id)->where('branch_id',$this->id)->first()->qty;
+            return $item->qty;
         }
         return  0;
     }
     public function productStatus($product_id){
         $item =  ProductBranch::where('product_id',$product_id)->where('branch_id',$this->id)->first();
         if($item){
-            return ProductBranch::where('product_id',$product_id)->where('branch_id',$this->id)->first()->status;
+            return $item->status;
         }
         return  null;
     }

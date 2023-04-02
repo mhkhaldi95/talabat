@@ -150,6 +150,17 @@ return [
     'Show' =>'Show' ,
     'admin' =>'Admin' ,
     'branch' => 'Branch',
-    'settings' => 'Settings'
+    'settings' => 'Settings',
+    "homeIntro" => "Order Now, Receive It At The Branch Within 15 Minutes",
+    'coupons' => 'Coupons',
+    'code' => 'Code',
+    'discount' => 'Discount',
+    'type' => 'Type',
+    'max_uses' => 'Max Uses',
+    'times_used' => 'Time Used',
+    'fixed' => 'Fixed',
+    'percentage' => 'Percentage',
+    'days' => 'Days',
+    'cashback' => 'Cashback',
 
 ];

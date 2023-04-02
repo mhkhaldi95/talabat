@@ -3,7 +3,9 @@
 use App\Http\Controllers\Dashboard\Addons\AddonController;
 use App\Http\Controllers\Dashboard\Auth\LoginController;
 use App\Http\Controllers\Dashboard\Categories\CategoryController;
+use App\Http\Controllers\Dashboard\Coupons\CouponController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\Orders\OrderController;
 use App\Http\Controllers\Dashboard\Products\ProductController;
 use App\Http\Controllers\Dashboard\Settings\SettingsController;
 use App\Http\Controllers\Dashboard\UserManagement\Admins\AccountSettingsController;
@@ -26,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin','middleware'=>'locale'], function () {
 
     Route::group(['prefix' => 'auth','middleware'=>'guest'], function () {
         Route::get('login', [LoginController::class, 'index'])->name('login');
@@ -90,6 +92,20 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/store/{id?}', [CategoryController::class, 'store'])->name('categories.store');
             Route::post('{id}/delete', [CategoryController::class, 'delete'])->name('categories.delete');
             Route::post('delete-selected', [CategoryController::class, 'deleteSelected'])->name('categories.deleteSelected');
+        });
+
+        Route::group(['prefix' => 'coupons'], function () {
+            Route::get('/', [CouponController::class, 'index'])->name('coupons.index');
+            Route::get('/create/{id?}', [CouponController::class, 'create'])->name('coupons.create');
+            Route::post('/store/{id?}', [CouponController::class, 'store'])->name('coupons.store');
+            Route::post('{id}/delete', [CouponController::class, 'delete'])->name('coupons.delete');
+            Route::post('delete-selected', [CouponController::class, 'deleteSelected'])->name('coupons.deleteSelected');
+        });
+        Route::group(['prefix' => 'orders'], function () {
+            Route::get('/', [OrderController::class, 'index'])->name('admin.orders.index');
+            Route::get('/show/{id}', [OrderController::class, 'show'])->name('admin.orders.show');
+            Route::post('{id}/delete', [OrderController::class, 'delete'])->name('admin.orders.delete');
+            Route::post('delete-selected', [OrderController::class, 'deleteSelected'])->name('admin.coupons.deleteSelected');
         });
 
         Route::group(['prefix' => 'addons'], function () {

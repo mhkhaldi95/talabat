@@ -11,8 +11,8 @@ class BranchController extends Controller
 {
     public function index(){
         $page_breadcrumbs = [
-            ['page' => route('break.index') , 'title' =>__('lang.home'),'active' => true],
-            ['page' => '#' , 'title' =>__('lang.branches'),'active' => false],
+            ['page' => route('break.index') , 'title' =>__('lang.home'),'active' => false],
+            ['page' => '#' , 'title' =>__('lang.branches'),'active' => true],
         ];
         return view('website.branches',[
             'branches' => BranchResource::collection(Branch::with(['user'])->get())->resolve(),

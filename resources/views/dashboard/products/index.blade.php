@@ -209,7 +209,7 @@
                         // $(row).find('td:eq(4)').attr('data-filter', data.CreditCardType);
                     }
                 });
-
+                console.log("dt",dt)
                 table = dt.$;
 
                 // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw

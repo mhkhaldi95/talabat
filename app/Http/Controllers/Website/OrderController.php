@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Website;
 
+use App\Constants\Enum;
+use App\Constants\StatusCodes;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Categories\CategoryResource;
 use App\Http\Resources\Website\ProductResource;
 use App\Models\Branch;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductBranch;
 use Illuminate\Database\QueryException;
@@ -44,5 +47,8 @@ class OrderController extends Controller
         }
         return  ['status' => $status,'msg' => $msg];
 
+    }
+    public function orderInfo(){
+        return $this->response_json(true, StatusCodes::OK, Enum::DELETED_SUCCESSFULLY,view('website._invoice_modal_body')->render());
     }
 }

@@ -32,7 +32,9 @@ class ProductController extends Controller
     }
     public function index(Request $request){
         if($request->ajax()){
-            $items = Product::query()->orderBy(getColAndDirForOrderBy(Product::class)['col'],getColAndDirForOrderBy(Product::class)['dir'])->filter()->paginate(\request()->get('length', 10),'*','*',getPageNumber());
+            $items = Product::query()->orderBy(
+                getColAndDirForOrderBy(Product::class)['col'],getColAndDirForOrderBy(Product::class)['dir'])->filter()->paginate(\request()->get('length', 10),'*','*',getPageNumber()
+            );
             return datatable_response($items, null, ProductResource::class);
         }
         $page_breadcrumbs = [

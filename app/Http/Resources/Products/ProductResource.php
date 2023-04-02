@@ -28,7 +28,7 @@ class ProductResource extends JsonResource
                 'item' => $this
             ])->render(),
             'avatar' => $this->avatar,
-            'category' => $this->category->name,
+            'category' => @$this->category->name,
             'actions' => view('dashboard.products.partial.datatable_cols._action',[
                 'item' => $this
             ])->render(),
@@ -50,6 +50,7 @@ class ProductResource extends JsonResource
             'description' => $this->description,
             'category_id' => $this->category_id,
             'price' => $this->price,
+            'cashback' => $this->cashback,
             'discount_option' => $this->discount_option,
             'discounted_price' => $this->discounted_price,
             'max_addons' => $this->max_addons,
@@ -61,16 +62,5 @@ class ProductResource extends JsonResource
             'price_after_discount' => $this->price_after_discount == $this->price? $this->price:$this->price_after_discount,
 
         ];
-    }
-    public function toWebSite(){
-        return [
-            'id' => $this['id'],
-            'name' => $this->name,
-            'description' => $this->description,
-            'photos' => @$this->photos()->select('id','name')->get(),
-            'master_photo' => $this->avatar,
-            'price' => $this->price,
-            'price_after_discount' => $this->price_after_discount == $this->price? $this->price:$this->price_after_discount,
-            ];
     }
 }

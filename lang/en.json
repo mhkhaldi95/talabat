@@ -1,14 +1,33 @@
 {
-    "200.202.0" : {
-        "label" : "تخزين العملية بنجاح",
-        "value" : "تم تخزين العملية بنجاح"
-    },
-    "200.202.2" : {
-        "label" : "تخزين العملية بنجاح ولم يتم إرسال رسالة جوال ",
-        "value" : "تم تخزين العملية بنجاح ولم يتم إرسال رسالة جوال"
-    },
-    "200.202.1" : {
-        "label" : "إنشاء تخزين العملية بنجاح ولم يتم إرسال إشعار",
-        "value" : "تم تخزين العملية بنجاح ولم يتم إرسال إشعار"
-    }
+    "homeIntro": "Order Now, Receive It At The Branch Within 15 Minutes ",
+    "custimizeBranch":" Branch identification",
+    "Copyright":"2023 © Copyright  ",
+    "creator":" Braa Adnan",
+    "custimizeBranchHeader":"Select The Branch From Which You Want To Receive The Order  ",
+    "breadCrumbHome":"Home",
+    "breadCrumbBranch":" / Branch ",
+    "breadCrumbOrders":" / Orders",
+    "branchName":"Reyad - Saudia",
+    "categories":"categories",
+    "all":"All",
+    "productCat":"donuts",
+    "productName1":"donuts",
+    "productText":"Some quick example text to build on the card title and make up the bulk of the card's content.",
+    "bill":"Bill",
+    "productPrice":" SAR",
+    "discountText":"discount ",
+    "percentage":"20%",
+    "totalText":"Total",
+    "totalAmount":"20 SAR",
+    "addedTax":"Including value added tax",
+    "completion":"completion",
+    "productName":"product name",
+    "remove":"remove",
+    "recieveFrom":"recieve from",
+    "recieveFromBranch":"recieve from branch",
+    "refundText":"You have a refund ",
+    "refundAmount":"20 SAR",
+    "viewDetails":"view details",
+    "orderNumber":"order 3232",
+    "breadCrumbUser":" / my account"
 }

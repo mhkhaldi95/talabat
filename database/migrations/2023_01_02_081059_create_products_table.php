@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('description_en');
             $table->string('master_photo')->default('default.png');
             $table->text('tags')->nullable();
+            $table->double('cashback')->default(0);
             $table->double('price');
             $table->foreignId('category_id')->nullable()->index();
             $table->double('discounted_price')->default(0);
