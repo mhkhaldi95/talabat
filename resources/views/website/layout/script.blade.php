@@ -453,7 +453,27 @@
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             var branch_id = urlParams.get('branch_id')
-            goToUrl('/payment?branch_id=' + branch_id)
+            goToUrl('/payment?payment_method=online&branch_id=' + branch_id)
+            $('#invoice').modal("hide")
+        })
+        $(document).on('click', '#cashBack-payment', function (e) {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            var branch_id = urlParams.get('branch_id')
+
+            axios.get('/check-cashback').then(response => {
+                if(response.data.status){
+                    goToUrl('/payment?payment_method=cashBack&branch_id=' + branch_id)
+                    $('#invoice').modal("hide")
+                }else{
+                    toastr.warning("رصيدك لا يكفي");
+                }
+
+            }).catch(error => {
+                toastr.warning("حدث خطا ما");
+            });
+
+            goToUrl('/payment?payment_method=cashBack&branch_id=' + branch_id)
             $('#invoice').modal("hide")
         })
 

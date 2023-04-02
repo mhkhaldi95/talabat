@@ -18,10 +18,23 @@ class PaymentController extends Controller
     {
 
         try {
-//            $order = $createOrder->create(session()->get('cart'), session()->get('coupon', null));
-            return view('website.payment', [
+            if($request->payment_method == 'online'){
+                //            $order = $createOrder->create(session()->get('cart'), session()->get('coupon', null));
+                return view('website.payment', [
 //                'order' => $order
-            ]);
+                ]);
+            }else{
+                $order = $createOrder->create(session()->get('cart'), session()->get('coupon', null));
+
+                if($request->payment_method == 'cashBack' && $order->price > auth()->user()->balance){
+                    return $this->returnBackWithPaymentFailed();
+                }
+                if($order){
+                    return $this->returnBackWithPaymentDone();
+                }
+                return $this->returnBackWithPaymentFailed();
+            }
+
         } catch (QueryException $exception) {
             return $this->invalidIntParameterJson();
         }
@@ -44,4 +57,12 @@ class PaymentController extends Controller
         ]);
 
     }
+    public function checkCashback()
+    {
+        return response()->json([
+            'status' => calculateOrderTotal() <= auth()->user()->balance
+        ]);
+
+    }
+
 }

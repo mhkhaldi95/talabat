@@ -74,8 +74,8 @@
     <a href="#" class="text-dark mb-3 text-decoration-underline" data-i18n="addedTax">{{__('addedTax')}}</a>
 </div>
 
-<div class="btn  bg-gray w-100 p-2 mt-3" id="online-payment">
-    <div class="d-flex align-items-center justify-content-center">
+<div class="btn  bg-gray w-100 p-2 mt-3" >
+    <div class="d-flex align-items-center justify-content-center" id="online-payment">
         <img src="{{asset('')}}assets/website/images/visa.png" alt="" style="width: 30px;">
         <span class="mx-2">visa</span>
     </div>

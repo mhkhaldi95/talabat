@@ -50,6 +50,7 @@ Route::group(['middleware'=>'locale'], function () {
             Route::get('/orderInfo', [OrderController::class, 'orderInfo'])->name('orderInfo')->withoutMiddleware('select_branch');
             Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
             Route::get('/create/order', [PaymentController::class, 'create'])->name('create.order');
+            Route::get('/check-cashback', [PaymentController::class, 'checkCashback'])->name('checkCashback')->withoutMiddleware('select_branch');
             Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
             Route::post('/payment/completed', [PaymentController::class, 'completed'])->name('completed.payment')->withoutMiddleware('select_branch');
 

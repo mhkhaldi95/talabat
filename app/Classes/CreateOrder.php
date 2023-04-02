@@ -2,6 +2,7 @@
 
 namespace App\Classes;
 
+use App\Constants\Enum;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Database\QueryException;
@@ -25,12 +26,21 @@ class CreateOrder
                 $total += ($item['price'] * $item['quantity']);
 
             }
-            $item = Order::create([
+            $data = [
                 'coupon_id' => $coupon ? $coupon->id : null,
                 'price' => $total,
                 'branch_id' => request()->get('branch_id'),
                 'user_id' => Auth::id(),
-            ]);
+            ];
+
+            if( request('payment_method') != 'online' && !empty(request('payment_method'))){
+                $data+=  [
+                    'status' =>Enum::PAID,
+                    'payment_method' =>  request('payment_method')
+                ];
+            }
+
+            $item = Order::create($data);
             foreach ($items as $row) {
                 $row['order_id'] = $item->id;
                 $row['addon_ids'] = json_encode($row['addon_ids']);
