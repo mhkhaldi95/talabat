@@ -34,9 +34,14 @@ class CreateOrder
             ];
 
             if( request('payment_method') != 'online' && !empty(request('payment_method'))){
+                if(request('payment_method') == 'cashBack'){
+                    $payment_method = 'wallet';
+                }else{
+                    $payment_method = 'cash';
+                }
                 $data+=  [
                     'status' =>Enum::PAID,
-                    'payment_method' =>  request('payment_method')
+                    'payment_method' =>  $payment_method
                 ];
             }
 

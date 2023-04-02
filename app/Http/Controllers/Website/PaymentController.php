@@ -23,20 +23,20 @@ class PaymentController extends Controller
                 return view('website.payment', [
 //                'order' => $order
                 ]);
-            }else{
-                $order = $createOrder->create(session()->get('cart'), session()->get('coupon', null));
+            }elseif($request->payment_method == 'cashBack' ){
+                if(calculateOrderTotal() <= floatval(auth()->user()->balance)){
+                    $order = $createOrder->create(session()->get('cart'), session()->get('coupon', null));
+                    if($order){
+                        auth()->user()->withdraw($order->price);
+                        return $this->returnBackWithPaymentDone();
+                    }
+                }
 
-                if($request->payment_method == 'cashBack' && $order->price > auth()->user()->balance){
-                    return $this->returnBackWithPaymentFailed();
-                }
-                if($order){
-                    return $this->returnBackWithPaymentDone();
-                }
                 return $this->returnBackWithPaymentFailed();
             }
 
         } catch (QueryException $exception) {
-            return $this->invalidIntParameterJson();
+            return $this->returnBackWithPaymentFailed();
         }
     }
 

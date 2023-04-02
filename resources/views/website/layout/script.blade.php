@@ -461,7 +461,7 @@
             const urlParams = new URLSearchParams(queryString);
             var branch_id = urlParams.get('branch_id')
 
-            axios.get('/check-cashback').then(response => {
+            axios.get('{{route('checkCashback')}}').then(response => {
                 if(response.data.status){
                     goToUrl('/payment?payment_method=cashBack&branch_id=' + branch_id)
                     $('#invoice').modal("hide")
@@ -473,8 +473,8 @@
                 toastr.warning("حدث خطا ما");
             });
 
-            goToUrl('/payment?payment_method=cashBack&branch_id=' + branch_id)
-            $('#invoice').modal("hide")
+            // goToUrl('/payment?payment_method=cashBack&branch_id=' + branch_id)
+            // $('#invoice').modal("hide")
         })
 
 

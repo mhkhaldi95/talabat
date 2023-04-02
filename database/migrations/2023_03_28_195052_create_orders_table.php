@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->double('price')->nullable();
             $table->text('payment_id')->nullable();
-            $table->enum('payment_method',['online','wallet'])->default('online');
+            $table->enum('payment_method',['online','wallet','cash'])->default('online');
             $table->string('status')->default('initiated');
             $table->softDeletes();
 
