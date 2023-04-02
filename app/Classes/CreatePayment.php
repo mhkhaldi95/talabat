@@ -19,7 +19,7 @@ class CreatePayment
         $order = $createOrder->create(session()->get('cart'), session()->get('coupon', null));
 
         $id = request('id');
-//        $token = base64_encode('sk_test_R4jMBkA5k11fuJmiRpsyuJk1Tt9f96ySwrqQRHmK');
+        $token = base64_encode('sk_test_R4jMBkA5k11fuJmiRpsyuJk1Tt9f96ySwrqQRHmK');
         $paymentService = new \Moyasar\Providers\PaymentService();
         $payment = $paymentService->fetch($id);
 
