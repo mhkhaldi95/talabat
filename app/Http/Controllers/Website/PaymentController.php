@@ -27,6 +27,8 @@ class PaymentController extends Controller
                 if(calculateOrderTotal() <= floatval(auth()->user()->balance)){
                     $order = $createOrder->create(session()->get('cart'), session()->get('coupon', null));
                     if($order){
+                        session()->forget('cart');
+                        session()->forget('coupon');
                         auth()->user()->withdraw($order->price);
                         return $this->returnBackWithPaymentDone();
                     }
