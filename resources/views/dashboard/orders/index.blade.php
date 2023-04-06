@@ -10,57 +10,7 @@
                 <div class="card-header border-0 pt-6">
                     <!--begin::Card title-->
                     <div class="card-title">
-                        <!--begin::Search-->
-                        <div class="d-flex align-items-center position-relative my-1">
-                            <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                            <span class="svg-icon svg-icon-1 position-absolute ms-6">
-													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-														<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
-														<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
-													</svg>
-												</span>
-                            <!--end::Svg Icon-->
-                            <input type="text" id="search" class="form-control form-control-solid w-250px ps-15" placeholder="{{__('lang.search')}}" />
-                        </div>
-                        <!--end::Search-->
 
-                        <!--begin::Search-->
-                        <div class="d-flex align-items-center  position-relative my-1">
-                            <div class="mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fs-5 fw-bold mb-3">{{__('lang.user')}}:</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <select class="form-select form-select-solid  w-250px fw-bolder " data-kt-select2="true" data-placeholder="{{__('lang.select')}}" data-allow-clear="true"  id="customer_filter" >
-                                    <option></option>
-                                    @foreach($customers as $customer)
-                                     <option value="{{$customer->id}}" >{{$customer->name}}</option>
-                                    @endforeach
-                                </select>
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                        </div>
-                        <!--end::Search-->
-
-                        <!--begin::Search-->
-                        <div class="d-flex align-items-center  position-relative my-1">
-                            <div class=" mb-10">
-                                <!--begin::Label-->
-                                <label class="form-label fs-5 fw-bold mb-3">{{__('lang.Status')}}:</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <select class="form-select form-select-solid w-250px fw-bolder status_filter" data-kt-select2="true" data-placeholder="{{__('lang.select')}}" data-allow-clear="true"  id="status_filter" >
-                                    <option></option>
-                                    <option value="{{\App\Constants\Enum::INITIATED}}" >{{__('lang.'.\App\Constants\Enum::INITIATED)}}</option>
-                                    <option value="{{\App\Constants\Enum::PAID}}" >{{__('lang.'.\App\Constants\Enum::PAID)}}</option>
-
-                                </select>
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                        </div>
-                        <!--end::Search-->
                     </div>
                     <!--begin::Card title-->
                     <!--begin::Card toolbar-->
@@ -83,6 +33,98 @@
                     <!--end::Card toolbar-->
                 </div>
                 <!--end::Card header-->
+                <!--begin::Form-->
+                <form action="#">
+                    <!--begin::Card-->
+                    <div class="card mb-7">
+                        <!--begin::Card body-->
+                        <div class="card-body">
+                            <!--begin::Compact form-->
+                            <div class="d-flex align-items-center">
+                                <!--begin::Input group-->
+                                <div class="position-relative w-md-400px me-md-2">
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                                    <span
+                                        class="svg-icon svg-icon-3 svg-icon-gray-500 position-absolute top-50 translate-middle ms-6">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                             viewBox="0 0 24 24" fill="none">
+															<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546"
+                                                                  height="2" rx="1"
+                                                                  transform="rotate(45 17.0365 15.1223)"
+                                                                  fill="currentColor"/>
+															<path
+                                                                d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                                                                fill="currentColor"/>
+														</svg>
+													</span>
+                                    <!--end::Svg Icon-->
+                                    <input type="text" id="search" class="form-control form-control-solid w-250px ps-15" placeholder="{{__('lang.search')}}" />
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin:Action-->
+                                <div class="d-flex align-items-center">
+                                    <a id="kt_horizontal_search_advanced_link" class="btn btn-link"
+                                       data-bs-toggle="collapse" href="#kt_advanced_search_form">البحث المتقدم</a>
+                                </div>
+                                <!--end:Action-->
+                            </div>
+                            <!--end::Compact form-->
+                            <!--begin::Advance form-->
+                            <div class="collapse" id="kt_advanced_search_form">
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed mt-9 mb-6"></div>
+                                <!--end::Separator-->
+                                <!--begin::Row-->
+                                <div class="row g-8 mb-8">
+                                    <!--begin::Row-->
+                                    <div class="row g-8 academic-dev">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-3">
+                                            <!--begin::Label-->
+                                            <label class="form-label fs-5 fw-bold mb-3">{{__('lang.user')}}:</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <select class="form-select form-select-solid  w-250px fw-bolder " data-kt-select2="true" data-placeholder="{{__('lang.select')}}" data-allow-clear="true"  id="customer_filter" >
+                                                <option></option>
+                                                @foreach($customers as $customer)
+                                                    <option value="{{$customer->id}}" >{{$customer->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Col-->
+
+                                        <!--begin::Col-->
+                                        <div class="col-lg-3">
+                                            <!--begin::Label-->
+                                            <label class="form-label fs-5 fw-bold mb-3">{{__('lang.Status')}}:</label>
+                                            <!--end::Label-->
+                                            <!--begin::Input-->
+                                            <select class="form-select form-select-solid w-250px fw-bolder status_filter" data-kt-select2="true" data-placeholder="{{__('lang.select')}}" data-allow-clear="true"  id="status_filter" >
+                                                <option></option>
+                                                <option value="{{\App\Constants\Enum::INITIATED}}" >{{__('lang.'.\App\Constants\Enum::INITIATED)}}</option>
+                                                <option value="{{\App\Constants\Enum::PAID}}" >{{__('lang.'.\App\Constants\Enum::PAID)}}</option>
+
+                                            </select>
+                                            <!--end::Input-->
+                                        </div>
+                                        <!--end::Col-->
+
+
+
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Row-->
+                            </div>
+                            <!--end::Advance form-->
+                        </div>
+                        <!--end::Card body-->
+                    </div>
+                    <!--end::Card-->
+                </form>
+                <!--end::Form-->
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
                     <!--begin::Table-->

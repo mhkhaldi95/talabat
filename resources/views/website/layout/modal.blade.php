@@ -2,7 +2,7 @@
 <!-- the Section End model -->
 
 
-<div class="modal" id="productModal">
+<div class="modal productModal" id="productModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
@@ -93,11 +93,43 @@
         <!-- Modal footer -->
     </div>
 </div>
-<script>
-    var input = document.querySelector("#phone");
-    window.intlTelInput(input, {
-        separateDialCode: true,
-        excludeCountries: ["in", "il"],
-        preferredCountries: ["ru", "jp", "pk", "no"]
-    });
-</script>
+<div class="modal" id="countDownWebsite">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body" style="text-align: center" >
+                <div id="countDownWebsite-modal-body">
+
+                </div>
+            </div>
+        </div>
+        <!-- Modal footer -->
+    </div>
+</div>
+<div class="modal" id="countDown">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body" style="text-align: center" >
+                <div id="countDown-modal-body">
+
+                </div>
+                <input type="hidden" id="modal_order_id"/>
+                <input type="hidden" id="modal_branch_id"/>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="accept_order" class="btn btn-primary">قبول</button>
+                <button type="button" id="reject_order" class="btn btn-danger" >رفض</button>
+            </div>
+        </div>
+        <!-- Modal footer -->
+    </div>
+</div>
+

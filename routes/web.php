@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Dashboard\Auth\LoginController;
+use App\Http\Controllers\UpdateFcmController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +32,5 @@ Route::get('/test-payment', function (){
 
     return view('welcome');
 })->name('test-payment');
+Route::post('/store-token', UpdateFcmController::class);
 

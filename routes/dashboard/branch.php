@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Branch\DashboardController;
+use App\Http\Controllers\Branch\Orders\OrderController;
 use App\Http\Controllers\Branch\Products\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,4 +25,9 @@ Route::group(['prefix' => 'branch','middleware' => ['auth:sanctum','branch']], f
             Route::get('/create/{id?}', [ProductController::class, 'create'])->name('branch.products.create');
             Route::post('change-status', [ProductController::class, 'changeStatus'])->name('change-status');
         });
+        Route::group(['prefix' => 'orders'], function () {
+            Route::post('/orders/accept', [OrderController::class, 'accept'])->name('branch.orders.accept');
+            Route::post('/orders/reject', [OrderController::class, 'reject'])->name('branch.orders.reject');
+        });
+
 });

@@ -302,7 +302,7 @@
                                 @endif
 {{--                                    <a href="{{!\Auth::check()?'javascript:void(0)':route('payment.index',['branch_id' => $branch->id,'amount' => $total])}}" class="btn btn-product w-100"--}}
                                     <a href="javascript:void(0)" class="btn btn-product w-100"
-                                     id="{{!\Auth::check() ? 'complete_order' : 'openModalInvoice'}}"
+                                     id="{{!\Auth::check() ? 'complete_order' : (!is_null($cart) && count($cart) > 0 ?'openModalInvoice':'')}}"
                                        >
                                         <span class="mx-1" data-i18n="productPrice">{{$total}}  {{__('productPrice')}}</span>
                                         <img src="{{asset('')}}assets/website/images/sal-i.png" alt="" class="w-20px">
@@ -319,7 +319,7 @@
                 </div>
             </div>
         </div>
-        </div>
+
     </section>
     <!-- ../products -->
     @include('website.layout.modal')

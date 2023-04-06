@@ -32,6 +32,7 @@ class User extends Authenticatable implements Wallet
         'role',
         'phone',
         'gender',
+        'fcm_token',
         'photo',
     ];
     protected $fillable = self::FILLABLE;
@@ -83,6 +84,10 @@ class User extends Authenticatable implements Wallet
     public function codes()
     {
         return $this->hasMany(Code::class);
+    }
+    public function routeNotificationForFcm()
+    {
+        return $this->fcm_token;
     }
     public function activeCode()
     {

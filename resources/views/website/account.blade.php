@@ -181,6 +181,40 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col">
+                            <div class="product-item">
+                                <div class="card">
+                                    <div class="item-img position-relative">
+                                        <img src="{{asset('')}}assets/website/images/product.png" class="card-img-top" alt="product">
+                                        <div class="card-img-overlay">
+                                            <span
+                                                class="card-title shadow-sm bg-body p-2 color-main w-25 left rounded text-center">
+                                                2023-2-2</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body text-center">
+                                        <div
+                                            class="discount d-flex justify-content-between bg-gray align-items-center p-2">
+                                            <div data-i18n="discountText">discount percentage</div>
+                                            <div data-i18n="percentage">20%</div>
+                                        </div>
+                                        <div
+                                            class="total d-flex justify-content-between bg-gray align-items-center p-2 mt-3">
+                                            <div data-i18n="totalText">Total</div>
+                                            <div data-i18n="totalAmount">20%</div>
+                                        </div>
+                                        <a href="#" class="text-dark  text-decoration-underline text-center"
+                                           data-i18n="viewDetails">view details</a>
+
+                                        <button class="btn btn-product w-100 mt-3">
+                                            <span class="mx-1" data-i18n="recieveFromBranch">recieve from branch</span>
+                                            <img src="{{asset('')}}assets/website/images/sal-i.png" alt="" class="w-20px">
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 
@@ -221,8 +255,42 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col">
+                            <div class="product-item">
+                                <div class="card">
+                                    <div class="item-img position-relative">
+                                        <img src="{{asset('')}}assets/website/images/product.png" class="card-img-top" alt="product">
+                                        <div class="card-img-overlay">
+                                            <span
+                                                class="card-title shadow-sm bg-body p-2 color-main w-25 left rounded text-center">
+                                                2023-2-2</span>
+                                        </div>
+                                    </div>
 
 
+                                    <div class="card-body text-center">
+                                        <div
+                                            class="discount d-flex justify-content-between bg-gray align-items-center p-2">
+                                            <div data-i18n="discountText">discount percentage</div>
+                                            <div data-i18n="percentage">20%</div>
+                                        </div>
+                                        <div
+                                            class="total d-flex justify-content-between bg-gray align-items-center p-2 mt-3">
+                                            <div data-i18n="totalText">Total</div>
+                                            <div data-i18n="totalAmount">20%</div>
+                                        </div>
+                                        <a href="#" class="text-dark  text-decoration-underline text-center"
+                                           data-i18n="viewDetails">view details</a>
+
+                                        <button class="btn btn-outline-success w-100 mt-3">
+                                            <span class="mx-1" >recieved</span>
+                                            <i class="fa-solid fa-calendar-check"></i>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
 

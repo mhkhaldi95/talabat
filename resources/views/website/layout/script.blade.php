@@ -114,7 +114,9 @@
             // }
             $('.product-item #photo_modal').attr("src", product_photo);
             // $('#photo_modal').css("background-image", "url(" + product_photo + ")");
+            // $("#productModal").modal({ backdrop: "static ", keyboard: false });
             $('#productModal').modal("show")
+
 
 
             $(".addon_check").click( function (e) {
@@ -439,8 +441,9 @@
 
 
         $(document).on('click', '#openModalInvoice', function (e) {
-            axios.get("{{route('orderInfo')}}").then(response => {
-                console.log("response.data.data",response.data.data)
+            var url = "{{route('orderInfo')}}";
+            var url = url+"?branch_id="+getBranch()
+            axios.get(url,{branch_id:getBranch()}).then(response => {
                 $('#invoice-modal-body').html(response.data.data)
             }).catch(error => {
                 toastr.warning("حدث خطا ما");
@@ -450,9 +453,7 @@
 
 
         $(document).on('click', '#online-payment', function (e) {
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            var branch_id = urlParams.get('branch_id')
+
             goToUrl('/payment?payment_method=online&branch_id=' + branch_id)
             $('#invoice').modal("hide")
         })
@@ -475,6 +476,84 @@
 
             // goToUrl('/payment?payment_method=cashBack&branch_id=' + branch_id)
             // $('#invoice').modal("hide")
+        })
+        $(document).on('click', '#cash-payment', function (e) {
+
+
+            axios.post("{{route('orders.store')}}",{branch_id:getBranch(),payment_method:'cash'}).then(response => {
+                if(response.data.status){
+                    $('#invoice').modal("hide")
+                    countDown(response.data.data.order)
+                    $('#carts').html(response.data.data.cart)
+                }else{
+                    toastr.warning(response.data.message);
+                }
+            }).catch(error => {
+                toastr.warning("حدث خطا ما");
+            });
+
+        })
+
+
+
+        function  countDown(order){
+            $('#modal_order_id').val(order.id)
+            $('#modal_branch_id').val(getBranch())
+
+            $("#countDownWebsite").modal({ backdrop: "static ", keyboard: false });
+            $('#countDownWebsite').modal('show')
+            var countDownDate = 30;
+            document.getElementById("countDownWebsite-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
+
+            var x = setInterval(function() {
+                countDownDate = countDownDate - 1;
+                document.getElementById("countDownWebsite-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
+                if(countDownDate <= 0){
+                    clearInterval(x);
+                    axios.post("{{route('orders.accept')}}",{
+                            order_id: order.id,
+                            branch_id:getBranch()
+                    }).then(response => {
+                        $('#countDownWebsite').modal('hide')
+                        toastr.success("تم قبول طلبيتك بنجاح");
+                    }).catch(error => {
+                        toastr.warning("حدث خطا ما");
+                    });
+                }
+
+
+            }, 1000);
+            window.onbeforeunload = function() {
+                return "Dude, are you sure you want to leave? Think of the kittens!";
+            }
+        }
+        function getBranch(){
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            var branch_id = urlParams.get('branch_id')
+            return branch_id;
+        }
+
+        $(document).on('click', '#accept_order', function (e) {
+
+            var order_id = $('#modal_order_id').val()
+            var branch_id = $('#modal_branch_id').val()
+            if(order_id && branch_id){
+                axios.post("{{route('branch.orders.accept')}}",{
+                    order_id: order_id,
+                    branch_id:getBranch()
+                }).then(response => {
+                    $('#countDownWebsite').modal('hide')
+                    $('#countDown').modal('hide')
+                    toastr.success("تم قبول طلبيتك بنجاح");
+                }).catch(error => {
+                    toastr.warning("حدث خطا ما");
+                });
+            }else{
+                toastr.warning("حدث خطا ما");
+            }
+
+
         })
 
 

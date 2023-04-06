@@ -3,11 +3,15 @@
 namespace App\Classes;
 
 use App\Constants\Enum;
+use App\Constants\StatusCodes;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Notifications\OrderNotification;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use function PHPUnit\Framework\throwException;
 
 class CreateOrder
@@ -40,7 +44,7 @@ class CreateOrder
                     $payment_method = 'cash';
                 }
                 $data+=  [
-                    'status' =>Enum::PAID,
+                    'status' =>Enum::INITIATED,
                     'payment_method' =>  $payment_method
                 ];
             }
@@ -56,5 +60,41 @@ class CreateOrder
 
             DB::commit();
             return $item;
+    }
+    public function accept()
+    {
+        $order_id = \request('order_id');
+        try {
+            $item = Order::query()->findOrFail($order_id);
+            $item->update([
+                'status' => Enum::ACCEPT
+            ]);
+                 Notification::send($item->user, new OrderNotification([
+                     'order_id' => $item->id,
+                     'branch_id' =>  null,
+                     'title_ar' => $item->id.' قبول طلبية  #',
+                     'title_en' => 'accept order #'.$item->id,
+                     'body_ar' => $item->id.'قبول طلبية  #',
+                     'body_en' => 'accept order #'.$item->id,
+                     'type' => 'branch_accept_order',
+                 ]));
+            return $item;
+        } catch (QueryException $exception) {
+            return false;
+        }
+    }
+
+    public function reject()
+    {
+        $order_id = \request('order_id');
+        try {
+            $item = Order::query()->findOrFail($order_id);
+            $item->update([
+                'status' => Enum::REJECT
+            ]);
+            return $item;
+        } catch (QueryException $exception) {
+            return false;
+        }
     }
 }

@@ -9,7 +9,8 @@
 
 namespace App\Constants;
 
-class Enum {
+class Enum
+{
 
     // System Messages Enum
     const DONE_SUCCESSFULLY = '200.0.0';
@@ -23,8 +24,8 @@ class Enum {
     const UNAUTHORIZED = '400.401.000';
     const INVALID_OLD_PASSWORD = '400.422.001';
 
-    const NOT_FOUND  = '400.404.0';
-    const GENERAL_ERROR  = '500.000.0';
+    const NOT_FOUND = '400.404.0';
+    const GENERAL_ERROR = '500.000.0';
 
 
     // role user
@@ -42,13 +43,13 @@ class Enum {
 
     // product status
 
-    const PUBLISHED= 'published';
+    const PUBLISHED = 'published';
     const INACTIVE = 'inactive';
 
     // discount type
 
-    const NO_DISCOUNT= 1;
-    const DISCOUNT_PERCENTAGE  = 2;
+    const NO_DISCOUNT = 1;
+    const DISCOUNT_PERCENTAGE = 2;
     const DISCOUNT_FIXED = 3;
 
 
@@ -58,15 +59,15 @@ class Enum {
 
 
     // type discount coupon
-     const FIXED = 'fixed';
-     const PERCENTAGE = 'percentage';
+    const FIXED = 'fixed';
+    const PERCENTAGE = 'percentage';
 
 
     // type discount coupon
-     const PAID = 'paid';
-     const INITIATED  = 'initiated';
-
-
+    const INITIATED = 'initiated';
+    const PAID = 'paid';
+    const ACCEPT = 'accept';
+    const REJECT = 'reject';
 
 
 }

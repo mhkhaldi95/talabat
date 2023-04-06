@@ -12,6 +12,8 @@
             <meta charset="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <!-- ../Required meta tags -->
+            <meta name="csrf-token" content="{{ csrf_token() }}">
+
             <title>{{$settings->site_name}} | {{isset($page_title)?$page_title:'بريك'}}</title>
             <meta name="description" content="{{$settings->site_description}}" />
             <meta name="keywords" content="{{$settings->tags}}" />
@@ -63,6 +65,7 @@
             <script src="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
             <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="{{ asset('js/app.js') }}" defer></script>
 
             @yield('head')
         </head>

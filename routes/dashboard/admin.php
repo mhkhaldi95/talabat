@@ -104,7 +104,7 @@ Route::group(['prefix' => 'admin','middleware'=>'locale'], function () {
         Route::group(['prefix' => 'orders'], function () {
             Route::get('/', [OrderController::class, 'index'])->name('admin.orders.index');
             Route::get('/show/{id}', [OrderController::class, 'show'])->name('admin.orders.show');
-            Route::post('{id}/delete', [OrderController::class, 'delete'])->name('admin.orders.delete');
+            Route::delete('delete', [OrderController::class, 'delete'])->name('admin.orders.delete');
             Route::post('delete-selected', [OrderController::class, 'deleteSelected'])->name('admin.coupons.deleteSelected');
         });
 

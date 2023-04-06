@@ -16,7 +16,7 @@
 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
     <!--begin::Menu item-->
     <div class="menu-item px-3">
-        <a href="{{$is_branch?route('branch.orders.show',$item->id):route('admin.orders.show',$item->id)}}" class="menu-link px-3" data-kt-docs-table-filter="edit_row">
+        <a href="{{$is_branch?route('branch.orders.show',$item->id):route('admin.orders.show',$item->id)}}" data-id="{{$item->id}}" class="menu-link px-3" data-kt-docs-table-filter="edit_row">
             {{__('lang.show')}}
         </a>
     </div>
@@ -25,7 +25,7 @@
     @if(!$is_branch)
         <!--begin::Menu item-->
         <div class="menu-item px-3">
-            <a href="#" class="menu-link px-3" data-kt-docs-table-filter="delete_row" id="delete_row">
+            <a href="#" class="menu-link px-3 delete-form-datatable"  data-kt-docs-table-filter="delete_row"  data-id="{{$item->id}}">
                 {{__('lang.Delete')}}
             </a>
         </div>

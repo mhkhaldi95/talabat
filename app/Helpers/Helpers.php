@@ -4,6 +4,7 @@ use App\Classes\Timeout;
 use App\Http\Resources\Branch\ProductResource;
 use App\Models\Order;
 use App\Models\Permission;
+use App\Models\ProductBranch;
 
 if (!function_exists('setTimeout')) {
     function setTimeout($cb, $time, ...$args)
@@ -121,6 +122,26 @@ function calculateOrderTotal(){
     $total = round($total);
     return $total;
 
+
+}
+function checkQtyInCart($branch)
+{
+    $cart = session()->get('cart');
+    $msg = '';
+    foreach ($cart as $cart_item) {
+        $item = ProductBranch::query()->where('branch_id', $branch->id)->where('product_id', $cart_item['id'])->firstOrFail();
+        $status = false;
+        if ($item) {
+
+            if ($item->qty < $cart_item['quantity'])
+            {
+                $msg .= '  الكمية المطلوبة غير متوفرة: ' . $cart_item['name'] . '<br/>';
+                $status = true;
+            }
+        }
+
+    }
+    return ['status' => $status, 'msg' => $msg];
 
 }
 

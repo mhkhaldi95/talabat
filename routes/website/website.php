@@ -46,9 +46,13 @@ Route::group(['middleware'=>'locale'], function () {
             Route::post('customer-complete-register', [LogingController::class, 'completeRegister'])->name('customer-complete-register')->withoutMiddleware('select_branch');
             Route::post('customer-update/{id}', [CustomerAccountController::class, 'update'])->name('customer.update')->withoutMiddleware('select_branch');
             Route::get('/customer-account', [CustomerAccountController::class, 'index'])->name('customer.account')->withoutMiddleware('select_branch');
+
             Route::get('/orders', [OrderController::class, 'index'])->name('orders.index')->withoutMiddleware('select_branch');
             Route::get('/orderInfo', [OrderController::class, 'orderInfo'])->name('orderInfo')->withoutMiddleware('select_branch');
             Route::post('/orders/store', [OrderController::class, 'store'])->name('orders.store');
+            Route::post('/orders/accept', [OrderController::class, 'accept'])->name('orders.accept')->withoutMiddleware('select_branch');
+
+
             Route::get('/create/order', [PaymentController::class, 'create'])->name('create.order');
             Route::get('/check-cashback', [PaymentController::class, 'checkCashback'])->name('checkCashback')->withoutMiddleware('select_branch');
             Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');

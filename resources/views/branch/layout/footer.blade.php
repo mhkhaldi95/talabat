@@ -23,3 +23,9 @@
     </div>
     <!--end::Container-->
 </div>
+
+{{--<button id="play-button">Play Audio</button>--}}
+{{--<audio id="my-audio" src="https://server6.mp3quran.net/thubti/001.mp3">--}}
+{{--    <source src="https://server6.mp3quran.net/thubti/001.mp3" type="audio/mpeg"/>--}}
+{{--</audio>--}}
+

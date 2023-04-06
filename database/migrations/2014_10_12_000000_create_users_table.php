@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->string('phone')->nullable();
             $table->string('photo')->default('blank.png');
+            $table->text('fcm_token')->nullable();
             $table->tinyInteger('gender')->nullable();
             $table->tinyInteger('role')->default(Enum::ADMIN); // admin
             $table->rememberToken();
