@@ -19912,7 +19912,11 @@ console.log("s");
 
     // Clear any timeout/interval up to that id
     for (var i = 1; i < interval_id; i++) {
-      window.clearInterval(i);
+      console.log("localStorage.getItem('xInterval_'.payload.data.order_id) == i", localStorage.getItem('xInterval_'.payload.data.order_id) == i);
+      if (localStorage.getItem('xInterval_'.payload.data.order_id) == i) {
+        window.clearInterval(i);
+        localStorage.removeItem('xInterval_'.order_id);
+      }
     }
     toastr.success('تم قبول الطلبية بنجاح');
   } else if (payload.data.type == 'branch_reject_order') {
