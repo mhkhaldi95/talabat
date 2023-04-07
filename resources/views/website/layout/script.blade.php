@@ -41,7 +41,6 @@
     @endif
     $(window).ready(function () {
 
-        var xInterval = null;
         $("#product_search").on("keyup", function (event) {
             axios.post('{{route('products.filter')}}', {
                 search: event.target.value,
@@ -504,9 +503,9 @@
             var countDownDate = 30;
             document.getElementById("countDownWebsite-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
 
-             xInterval = setInterval(function() {
+            var  xInterval = setInterval(function() {
                 countDownDate = countDownDate - 1;
-                 console.log("xInterval",xInterval)
+                 console.log("xInterval1111111111111",xInterval)
                 document.getElementById("countDownWebsite-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
                 if(countDownDate <= 0){
                     clearInterval(xInterval);
