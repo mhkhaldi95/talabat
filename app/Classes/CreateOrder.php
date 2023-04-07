@@ -96,9 +96,9 @@ class CreateOrder
                 'order_id' => $item->id,
                 'branch_id' =>  null,
                 'title_ar' => $item->id.' رفض طلبية  #',
-                'title_en' => 'reject order #'.$item->id,
+                'title_en' => 'accept order #'.$item->id,
                 'body_ar' => $item->id.'رفض طلبية  #',
-                'body_en' => 'reject order #'.$item->id,
+                'body_en' => 'accept order #'.$item->id,
                 'type' => 'branch_reject_order',
             ]));
             return $item;
