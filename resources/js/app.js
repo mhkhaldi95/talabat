@@ -47,16 +47,21 @@ onMessage(messaging, (payload) => {
     }else if(payload.data.type == 'branch_accept_order'){
         $('#countDownWebsite').modal('hide')
         var x = localStorage.getItem('xInterval_'+payload.data.order_id)
-        console.log("xxxxxxx",x)
-        window.clearInterval(parseInt(x));
-        localStorage.removeItem('xInterval_'+payload.data.order_id)
-        toastr.success('تم قبول الطلبية بنجاح')
+        if(x){
+            window.clearInterval(parseInt(x));
+            localStorage.removeItem('xInterval_'+payload.data.order_id)
+            toastr.success('تم قبول الطلبية بنجاح')
+        }
+
     }else if(payload.data.type == 'branch_reject_order'){
         $('#countDownWebsite').modal('hide')
         var x = localStorage.getItem('xInterval_'+payload.data.order_id)
-        window.clearInterval(parseInt(x));
-        localStorage.removeItem('xInterval_'+payload.data.order_id)
-        toastr.warning('تم رفض الطلبية بنجاح')
+        if(x){
+            window.clearInterval(parseInt(x));
+            localStorage.removeItem('xInterval_'+payload.data.order_id)
+            toastr.warning('تم رفض الطلبية بنجاح')
+        }
+
     }
 
     console.log('Message received. ', payload);
