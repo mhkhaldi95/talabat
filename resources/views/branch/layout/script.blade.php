@@ -43,9 +43,18 @@
     $(window).ready(function () {
         $(document).off('click', '#accept_order').on('click', '#accept_order', function (e) {
 
+
             var order_id = $('#modal_order_id').val()
             var branch_id = $('#modal_branch_id').val()
             if(order_id && branch_id){
+
+                const interval_id = window.setInterval(function(){}, Number.MAX_SAFE_INTEGER);
+                console.log("interval_id",interval_id)
+// Clear any timeout/interval up to that id
+                for (let i = 1; i < interval_id; i++) {
+                    window.clearInterval(i);
+                }
+
                 axios.post("{{route('branch.orders.accept')}}",{
                     order_id: order_id,
                     branch_id:'{{auth()->user()->branch->id}}'
