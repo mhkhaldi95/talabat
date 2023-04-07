@@ -19884,15 +19884,12 @@ var app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_2__.initializeApp)(firebaseCo
 var messaging = (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_3__.getMessaging)(app);
 function startFCM() {
   Notification.requestPermission().then(function () {
-    console.log("getToken(messaging)", (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_3__.getToken)(messaging));
     return (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_3__.getToken)(messaging);
   }).then(function (response) {
-    console.log("sdsd");
     axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common["X-CSRF-TOKEN"] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/store-token', {
       fcm_token: response
     }).then(function (response) {
-      console.log("response", response);
       if (response.data.status) window.localStorage.setItem('fcm_token', response.data.fcm_token);
     });
   })["catch"](function (error) {
@@ -19900,7 +19897,6 @@ function startFCM() {
   });
 }
 var xInterval = null;
-console.log("s");
 (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_3__.onMessage)(messaging, function (payload) {
   if (payload.data.type == 'new_order') {
     countDown(payload.data);
@@ -19932,7 +19928,6 @@ function countDown(data) {
   document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
   xInterval = setInterval(function () {
     countDownDate = countDownDate - 1;
-    console.log("countDownDate11", countDownDate);
     document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
     if (countDownDate <= 0) {
       axios__WEBPACK_IMPORTED_MODULE_1__["default"].post(data.order_accept_url, {
