@@ -52,14 +52,8 @@ onMessage(messaging, (payload) => {
         $('#countDownWebsite').modal('hide')
         console.log("payload.data.order_id",payload.data.order_id)
         var x = localStorage.getItem('xInterval'+payload.data.order_id)
-        const interval_id = window.setInterval(function(){}, Number.MAX_SAFE_INTEGER);
-        for (let i = 1; i < interval_id; i++) {
-            console.log("x == i",x+" | "+i)
-            if(x == i){
-                window.clearInterval(i);
-                localStorage.removeItem('xInterval_'.order_id)
-            }
-        }
+        window.clearInterval(x);
+        localStorage.removeItem('xInterval_'.order_id)
         toastr.success('تم قبول الطلبية بنجاح')
     }else if(payload.data.type == 'branch_reject_order'){
         $('#countDownWebsite').modal('hide')

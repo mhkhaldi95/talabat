@@ -46,16 +46,10 @@
 
             var order_id = $('#modal_order_id').val()
             var branch_id = $('#modal_branch_id').val()
-            console.log('from_branch_localStorage.getItem("xInterval_"+order_id)',localStorage.getItem("xInterval_"+order_id))
+            var x = localStorage.getItem("xInterval_"+order_id);
             if(order_id && branch_id){
-                const interval_id = window.setInterval(function(){}, Number.MAX_SAFE_INTEGER);
-                for (let i = 1; i < interval_id; i++) {
-                    console.log(localStorage.getItem("xInterval_"+order_id)+" | "+i)
-                        window.clearInterval(i);
-                    }
-
-
-
+                window.clearInterval(x);
+                localStorage.removeItem("xInterval_"+order_id)
                 axios.post("{{route('branch.orders.accept')}}",{
                     order_id: order_id,
                     branch_id:'{{auth()->user()->branch->id}}',
