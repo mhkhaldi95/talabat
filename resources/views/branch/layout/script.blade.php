@@ -80,6 +80,7 @@
             if(order_id && branch_id){
                 window.clearInterval(parseInt(x));
                 localStorage.removeItem("xInterval_"+order_id)
+                alert("X");
                 axios.post("{{route('branch.orders.reject')}}",{
                     order_id: order_id,
                     branch_id:'{{auth()->user()->branch->id}}',
