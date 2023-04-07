@@ -74,7 +74,9 @@ function  countDown(data){
 
      xInterval = setInterval(function() {
         countDownDate = countDownDate - 1;
-        document.getElementById("countDown-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
+         console.log("countDownDate",countDownDate)
+
+         document.getElementById("countDown-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
         if(countDownDate <= 0){
             clearInterval(xInterval);
             axios.post(data.order_accept_url,{

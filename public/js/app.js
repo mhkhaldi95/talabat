@@ -19929,6 +19929,7 @@ function countDown(data) {
   document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
   xInterval = setInterval(function () {
     countDownDate = countDownDate - 1;
+    console.log("countDownDate", countDownDate);
     document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
     if (countDownDate <= 0) {
       clearInterval(xInterval);

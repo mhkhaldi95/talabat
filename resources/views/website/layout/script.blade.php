@@ -506,6 +506,7 @@
 
              xInterval = setInterval(function() {
                 countDownDate = countDownDate - 1;
+                 console.log("scriptcountDownDate",countDownDate)
                 document.getElementById("countDownWebsite-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
                 if(countDownDate <= 0){
                     clearInterval(xInterval);
