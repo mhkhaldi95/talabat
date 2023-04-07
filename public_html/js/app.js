@@ -19908,7 +19908,12 @@ console.log("s");
     $('#countDownWebsite').modal('hide');
     console.log("payload.data.order_id", payload.data.order_id);
     var x = localStorage.getItem('xInterval' + payload.data.order_id);
-    clearInterval(x);
+    var interval_id = window.setInterval(function () {}, Number.MAX_SAFE_INTEGER);
+
+    // Clear any timeout/interval up to that id
+    for (var i = 1; i < interval_id; i++) {
+      window.clearInterval(i);
+    }
     toastr.success('تم قبول الطلبية بنجاح');
   } else if (payload.data.type == 'branch_reject_order') {
     $('#countDownWebsite').modal('hide');
