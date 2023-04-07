@@ -99,7 +99,7 @@ class CreateOrder
                 'title_en' => 'accept order #'.$item->id,
                 'body_ar' => $item->id.'رفض طلبية  #',
                 'body_en' => 'reject order #'.$item->id,
-                'type' => 'aaaaaaaaaaaaaaaaaaaaaa',
+                'type' => 'typetype',
             ]));
             return $item;
         } catch (QueryException $exception) {
