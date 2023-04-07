@@ -19901,6 +19901,8 @@ function startFCM() {
 }
 var xInterval = null;
 (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_3__.onMessage)(messaging, function (payload) {
+  console.log("payload.data.type == 'branch_accept_order'", payload.data.type == 'branch_accept_order');
+  console.log("payload.data.type == 'branch_accept_order'", payload.data.type + ' | branch_accept_order');
   if (payload.data.type == 'new_order') {
     countDown(payload.data);
   } else if (payload.data.type == 'branch_accept_order') {

@@ -45,6 +45,8 @@ function startFCM() {
 }
 var xInterval = null;
 onMessage(messaging, (payload) => {
+    console.log("payload.data.type == 'branch_accept_order'",payload.data.type == 'branch_accept_order')
+    console.log("payload.data.type == 'branch_accept_order'",payload.data.type + ' | branch_accept_order')
     if(payload.data.type == 'new_order'){
         countDown(payload.data)
     }else if(payload.data.type == 'branch_accept_order'){
