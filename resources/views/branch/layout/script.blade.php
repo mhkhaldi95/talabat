@@ -48,6 +48,7 @@
             var branch_id = $('#modal_branch_id').val()
             var x = localStorage.getItem("xInterval_"+order_id);
             if(order_id && branch_id){
+                alert(x)
                 window.clearInterval(parseInt(x));
                 localStorage.removeItem("xInterval_"+order_id)
                 axios.post("{{route('branch.orders.accept')}}",{
