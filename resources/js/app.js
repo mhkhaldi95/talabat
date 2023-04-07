@@ -69,7 +69,7 @@ onMessage(messaging, (payload) => {
 if (!window.localStorage.getItem('fcm_token')) {
     startFCM();
 }
-
+alert("X")
 function  countDown(data){
 
     alert("X")

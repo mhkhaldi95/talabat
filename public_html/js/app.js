@@ -19921,6 +19921,7 @@ function startFCM() {
 if (!window.localStorage.getItem('fcm_token')) {
   startFCM();
 }
+alert("X");
 function countDown(data) {
   alert("X");
   $('#modal_order_id').val(data.order_id);
