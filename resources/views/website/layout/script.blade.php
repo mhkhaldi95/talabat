@@ -440,7 +440,7 @@
 
 
 
-        $('#openModalInvoice').click( function (e) {
+        $(document).off('click', '#openModalInvoice').on('click', '#openModalInvoice',function (e) {
             var url = "{{route('orderInfo')}}";
             var url = url+"?branch_id="+getBranch()
             axios.get(url,{branch_id:getBranch()}).then(response => {
@@ -477,9 +477,7 @@
             // goToUrl('/payment?payment_method=cashBack&branch_id=' + branch_id)
             // $('#invoice').modal("hide")
         })
-        $('#cash-payment').click( function (e) {
-
-
+        $(document).off('click', '#cash-payment').on('click', '#cash-payment',function (e) {
             axios.post("{{route('orders.store')}}",{branch_id:getBranch(),payment_method:'cash'}).then(response => {
                 if(response.data.status){
                     $('#invoice').modal("hide")
@@ -517,7 +515,6 @@
                     }).then(response => {
                         $('#countDownWebsite').modal('hide')
                         toastr.success("تم قبول الطلبية بنجاح");
-                        countDownDate = 30;
                     }).catch(error => {
                         toastr.warning("حدث خطا ما");
                     });
@@ -536,7 +533,7 @@
             return branch_id;
         }
 
-        $('#accept_order').click(function (e) {
+        $(document).off('click', '#accept_order').on('click', '#accept_order', function (e) {
 
             var order_id = $('#modal_order_id').val()
             var branch_id = $('#modal_branch_id').val()
@@ -557,9 +554,9 @@
 
 
         })
-        $('#accept_order').click( function (e) {
+        $(document).on('click', '#reject_order', function (e) {
 
-            alert("X");
+            alert("X")
             var order_id = $('#modal_order_id').val()
             var branch_id = $('#modal_branch_id').val()
             if(order_id && branch_id){
