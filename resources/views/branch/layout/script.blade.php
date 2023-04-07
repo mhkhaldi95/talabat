@@ -79,7 +79,7 @@
                     branch_id:'{{auth()->user()->branch->id}}',
                 }).then(response => {
                     $('#countDown').modal('hide')
-                    toastr.success("تم رفض الطلبية بنجاح");
+                    toastr.warning("تم رفض الطلبية بنجاح");
                 }).catch(error => {
                     toastr.warning("حدث خطا ما");
                 });
