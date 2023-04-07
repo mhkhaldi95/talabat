@@ -440,7 +440,7 @@
 
 
 
-        $(document).on('click', '#openModalInvoice', function (e) {
+        $('#openModalInvoice').click( function (e) {
             var url = "{{route('orderInfo')}}";
             var url = url+"?branch_id="+getBranch()
             axios.get(url,{branch_id:getBranch()}).then(response => {
@@ -477,7 +477,7 @@
             // goToUrl('/payment?payment_method=cashBack&branch_id=' + branch_id)
             // $('#invoice').modal("hide")
         })
-        $(document).on('click', '#cash-payment', function (e) {
+        $('#cash-payment').click( function (e) {
 
 
             axios.post("{{route('orders.store')}}",{branch_id:getBranch(),payment_method:'cash'}).then(response => {
@@ -516,7 +516,8 @@
                             branch_id:getBranch()
                     }).then(response => {
                         $('#countDownWebsite').modal('hide')
-                        toastr.success("تم قبول طلبيتك بنجاح");
+                        toastr.success("تم قبول الطلبية بنجاح");
+                        countDownDate = 30;
                     }).catch(error => {
                         toastr.warning("حدث خطا ما");
                     });
@@ -535,7 +536,7 @@
             return branch_id;
         }
 
-        $(document).on('click', '#accept_order', function (e) {
+        $('#accept_order').click(function (e) {
 
             var order_id = $('#modal_order_id').val()
             var branch_id = $('#modal_branch_id').val()
@@ -546,7 +547,29 @@
                 }).then(response => {
                     $('#countDownWebsite').modal('hide')
                     $('#countDown').modal('hide')
-                    toastr.success("تم قبول طلبيتك بنجاح");
+                    toastr.success("تم قبول الطلبية بنجاح");
+                }).catch(error => {
+                    toastr.warning("حدث خطا ما");
+                });
+            }else{
+                toastr.warning("حدث خطا ما");
+            }
+
+
+        })
+        $('#accept_order').click( function (e) {
+
+            alert("X");
+            var order_id = $('#modal_order_id').val()
+            var branch_id = $('#modal_branch_id').val()
+            if(order_id && branch_id){
+                axios.post("{{route('branch.orders.reject')}}",{
+                    order_id: order_id,
+                    branch_id:getBranch()
+                }).then(response => {
+                    $('#countDownWebsite').modal('hide')
+                    $('#countDown').modal('hide')
+                    toastr.warning("تم رفض طلبيتك ");
                 }).catch(error => {
                     toastr.warning("حدث خطا ما");
                 });

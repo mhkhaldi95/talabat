@@ -49,7 +49,10 @@ onMessage(messaging, (payload) => {
         countDown(payload.data)
     }else if(payload.data.type == 'branch_accept_order'){
         $('#countDownWebsite').modal('hide')
-        toastr.success('تم قبول طلبيتك بنجاح')
+        toastr.success('تم قبول الطلبية بنجاح')
+    }else if(payload.data.type == 'branch_reject_order'){
+        $('#countDownWebsite').modal('hide')
+        toastr.warning('تم رفض الطلبية بنجاح')
     }
 
     console.log('Message received. ', payload);
@@ -77,7 +80,7 @@ function  countDown(data){
                 branch_id:data.branch_id
             }).then(response => {
                 $('#countDown').modal('hide')
-                toastr.success("تم قبول طلبيتك بنجاح");
+                toastr.success("تم قبول الطلبية بنجاح");
             }).catch(error => {
                 toastr.warning("حدث خطا ما");
             });

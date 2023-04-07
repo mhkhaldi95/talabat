@@ -92,6 +92,15 @@ class CreateOrder
             $item->update([
                 'status' => Enum::REJECT
             ]);
+            Notification::send($item->user, new OrderNotification([
+                'order_id' => $item->id,
+                'branch_id' =>  null,
+                'title_ar' => $item->id.' رفض طلبية  #',
+                'title_en' => 'reject order #'.$item->id,
+                'body_ar' => $item->id.'رفض طلبية  #',
+                'body_en' => 'reject order #'.$item->id,
+                'type' => 'branch_reject_order',
+            ]));
             return $item;
         } catch (QueryException $exception) {
             return false;
