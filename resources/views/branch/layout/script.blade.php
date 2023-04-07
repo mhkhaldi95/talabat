@@ -46,7 +46,7 @@
 
             var order_id = $('#modal_order_id').val()
             var branch_id = $('#modal_branch_id').val()
-            console.log("order_id && branch_id",order_id && branch_id)
+            console.log('xInterval_'.order_id,order_id)
             if(order_id && branch_id){
                 const interval_id = window.setInterval(function(){}, Number.MAX_SAFE_INTEGER);
                 console.log("interval_id",interval_id)
