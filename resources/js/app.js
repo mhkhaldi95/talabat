@@ -67,7 +67,7 @@ if (!window.localStorage.getItem('fcm_token')) {
     startFCM();
 }
 
-function  countDown(data,tt){
+function  countDown(data){
 
     $('#modal_order_id').val(data.order_id)
     $('#modal_branch_id').val(data.branch_id)
