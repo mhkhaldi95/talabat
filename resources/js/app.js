@@ -50,7 +50,7 @@ onMessage(messaging, (payload) => {
         window.clearInterval(x);
         localStorage.removeItem('xInterval_'.order_id)
         toastr.success('تم قبول الطلبية بنجاح')
-    }else if(payload.data.type == 'branch_reject_order'){
+    }else if(payload.data.type == 'branch_accept_order2'){
         $('#countDownWebsite').modal('hide')
         var x = localStorage.getItem('xInterval'+payload.data.order_id)
         window.clearInterval(x);
