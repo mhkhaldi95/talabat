@@ -19929,15 +19929,15 @@ function countDown(data) {
   document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
   xInterval = setInterval(function () {
     countDownDate = countDownDate - 1;
-    console.log("countDownDate", countDownDate);
+    console.log("countDownDate11", countDownDate);
     document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
     if (countDownDate <= 0) {
-      clearInterval(xInterval);
       axios__WEBPACK_IMPORTED_MODULE_1__["default"].post(data.order_accept_url, {
         order_id: data.order_id,
         branch_id: data.branch_id
       }).then(function (response) {
         $('#countDown').modal('hide');
+        clearInterval(xInterval);
         toastr.success("تم قبول الطلبية بنجاح");
       })["catch"](function (error) {
         toastr.warning("حدث خطا ما");

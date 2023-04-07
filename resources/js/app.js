@@ -74,16 +74,16 @@ function  countDown(data){
 
      xInterval = setInterval(function() {
         countDownDate = countDownDate - 1;
-         console.log("countDownDate",countDownDate)
+         console.log("countDownDate11",countDownDate)
 
          document.getElementById("countDown-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
         if(countDownDate <= 0){
-            clearInterval(xInterval);
             axios.post(data.order_accept_url,{
                 order_id: data.order_id,
                 branch_id:data.branch_id
             }).then(response => {
                 $('#countDown').modal('hide')
+                clearInterval(xInterval);
                 toastr.success("تم قبول الطلبية بنجاح");
             }).catch(error => {
                 toastr.warning("حدث خطا ما");

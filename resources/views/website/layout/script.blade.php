@@ -506,7 +506,7 @@
 
              xInterval = setInterval(function() {
                 countDownDate = countDownDate - 1;
-                 console.log("scriptcountDownDate",countDownDate)
+                 console.log("xInterval",xInterval)
                 document.getElementById("countDownWebsite-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
                 if(countDownDate <= 0){
                     clearInterval(xInterval);
@@ -534,57 +534,11 @@
             return branch_id;
         }
 
-        $(document).off('click', '#accept_order').on('click', '#accept_order', function (e) {
 
-            var order_id = $('#modal_order_id').val()
-            var branch_id = $('#modal_branch_id').val()
-            if(order_id && branch_id){
-                clearInterval(xInterval);
-                axios.post("{{route('branch.orders.accept')}}",{
-                    order_id: order_id,
-                    branch_id:getBranch()
-                }).then(response => {
-                    $('#countDownWebsite').modal('hide')
-                    $('#countDown').modal('hide')
-                    toastr.success("تم قبول الطلبية بنجاح");
-                }).catch(error => {
-                    toastr.warning("حدث خطا ما");
-                });
-            }else{
-                toastr.warning("حدث خطا ما");
-            }
-
-
-        })
-        $(document).on('click', '#reject_order', function (e) {
-
-            alert("X")
-            var order_id = $('#modal_order_id').val()
-            var branch_id = $('#modal_branch_id').val()
-            if(order_id && branch_id){
-                axios.post("{{route('branch.orders.reject')}}",{
-                    order_id: order_id,
-                    branch_id:getBranch()
-                }).then(response => {
-                    $('#countDownWebsite').modal('hide')
-                    $('#countDown').modal('hide')
-                    toastr.warning("تم رفض طلبيتك ");
-                }).catch(error => {
-                    toastr.warning("حدث خطا ما");
-                });
-            }else{
-                toastr.warning("حدث خطا ما");
-            }
-
-
-        })
 
 
     });
-    // function  play(){
-    //     var aud = document.getElementById("audio");
-    //     aud.play()
-    // }
+
 </script>
 <script type="text/javascript">
 
