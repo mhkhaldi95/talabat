@@ -49,9 +49,11 @@ onMessage(messaging, (payload) => {
         countDown(payload.data)
     }else if(payload.data.type == 'branch_accept_order'){
         $('#countDownWebsite').modal('hide')
+        clearInterval(xInterval);
         toastr.success('تم قبول الطلبية بنجاح')
     }else if(payload.data.type == 'branch_reject_order'){
         $('#countDownWebsite').modal('hide')
+        clearInterval(xInterval);
         toastr.warning('تم رفض الطلبية بنجاح')
     }
 
@@ -61,7 +63,7 @@ onMessage(messaging, (payload) => {
 if (!window.localStorage.getItem('fcm_token')) {
     startFCM();
 }
-
+var xInterval = null;
 function  countDown(data){
     $('#modal_order_id').val(data.order_id)
     $('#modal_branch_id').val(data.branch_id)
@@ -70,11 +72,11 @@ function  countDown(data){
     var countDownDate = 30;
     document.getElementById("countDown-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
 
-    var x = setInterval(function() {
+     xInterval = setInterval(function() {
         countDownDate = countDownDate - 1;
         document.getElementById("countDown-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
         if(countDownDate <= 0){
-            clearInterval(x);
+            clearInterval(xInterval);
             axios.post(data.order_accept_url,{
                 order_id: data.order_id,
                 branch_id:data.branch_id
