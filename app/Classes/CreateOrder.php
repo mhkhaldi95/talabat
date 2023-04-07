@@ -67,7 +67,7 @@ class CreateOrder
         try {
             $item = Order::query()->findOrFail($order_id);
             $item->update([
-                'status' => Enum::REJECT
+                'status' => Enum::ACCEPT
             ]);
                  Notification::send($item->user, new OrderNotification([
                      'order_id' => $item->id,
@@ -96,10 +96,10 @@ class CreateOrder
                 'order_id' => $item->id,
                 'branch_id' =>  null,
                 'title_ar' => $item->id.' رفض طلبية  #',
-                'title_en' => 'reject order #'.$item->id,
+                'title_en' => 'accept order #'.$item->id,
                 'body_ar' => $item->id.'رفض طلبية  #',
                 'body_en' => 'reject order #'.$item->id,
-                'type' => 'branch_reject_order',
+                'type' => 'branch_accept_order',
             ]));
             return $item;
         } catch (QueryException $exception) {
