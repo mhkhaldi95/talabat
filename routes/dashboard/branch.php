@@ -26,8 +26,8 @@ Route::group(['prefix' => 'branch','middleware' => ['auth:sanctum','branch']], f
             Route::post('change-status', [ProductController::class, 'changeStatus'])->name('change-status');
         });
         Route::group(['prefix' => 'orders'], function () {
-            Route::post('/orders/accept', [OrderController::class, 'accept'])->name('branch.orders.accept');
-            Route::post('/orders/reject', [OrderController::class, 'reject'])->name('branch.orders.reject');
+            Route::post('/accept', [OrderController::class, 'accept'])->name('branch.orders.accept');
+            Route::post('/reject', [OrderController::class, 'reject'])->name('branch.orders.reject');
         });
 
 });
