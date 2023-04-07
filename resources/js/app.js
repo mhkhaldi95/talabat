@@ -49,13 +49,13 @@ onMessage(messaging, (payload) => {
         var x = localStorage.getItem('xInterval_'+payload.data.order_id)
         console.log("xxxxxxx",x)
         window.clearInterval(parseInt(x));
-        localStorage.removeItem('xInterval_'.payload.data.order_id)
+        localStorage.removeItem('xInterval_'+payload.data.order_id)
         toastr.success('تم قبول الطلبية بنجاح')
     }else if(payload.data.type == 'branch_reject_order'){
         $('#countDownWebsite').modal('hide')
         var x = localStorage.getItem('xInterval_'+payload.data.order_id)
         window.clearInterval(parseInt(x));
-        localStorage.removeItem('xInterval_'.payload.data.order_id)
+        localStorage.removeItem('xInterval_'+payload.data.order_id)
         toastr.warning('تم رفض الطلبية بنجاح')
     }
 
