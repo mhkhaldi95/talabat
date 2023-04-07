@@ -54,7 +54,6 @@
                     order_id: order_id,
                     branch_id:'{{auth()->user()->branch->id}}',
                 }).then(response => {
-                    // $('#countDownWebsite').modal('hide')
                     $('#countDown').modal('hide')
                     toastr.success("تم قبول الطلبية بنجاح");
                 }).catch(error => {
@@ -66,19 +65,21 @@
 
 
         })
-        $(document).on('click', '#reject_order', function (e) {
+        $(document).off('click', '#reject_order').on('click', '#reject_order', function (e) {
 
-            alert("X")
+
             var order_id = $('#modal_order_id').val()
             var branch_id = $('#modal_branch_id').val()
+            var x = localStorage.getItem("xInterval_"+order_id);
             if(order_id && branch_id){
+                window.clearInterval(x);
+                localStorage.removeItem("xInterval_"+order_id)
                 axios.post("{{route('branch.orders.reject')}}",{
                     order_id: order_id,
-                    branch_id:getBranch()
+                    branch_id:'{{auth()->user()->branch->id}}',
                 }).then(response => {
-                    $('#countDownWebsite').modal('hide')
                     $('#countDown').modal('hide')
-                    toastr.warning("تم رفض طلبيتك ");
+                    toastr.success("تم رفض الطلبية بنجاح");
                 }).catch(error => {
                     toastr.warning("حدث خطا ما");
                 });

@@ -19925,10 +19925,10 @@ function countDown(data) {
   });
   $('#countDown').modal('show');
   var countDownDate = 30;
-  document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
+  document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول الطلب تلقائيا بعد 30 ثانية';
   xInterval = setInterval(function () {
     countDownDate = countDownDate - 1;
-    document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
+    document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول الطلب تلقائيا بعد 30 ثانية';
     if (countDownDate <= 0) {
       axios__WEBPACK_IMPORTED_MODULE_1__["default"].post(data.order_accept_url, {
         order_id: data.order_id,
