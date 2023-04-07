@@ -489,7 +489,8 @@
                     toastr.warning(response.data.message);
                 }
             }).catch(error => {
-                toastr.warning("حدث خطا ما");
+                alert(error.message)
+                toastr.warning(error.message);
             });
 
         })

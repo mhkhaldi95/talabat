@@ -58,8 +58,7 @@ class OrderController extends Controller
         }
         $order = $createOrder->create(session()->get('cart'), session()->get('coupon', null));
         if ($order) {
-            session()->forget('cart');
-            session()->forget('coupon');
+
             $user = $this->branch->user;
             Notification::send($user, new OrderNotification([
                 'order_id' => $order->id,
@@ -70,6 +69,8 @@ class OrderController extends Controller
                 'body_en' => 'new order #'.$order->id,
                 'type' => 'new_order',
             ]));
+            session()->forget('cart');
+            session()->forget('coupon');
             return $this->response_json(true, StatusCodes::OK, Enum::DONE_SUCCESSFULLY, [
                 'order' => $order,
                 'cart' => view('website._cart', [
