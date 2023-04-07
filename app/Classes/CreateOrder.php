@@ -76,7 +76,7 @@ class CreateOrder
                      'title_en' => 'accept order #'.$item->id,
                      'body_ar' => $item->id.'قبول طلبية  #',
                      'body_en' => 'accept order #'.$item->id,
-                     'type' => 'new_order',
+                     'type' => 'branch_accept_order',
                  ]));
             return $item;
         } catch (QueryException $exception) {
@@ -99,7 +99,7 @@ class CreateOrder
                 'title_en' => 'accept order #'.$item->id,
                 'body_ar' => $item->id.'رفض طلبية  #',
                 'body_en' => 'reject order #'.$item->id,
-                'type' => 'new_order',
+                'type' => 'branch_accept_order',
             ]));
             return $item;
         } catch (QueryException $exception) {
