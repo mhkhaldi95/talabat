@@ -44,6 +44,7 @@ function startFCM() {
     });
 }
 var xInterval = null;
+console.log("s")
 onMessage(messaging, (payload) => {
     if(payload.data.type == 'new_order'){
         countDown(payload.data)
