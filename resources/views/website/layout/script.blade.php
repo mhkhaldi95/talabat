@@ -505,7 +505,6 @@
 
             var  xInterval = setInterval(function() {
                 countDownDate = countDownDate - 1;
-                localStorage.setItem("xInterval_"+order.id,xInterval)
                 document.getElementById("countDownWebsite-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
                 if(countDownDate <= 0){
                     clearInterval(xInterval);
@@ -522,6 +521,8 @@
 
 
             }, 1000);
+            localStorage.setItem("xInterval_"+order.id,xInterval)
+
             window.onbeforeunload = function() {
                 return "Dude, are you sure you want to leave? Think of the kittens!";
             }
