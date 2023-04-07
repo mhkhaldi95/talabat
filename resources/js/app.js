@@ -44,13 +44,13 @@ var xInterval = null;
 onMessage(messaging, (payload) => {
     if(payload.data.type == 'new_order'){
         countDown(payload.data)
-    }else if(payload.data.type == 'branch_accept_order'){
+    }else if(payload.data.type == 1){
         $('#countDownWebsite').modal('hide')
         var x = localStorage.getItem('xInterval'+payload.data.order_id)
         window.clearInterval(x);
         localStorage.removeItem('xInterval_'.order_id)
         toastr.success('تم قبول الطلبية بنجاح')
-    }else if(payload.data.type == 'branch_accept_order2'){
+    }else if(payload.data.type == 2){
         $('#countDownWebsite').modal('hide')
         var x = localStorage.getItem('xInterval'+payload.data.order_id)
         window.clearInterval(x);
