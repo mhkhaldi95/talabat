@@ -27,7 +27,7 @@ class OrderController extends Controller
        if($result){
            return $this->response_json(true, StatusCodes::OK, Enum::DONE_SUCCESSFULLY, $result);
        }
-        return $this->invalidIntParameter();
+        return $this->response_json(false, StatusCodes::OK, Enum::GENERAL_ERROR, $result);
     }
 
     public function reject(CreateOrder $createOrder)
@@ -36,7 +36,7 @@ class OrderController extends Controller
         if($result){
             return $this->response_json(true, StatusCodes::OK, Enum::DONE_SUCCESSFULLY, $result);
         }
-        return $this->invalidIntParameter();
+        return $this->response_json(false, StatusCodes::OK, Enum::GENERAL_ERROR, $result);
     }
 
 }

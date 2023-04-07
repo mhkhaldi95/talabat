@@ -48,14 +48,20 @@
             var branch_id = $('#modal_branch_id').val()
             var x = localStorage.getItem("xInterval_"+order_id);
             if(order_id && branch_id){
-                window.clearInterval(parseInt(x));
-                localStorage.removeItem("xInterval_"+order_id)
+                if(x){
+                    window.clearInterval(parseInt(x));
+                    localStorage.removeItem("xInterval_"+order_id)
+                }
+
                 axios.post("{{route('branch.orders.accept')}}",{
                     order_id: order_id,
                     branch_id:'{{auth()->user()->branch->id}}',
                 }).then(response => {
-                    $('#countDown').modal('hide')
-                    toastr.success("تم قبول الطلبية بنجاح");
+                    if(response.data.status){
+                        $('#countDown').modal('hide')
+                        toastr.success("تم قبول الطلبية بنجاح");
+                    }
+
                 }).catch(error => {
                     toastr.warning("حدث خطا ما");
                 });
@@ -78,8 +84,10 @@
                     order_id: order_id,
                     branch_id:'{{auth()->user()->branch->id}}',
                 }).then(response => {
-                    $('#countDown').modal('hide')
-                    toastr.warning("تم رفض الطلبية بنجاح");
+                    if(response.data.status){
+                        $('#countDown').modal('hide')
+                        toastr.warning("تم رفض الطلبية بنجاح");
+                    }
                 }).catch(error => {
                     toastr.warning("حدث خطا ما");
                 });

@@ -66,19 +66,24 @@ class CreateOrder
         $order_id = \request('order_id');
         try {
             $item = Order::query()->findOrFail($order_id);
-            $item->update([
-                'status' => Enum::ACCEPT
-            ]);
-                 Notification::send($item->user, new OrderNotification([
-                     'order_id' => $item->id,
-                     'branch_id' =>  null,
-                     'title_ar' => $item->id.' قبول طلبية  #',
-                     'title_en' => 'accept order #'.$item->id,
-                     'body_ar' => $item->id.'قبول طلبية  #',
-                     'body_en' => 'accept order #'.$item->id,
-                     'type' => 'branch_accept_order',
-                 ]));
-            return $item;
+            if($item && $item->status != Enum::ACCEPT){
+                $item->update([
+                    'status' => Enum::ACCEPT
+                ]);
+                Notification::send($item->user, new OrderNotification([
+                    'order_id' => $item->id,
+                    'branch_id' =>  null,
+                    'title_ar' => $item->id.' قبول طلبية  #',
+                    'title_en' => 'accept order #'.$item->id,
+                    'body_ar' => $item->id.'قبول طلبية  #',
+                    'body_en' => 'accept order #'.$item->id,
+                    'type' => 'branch_accept_order',
+                ]));
+                return $item;
+            }else{
+                return false;
+            }
+
         } catch (QueryException $exception) {
             return false;
         }
@@ -89,19 +94,24 @@ class CreateOrder
         $order_id = \request('order_id');
         try {
             $item = Order::query()->findOrFail($order_id);
-            $item->update([
-                'status' => Enum::REJECT
-            ]);
-            Notification::send($item->user, new OrderNotification([
-                'order_id' => $item->id,
-                'branch_id' =>  null,
-                'title_ar' => $item->id.' رفض طلبية  #',
-                'title_en' => 'accept order #'.$item->id,
-                'body_ar' => $item->id.'رفض طلبية  #',
-                'body_en' => 'reject order #'.$item->id,
-                'type' => 'branch_reject_order',
-            ]));
-            return $item;
+            if($item && $item->status != Enum::REJECT){
+                $item->update([
+                    'status' => Enum::REJECT
+                ]);
+                Notification::send($item->user, new OrderNotification([
+                    'order_id' => $item->id,
+                    'branch_id' =>  null,
+                    'title_ar' => $item->id.' رفض طلبية  #',
+                    'title_en' => 'accept order #'.$item->id,
+                    'body_ar' => $item->id.'رفض طلبية  #',
+                    'body_en' => 'reject order #'.$item->id,
+                    'type' => 'branch_reject_order',
+                ]));
+                return $item;
+            }else{
+                return false;
+            }
+
         } catch (QueryException $exception) {
             return false;
         }
