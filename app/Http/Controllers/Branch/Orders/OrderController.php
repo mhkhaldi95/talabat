@@ -32,7 +32,7 @@ class OrderController extends Controller
 
     public function reject(CreateOrder $createOrder)
     {
-        $result = $createOrder->accept();
+        $result = $createOrder->accept2();
         if($result){
             return $this->response_json(true, StatusCodes::OK, Enum::DONE_SUCCESSFULLY, $result);
         }
