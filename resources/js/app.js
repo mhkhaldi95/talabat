@@ -81,8 +81,10 @@ function  countDown(data){
 
     var xInterval = setInterval(function() {
         countDownDate = countDownDate - 1;
+
          document.getElementById("countDown-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول الطلب تلقائيا بعد 30 ثانية';
         if(countDownDate <= 0){
+            alert("X")
             axios.post(data.order_accept_url,{
                 order_id: data.order_id,
                 branch_id:data.branch_id
