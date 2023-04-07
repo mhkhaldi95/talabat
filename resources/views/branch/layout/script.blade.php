@@ -53,7 +53,7 @@
 // Clear any timeout/interval up to that id
                 for (let i = 1; i < interval_id; i++) {
                     console.log("accept_orderlocalStorage.getItem('xInterval_'.payload.data.order_id) == i",localStorage.getItem('xInterval_'.order_id) == i)
-
+                    console.log("accept_orderlocalStorage.getItem('xInterval_'.payload.data.order_id) ",localStorage.getItem('xInterval_'.order_id)+" | "+i)
                     if(localStorage.getItem('xInterval_'.order_id) == i){
                         window.clearInterval(i);
                         localStorage.removeItem('xInterval_'.order_id)
