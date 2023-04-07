@@ -43,7 +43,7 @@ function startFCM() {
         console.log(error)
     });
 }
-
+var xInterval = null;
 onMessage(messaging, (payload) => {
     if(payload.data.type == 'new_order'){
         countDown(payload.data)
@@ -63,7 +63,7 @@ onMessage(messaging, (payload) => {
 if (!window.localStorage.getItem('fcm_token')) {
     startFCM();
 }
-var xInterval = null;
+
 function  countDown(data){
     $('#modal_order_id').val(data.order_id)
     $('#modal_branch_id').val(data.branch_id)
