@@ -19903,6 +19903,7 @@ var xInterval = null;
   } else if (payload.data.type == 'branch_accept_order') {
     $('#countDownWebsite').modal('hide');
     var x = localStorage.getItem('xInterval_' + payload.data.order_id);
+    console.log("xxxxxxx", x);
     window.clearInterval(x);
     localStorage.removeItem('xInterval_'.order_id);
     toastr.success('تم قبول الطلبية بنجاح');
