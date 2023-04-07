@@ -19905,6 +19905,7 @@ var xInterval = null;
     countDown(payload.data);
   } else if (payload.data.type == 'branch_accept_order') {
     $('#countDownWebsite').modal('hide');
+    console.log("xIntervalssss", xInterval);
     clearInterval(xInterval);
     toastr.success('تم قبول الطلبية بنجاح');
   } else if (payload.data.type == 'branch_reject_order') {
