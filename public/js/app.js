@@ -19904,7 +19904,7 @@ var xInterval = null;
   if (payload.data.type == 'new_order') {
     countDown(payload.data);
   } else if (payload.data.type == 'branch_accept_order') {
-    $('#countDownWebsite').modal('hide');
+    // $('#countDownWebsite').modal('hide')
     // console.log("payload.data.order_id",payload.data.order_id)
     // var x = localStorage.getItem('xInterval'+payload.data.order_id)
     // clearInterval(x);
