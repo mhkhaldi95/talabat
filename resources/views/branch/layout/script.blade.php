@@ -46,24 +46,20 @@
 
             var order_id = $('#modal_order_id').val()
             var branch_id = $('#modal_branch_id').val()
-            console.log('xInterval_'+order_id,order_id)
+            console.log('from_branch_localStorage.getItem("xInterval_"+order_id)',localStorage.getItem("xInterval_"+order_id))
             if(order_id && branch_id){
                 const interval_id = window.setInterval(function(){}, Number.MAX_SAFE_INTEGER);
-                console.log("interval_id",interval_id)
-// Clear any timeout/interval up to that id
                 for (let i = 1; i < interval_id; i++) {
-                    console.log("accept_orderlocalStorage.getItem('xInterval_'.payload.data.order_id) == i",localStorage.getItem('xInterval_'+order_id) == i)
-                    console.log("accept_orderlocalStorage.getItem('xInterval_'.payload.data.order_id) ",localStorage.getItem('xInterval_'+order_id)+" | "+i)
-                    if(localStorage.getItem('xInterval_'+order_id) == i){
+                    console.log(localStorage.getItem("xInterval_"+order_id)+" | "+i)
                         window.clearInterval(i);
-                        localStorage.removeItem('xInterval_'+order_id)
                     }
 
                 }
 
                 axios.post("{{route('branch.orders.accept')}}",{
                     order_id: order_id,
-                    branch_id:'{{auth()->user()->branch->id}}'
+                    branch_id:'{{auth()->user()->branch->id}}',
+                    xInterval_id:'{{auth()->user()->branch->id}}'
                 }).then(response => {
                     // $('#countDownWebsite').modal('hide')
                     $('#countDown').modal('hide')

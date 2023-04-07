@@ -53,11 +53,9 @@ onMessage(messaging, (payload) => {
         console.log("payload.data.order_id",payload.data.order_id)
         var x = localStorage.getItem('xInterval'+payload.data.order_id)
         const interval_id = window.setInterval(function(){}, Number.MAX_SAFE_INTEGER);
-
-// Clear any timeout/interval up to that id
         for (let i = 1; i < interval_id; i++) {
-            console.log("localStorage.getItem('xInterval_'.payload.data.order_id) == i",localStorage.getItem('xInterval_'.payload.data.order_id) == i)
-            if(localStorage.getItem('xInterval_'.payload.data.order_id) == i){
+            console.log("x == i",x+" | "+i)
+            if(x == i){
                 window.clearInterval(i);
                 localStorage.removeItem('xInterval_'.order_id)
             }
@@ -105,6 +103,7 @@ function  countDown(data){
 
 
     }, 1000);
+    localStorage.setItem("xInterval_"+data.order_id,xInterval)
     window.onbeforeunload = function() {
         return "Dude, are you sure you want to leave? Think of the kittens!";
     }
