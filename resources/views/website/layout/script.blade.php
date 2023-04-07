@@ -483,7 +483,6 @@
                     toastr.warning(response.data.message);
                 }
             }).catch(error => {
-                alert(error.message)
                 toastr.warning(error.message);
             });
 
@@ -509,9 +508,11 @@
                             order_id: order.id,
                             branch_id:getBranch()
                     }).then(response => {
-                        $('#countDownWebsite').modal('hide')
-                        toastr.success("تم قبول الطلبية بنجاح");
-                        alert("from website")
+                        if(response.data.status){
+                            $('#countDownWebsite').modal('hide')
+                            toastr.success("تم قبول الطلبية بنجاح");
+                        }
+
                     }).catch(error => {
                         toastr.warning("حدث خطا ما");
                     });

@@ -60,7 +60,6 @@
                     if(response.data.status){
                         $('#countDown').modal('hide')
                         toastr.success("تم قبول الطلبية بنجاح");
-                        alert("from branch")
                     }
 
                 }).catch(error => {
