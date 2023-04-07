@@ -7,9 +7,10 @@ import axios from "axios";
 window.Vue = require('vue');
 window.Vue = Vue;
 window.http = axios
+alert("X")
+console.log("qqqqqqqqqqqqqqqqqqqqqqqq")
 import {initializeApp} from "firebase/app";
 import {getMessaging, getToken, onMessage} from "firebase/messaging";
-alert("X")
 const firebaseConfig = {
     apiKey: "AIzaSyDbY1oznSAopxqU8_E1cLgoaTW5AkdwgPc",
     authDomain: "break-c2fcb.firebaseapp.com",

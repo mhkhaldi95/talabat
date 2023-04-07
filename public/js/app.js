@@ -19869,9 +19869,10 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/index.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/index.js");
 window.Vue = vue__WEBPACK_IMPORTED_MODULE_0__["default"];
 window.http = axios__WEBPACK_IMPORTED_MODULE_1__["default"];
-
-
 alert("X");
+console.log("qqqqqqqqqqqqqqqqqqqqqqqq");
+
+
 var firebaseConfig = {
   apiKey: "AIzaSyDbY1oznSAopxqU8_E1cLgoaTW5AkdwgPc",
   authDomain: "break-c2fcb.firebaseapp.com",
