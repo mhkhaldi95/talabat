@@ -19902,7 +19902,7 @@ function startFCM() {
 var xInterval = null;
 (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_3__.onMessage)(messaging, function (payload) {
   if (payload.data.type == 'new_order') {
-    countDown(payload.data);
+    countDown(payload.data, 'app');
   } else if (payload.data.type == 'branch_accept_order') {
     $('#countDownWebsite').modal('hide');
     console.log("xIntervalssss", xInterval);
@@ -19918,7 +19918,8 @@ var xInterval = null;
 if (!window.localStorage.getItem('fcm_token')) {
   startFCM();
 }
-function countDown(data) {
+function countDown(data, tt) {
+  console.log("ttsss", tt);
   $('#modal_order_id').val(data.order_id);
   $('#modal_branch_id').val(data.branch_id);
   $("#countDown").modal({

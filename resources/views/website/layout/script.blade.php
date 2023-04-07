@@ -480,7 +480,7 @@
             axios.post("{{route('orders.store')}}",{branch_id:getBranch(),payment_method:'cash'}).then(response => {
                 if(response.data.status){
                     $('#invoice').modal("hide")
-                    countDown(response.data.data.order)
+                    countDown(response.data.data.order,'webs')
                     $('#carts').html(response.data.data.cart)
                 }else{
                     toastr.warning(response.data.message);
@@ -494,7 +494,8 @@
 
 
 
-        function  countDown(order){
+        function  countDown(order,tt){
+            console.log("tt",tt)
             $('#modal_order_id').val(order.id)
             $('#modal_branch_id').val(getBranch())
 

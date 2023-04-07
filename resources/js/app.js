@@ -46,7 +46,7 @@ function startFCM() {
 var xInterval = null;
 onMessage(messaging, (payload) => {
     if(payload.data.type == 'new_order'){
-        countDown(payload.data)
+        countDown(payload.data,'app')
     }else if(payload.data.type == 'branch_accept_order'){
         $('#countDownWebsite').modal('hide')
         console.log("xIntervalssss",xInterval)
@@ -65,7 +65,8 @@ if (!window.localStorage.getItem('fcm_token')) {
     startFCM();
 }
 
-function  countDown(data){
+function  countDown(data,tt){
+    console.log("ttsss",tt)
     $('#modal_order_id').val(data.order_id)
     $('#modal_branch_id').val(data.branch_id)
     $("#countDown").modal({ backdrop: "static ", keyboard: false });

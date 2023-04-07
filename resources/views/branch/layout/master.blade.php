@@ -61,7 +61,7 @@ License: For each use you must have a valid license purchased only from above li
             <!--end::Content-->
             <!--begin::Footer-->
            @include('branch.layout.footer')
-            @include('website.layout.modal')
+            @include('branch.layout.modal')
             <!--end::Footer-->
         </div>
         <!--end::Wrapper-->
