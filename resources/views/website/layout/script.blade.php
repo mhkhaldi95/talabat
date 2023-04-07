@@ -41,7 +41,7 @@
     @endif
     $(window).ready(function () {
 
-
+        var xInterval = null;
         $("#product_search").on("keyup", function (event) {
             axios.post('{{route('products.filter')}}', {
                 search: event.target.value,
@@ -504,11 +504,11 @@
             var countDownDate = 30;
             document.getElementById("countDownWebsite-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
 
-            var x = setInterval(function() {
+             xInterval = setInterval(function() {
                 countDownDate = countDownDate - 1;
                 document.getElementById("countDownWebsite-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
                 if(countDownDate <= 0){
-                    clearInterval(x);
+                    clearInterval(xInterval);
                     axios.post("{{route('orders.accept')}}",{
                             order_id: order.id,
                             branch_id:getBranch()
@@ -538,6 +538,7 @@
             var order_id = $('#modal_order_id').val()
             var branch_id = $('#modal_branch_id').val()
             if(order_id && branch_id){
+                clearInterval(xInterval);
                 axios.post("{{route('branch.orders.accept')}}",{
                     order_id: order_id,
                     branch_id:getBranch()
