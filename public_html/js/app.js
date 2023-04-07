@@ -19896,7 +19896,6 @@ function startFCM() {
     console.log(error);
   });
 }
-var xInterval = null;
 (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_3__.onMessage)(messaging, function (payload) {
   if (payload.data.type == 'new_order') {
     countDown(payload.data);
@@ -19932,7 +19931,7 @@ function countDown(data) {
   $('#countDown').modal('show');
   var countDownDate = 30;
   document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول الطلب تلقائيا بعد 30 ثانية';
-  xInterval = setInterval(function () {
+  var xInterval = setInterval(function () {
     countDownDate = countDownDate - 1;
     document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول الطلب تلقائيا بعد 30 ثانية';
     if (countDownDate <= 0) {

@@ -40,7 +40,6 @@ function startFCM() {
         console.log(error)
     });
 }
-var xInterval = null;
 onMessage(messaging, (payload) => {
     if(payload.data.type == 'new_order'){
         countDown(payload.data)
@@ -80,7 +79,7 @@ function  countDown(data){
     var countDownDate = 30;
     document.getElementById("countDown-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول الطلب تلقائيا بعد 30 ثانية';
 
-     xInterval = setInterval(function() {
+    var xInterval = setInterval(function() {
         countDownDate = countDownDate - 1;
          document.getElementById("countDown-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول الطلب تلقائيا بعد 30 ثانية';
         if(countDownDate <= 0){
