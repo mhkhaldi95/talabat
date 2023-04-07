@@ -19905,14 +19905,12 @@ var xInterval = null;
     countDown(payload.data);
   } else if (payload.data.type == 'branch_accept_order') {
     $('#countDownWebsite').modal('hide');
-    console.log("xIntervalssss", xInterval);
-    clearInterval(xInterval);
-    toastr.success('تم قبول الطلبية بنجاح');
-  } else if (payload.data.type == 'branch_reject_order') {
-    $('#countDownWebsite').modal('hide');
     console.log("payload.data.order_id", payload.data.order_id);
     var x = localStorage.getItem('xInterval' + payload.data.order_id);
     clearInterval(x);
+    toastr.success('تم قبول الطلبية بنجاح');
+  } else if (payload.data.type == 'branch_reject_order') {
+    $('#countDownWebsite').modal('hide');
     toastr.warning('تم رفض الطلبية بنجاح');
   }
   console.log('Message received. ', payload);
