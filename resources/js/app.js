@@ -46,14 +46,15 @@ onMessage(messaging, (payload) => {
         countDown(payload.data)
     }else if(payload.data.type == 'branch_accept_order'){
         $('#countDownWebsite').modal('hide')
-        console.log("payload.data.order_id",payload.data.order_id)
         var x = localStorage.getItem('xInterval'+payload.data.order_id)
         window.clearInterval(x);
         localStorage.removeItem('xInterval_'.order_id)
         toastr.success('تم قبول الطلبية بنجاح')
     }else if(payload.data.type == 'branch_reject_order'){
         $('#countDownWebsite').modal('hide')
-
+        var x = localStorage.getItem('xInterval'+payload.data.order_id)
+        window.clearInterval(x);
+        localStorage.removeItem('xInterval_'.order_id)
         toastr.warning('تم رفض الطلبية بنجاح')
     }
 
