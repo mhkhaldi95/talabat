@@ -27,14 +27,11 @@ const messaging = getMessaging(app);
 function startFCM() {
     Notification.requestPermission()
         .then(function () {
-            console.log("getToken(messaging)",getToken(messaging))
             return getToken(messaging);
         })
         .then(function (response) {
-            console.log("sdsd")
             axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             axios.post('/store-token', {fcm_token: response}).then(function (response) {
-                console.log("response",response)
                 if (response.data.status)
                     window.localStorage.setItem('fcm_token', response.data.fcm_token);
             })
@@ -44,7 +41,6 @@ function startFCM() {
     });
 }
 var xInterval = null;
-console.log("s")
 onMessage(messaging, (payload) => {
     if(payload.data.type == 'new_order'){
         countDown(payload.data)
@@ -79,8 +75,6 @@ function  countDown(data){
 
      xInterval = setInterval(function() {
         countDownDate = countDownDate - 1;
-         console.log("countDownDate11",countDownDate)
-
          document.getElementById("countDown-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
         if(countDownDate <= 0){
             axios.post(data.order_accept_url,{

@@ -296,7 +296,6 @@
             })
 
             $(document).on('click', '#modal-check-code-next222', function (e) {
-                console.log("111111111")
                 var check_input_1 = $('#check_input_1').val();
                 var check_input_2 = $('#check_input_2').val();
                 var check_input_3 = $('#check_input_3').val();
@@ -312,7 +311,6 @@
                     $('#mobile_hide').removeClass("selector_hide").addClass("selector_show");
                     return;
                 }
-                console.log("X")
                 var code = check_input_1 + check_input_2 + check_input_3 + check_input_4 + check_input_5
                 axios.post('{{route('checkCodeSms')}}', {
                     phone: localStorage.getItem('phone'),
@@ -351,7 +349,6 @@
             })
 
             $(document).on('click', '#modal-enter-name-done', function (e) {
-                console.log("X")
                 var name = $('#name').val();
                 if (
                     !name || name == ''
