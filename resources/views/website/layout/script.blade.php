@@ -511,6 +511,7 @@
                     }).then(response => {
                         $('#countDownWebsite').modal('hide')
                         toastr.success("تم قبول الطلبية بنجاح");
+                        alert("from website")
                     }).catch(error => {
                         toastr.warning("حدث خطا ما");
                     });

@@ -51,6 +51,7 @@ onMessage(messaging, (payload) => {
             window.clearInterval(parseInt(x));
             localStorage.removeItem('xInterval_'+payload.data.order_id)
             toastr.success('تم قبول الطلبية بنجاح')
+            alert("from app.js")
         }
 
     }else if(payload.data.type == 'branch_reject_order'){
