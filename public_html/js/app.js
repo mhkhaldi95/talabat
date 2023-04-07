@@ -19900,13 +19900,13 @@ var xInterval = null;
 (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_3__.onMessage)(messaging, function (payload) {
   if (payload.data.type == 'new_order') {
     countDown(payload.data);
-  } else if (payload.data.type == 1) {
+  } else if (payload.data.type == 'branch_accept_order') {
     $('#countDownWebsite').modal('hide');
     var x = localStorage.getItem('xInterval' + payload.data.order_id);
     window.clearInterval(x);
     localStorage.removeItem('xInterval_'.order_id);
     toastr.success('تم قبول الطلبية بنجاح');
-  } else if (payload.data.type == 2) {
+  } else if (payload.data.type == 'branch_reject_order') {
     $('#countDownWebsite').modal('hide');
     var x = localStorage.getItem('xInterval' + payload.data.order_id);
     window.clearInterval(x);
