@@ -19902,7 +19902,7 @@ function startFCM() {
 var xInterval = null;
 (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_3__.onMessage)(messaging, function (payload) {
   if (payload.data.type == 'new_order') {
-    countDown(payload.data, 'app');
+    countDown(payload.data);
   } else if (payload.data.type == 'branch_accept_order') {
     $('#countDownWebsite').modal('hide');
     console.log("xIntervalssss", xInterval);
@@ -19910,7 +19910,9 @@ var xInterval = null;
     toastr.success('تم قبول الطلبية بنجاح');
   } else if (payload.data.type == 'branch_reject_order') {
     $('#countDownWebsite').modal('hide');
-    clearInterval(xInterval);
+    console.log("payload.data.order_id", payload.data.order_id);
+    var x = localStorage.getItem('xInterval' + payload.data.order_id);
+    clearInterval(x);
     toastr.warning('تم رفض الطلبية بنجاح');
   }
   console.log('Message received. ', payload);
@@ -19919,7 +19921,6 @@ if (!window.localStorage.getItem('fcm_token')) {
   startFCM();
 }
 function countDown(data, tt) {
-  console.log("ttsss", tt);
   $('#modal_order_id').val(data.order_id);
   $('#modal_branch_id').val(data.branch_id);
   $("#countDown").modal({

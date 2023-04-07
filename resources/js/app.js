@@ -46,7 +46,7 @@ function startFCM() {
 var xInterval = null;
 onMessage(messaging, (payload) => {
     if(payload.data.type == 'new_order'){
-        countDown(payload.data,'app')
+        countDown(payload.data)
     }else if(payload.data.type == 'branch_accept_order'){
         $('#countDownWebsite').modal('hide')
         console.log("xIntervalssss",xInterval)
@@ -54,7 +54,9 @@ onMessage(messaging, (payload) => {
         toastr.success('تم قبول الطلبية بنجاح')
     }else if(payload.data.type == 'branch_reject_order'){
         $('#countDownWebsite').modal('hide')
-        clearInterval(xInterval);
+        console.log("payload.data.order_id",payload.data.order_id)
+        var x = localStorage.getItem('xInterval'+payload.data.order_id)
+        clearInterval(x);
         toastr.warning('تم رفض الطلبية بنجاح')
     }
 
@@ -66,7 +68,7 @@ if (!window.localStorage.getItem('fcm_token')) {
 }
 
 function  countDown(data,tt){
-    console.log("ttsss",tt)
+
     $('#modal_order_id').val(data.order_id)
     $('#modal_branch_id').val(data.branch_id)
     $("#countDown").modal({ backdrop: "static ", keyboard: false });

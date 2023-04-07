@@ -480,7 +480,7 @@
             axios.post("{{route('orders.store')}}",{branch_id:getBranch(),payment_method:'cash'}).then(response => {
                 if(response.data.status){
                     $('#invoice').modal("hide")
-                    countDown(response.data.data.order,'webs')
+                    countDown(response.data.data.order)
                     $('#carts').html(response.data.data.cart)
                 }else{
                     toastr.warning(response.data.message);
@@ -494,8 +494,7 @@
 
 
 
-        function  countDown(order,tt){
-            console.log("tt",tt)
+        function  countDown(order){
             $('#modal_order_id').val(order.id)
             $('#modal_branch_id').val(getBranch())
 
@@ -506,7 +505,7 @@
 
             var  xInterval = setInterval(function() {
                 countDownDate = countDownDate - 1;
-                 console.log("xInterval1111111111111",xInterval)
+                localStorage.setItem("xInterval_"+order.id,xInterval)
                 document.getElementById("countDownWebsite-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
                 if(countDownDate <= 0){
                     clearInterval(xInterval);
