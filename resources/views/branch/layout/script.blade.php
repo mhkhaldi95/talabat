@@ -54,12 +54,11 @@
                         window.clearInterval(i);
                     }
 
-                }
+
 
                 axios.post("{{route('branch.orders.accept')}}",{
                     order_id: order_id,
                     branch_id:'{{auth()->user()->branch->id}}',
-                    xInterval_id:'{{auth()->user()->branch->id}}'
                 }).then(response => {
                     // $('#countDownWebsite').modal('hide')
                     $('#countDown').modal('hide')
