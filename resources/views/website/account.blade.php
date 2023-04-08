@@ -31,7 +31,7 @@
                             </div>
                             <div class="col">
                                 <div class="out-item  my-3 p-2 text-danger pointer"
-                                     onclick="goToUrl('{{route('break.logout')}}')">
+                                     onclick="goToUrl('{{route('break.logout')}}') ; event.preventDefault(); window.localStorage.removeItem('fcm_token')">
                                     <i class="fa-solid fa-right-from-bracket fa-xl"></i>
                                     <span class="mx-2">sign out</span>
                                 </div>
