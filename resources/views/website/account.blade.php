@@ -189,7 +189,7 @@
                     @php
                         $new_orders = auth()->user()->orders()->where('status','!=','done')->orderBy('created_at','desc')->take(10)->get();
                     @endphp
-                    <div class="row row-cols-md-2 mt-3 d-none   " id="NewOrders">
+                    <div class="row row-cols-lg-2 mt-3 d-none " id="NewOrders">
                         @if(count($new_orders) > 0)
                             <div class="col">
                                 @foreach($new_orders as $index => $order)
@@ -284,7 +284,7 @@
                     @php
                         $history_orders = auth()->user()->orders()->where('status','=','done')->orderBy('created_at','desc')->take(10)->get();
                     @endphp
-                    <div class="row row-cols-md-2 mt-3 " id="OrderHistory">
+                    <div class="row row-cols-lg-2 mt-3 " id="OrderHistory">
                         @if(count($history_orders) > 0)
                             <div class="col">
                                 @foreach($history_orders as $index => $order)

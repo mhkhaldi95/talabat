@@ -42,7 +42,7 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-lg-8 mb-lg-0 mb-4">
 
                     <div class="tab-content" id="myTabContent">
                         <div id="products">
@@ -123,7 +123,7 @@
 
                 </div>
                 @php $total = 0 @endphp
-                <div class="col-md-4">
+                <div class="col-lg-4">
                     <div class="cart-car">
                         <div class="card h-100 w-100">
                             <div class="dropdown">

@@ -12,7 +12,7 @@
 
             <form  class=" row my-5" id="branch_form">
                 @foreach($branches as $branch)
-                <div class="col-md-6 mb-md-0 mb-3 ">
+                <div class="col-lg-6 mb-lg-0 mb-3 ">
                     <input type="radio" class="btn-check select_branch" value="{{$branch['id']}}" name="options-outlined" id="success-outlined_{{$branch['id']}}" autocomplete="off"
                            >
                     <label class="btn btn btn-outline-dark w-100 h-100" for="success-outlined_{{$branch['id']}}">
