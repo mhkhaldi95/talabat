@@ -38,9 +38,9 @@ class CustomerController extends Controller
     }
     public function create($id = null)
     {
-        $page_title = __('lang.create_customer');
+        $page_title = __('lang.create');
         if (isset($id)) {
-            $page_title = __('lang.edit_customer');
+            $page_title = __('lang.edit');
             try {
                 $item = User::query()->customerFilter('customer')->findOrFail($id);
             } catch (QueryException $exception) {
@@ -50,7 +50,7 @@ class CustomerController extends Controller
         $page_breadcrumbs = [
             ['page' => route('dashboard.index') , 'title' =>__('lang.home'),'active' => true],
             ['page' => route('customers.index') , 'title' =>__('lang.customers'),'active' => true],
-            ['page' => '#' , 'title' =>isset($id)?__('lang.edit_customer'):__('lang.add_customer'),'active' => false],
+            ['page' => '#' , 'title' =>isset($id)?__('lang.edit'):__('lang.add'),'active' => false],
         ];
         return view('dashboard.user_management.customers.create', [
             'page_title' =>$page_title,

@@ -38,9 +38,9 @@ class CategoryController extends Controller
     }
     public function create($id = null)
     {
-        $page_title = __('lang.create_category');
+        $page_title = __('lang.create');
         if (isset($id)) {
-            $page_title = __('lang.edit_category');
+            $page_title = __('lang.edit');
             try {
                 $item = Category::query()->filter()->findOrFail($id);
             } catch (QueryException $exception) {
@@ -50,7 +50,7 @@ class CategoryController extends Controller
         $page_breadcrumbs = [
             ['page' => route('dashboard.index') , 'title' =>__('lang.home'),'active' => true],
             ['page' => route('categories.index') , 'title' =>__('lang.categories'),'active' => true],
-            ['page' => '#' , 'title' =>isset($id)?__('lang.edit_category'):__('lang.add_category'),'active' => false],
+            ['page' => '#' , 'title' =>isset($id)?__('lang.edit'):__('lang.add'),'active' => false],
         ];
         return view('dashboard.categories.create', [
             'page_title' =>$page_title,

@@ -40,9 +40,9 @@ class RoleController extends Controller
     }
     public function create($id = null)
     {
-        $page_title = __('lang.create_role');
+        $page_title = __('lang.create');
         if (isset($id)) {
-            $page_title = __('lang.edit_role');
+            $page_title = __('lang.edit');
             try {
                 $item = Role::query()->findOrFail($id);
             } catch (QueryException $exception) {
@@ -52,7 +52,7 @@ class RoleController extends Controller
         $page_breadcrumbs = [
             ['page' => route('dashboard.index') , 'title' =>__('lang.home'),'active' => true],
             ['page' => route('roles.index') , 'title' =>__('lang.roles'),'active' => true],
-            ['page' => '#' , 'title' =>isset($id)?__('lang.edit_role'):__('lang.add_role'),'active' => false],
+            ['page' => '#' , 'title' =>isset($id)?__('lang.edit'):__('lang.add'),'active' => false],
         ];
         if(@$item)
         $permissions = @$item->permissions()->pluck('id')->toArray();

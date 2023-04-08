@@ -39,9 +39,9 @@ class BranchController extends Controller
     }
     public function create($id = null)
     {
-        $page_title = __('lang.create_branch');
+        $page_title = __('lang.create');
         if (isset($id)) {
-            $page_title = __('lang.edit_branch');
+            $page_title = __('lang.edit');
             try {
                 $item = Branch::query()->filter()->findOrFail($id);
             } catch (QueryException $exception) {
@@ -51,7 +51,7 @@ class BranchController extends Controller
         $page_breadcrumbs = [
             ['page' => route('dashboard.index') , 'title' =>__('lang.home'),'active' => true],
             ['page' => route('branches.index') , 'title' =>__('lang.branches'),'active' => true],
-            ['page' => '#' , 'title' =>isset($id)?__('lang.edit_branch'):__('lang.add_branch'),'active' => false],
+            ['page' => '#' , 'title' =>isset($id)?__('lang.edit'):__('lang.add'),'active' => false],
         ];
         return view('dashboard.user_management.branches.create', [
             'page_title' =>$page_title,

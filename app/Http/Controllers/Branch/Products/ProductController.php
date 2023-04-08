@@ -43,9 +43,9 @@ class ProductController extends Controller
 
     public function create($id = null)
     {
-        $page_title = __('lang.create_product');
+        $page_title = __('lang.create');
         if (isset($id)) {
-            $page_title = __('lang.edit_product');
+            $page_title = __('lang.edit');
             try {
                 $item = Product::query()->filter()->findOrFail($id);
             } catch (QueryException $exception) {
@@ -55,7 +55,7 @@ class ProductController extends Controller
         $page_breadcrumbs = [
             ['page' => route('branch.dashboard'), 'title' => __('lang.home'), 'active' => true],
             ['page' => route('branch.products.index'), 'title' => __('lang.products'), 'active' => true],
-            ['page' => '#', 'title' => isset($id) ? __('lang.edit_product') : __('lang.add_product'), 'active' => false],
+            ['page' => '#', 'title' => isset($id) ? __('lang.edit') : __('lang.add'), 'active' => false],
         ];
         return view('branch.products.create', [
             'page_title' => $page_title,

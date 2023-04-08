@@ -39,9 +39,9 @@ class AdminController extends Controller
     }
     public function create($id = null)
     {
-        $page_title = __('lang.create_admin');
+        $page_title = __('lang.create');
         if (isset($id)) {
-            $page_title = __('lang.edit_admin');
+            $page_title = __('lang.edit');
             try {
                 $item = User::query()->adminFilter('admin')->findOrFail($id);
             } catch (QueryException $exception) {
@@ -52,7 +52,7 @@ class AdminController extends Controller
         $page_breadcrumbs = [
             ['page' => route('dashboard.index') , 'title' =>__('lang.home'),'active' => true],
             ['page' => route('admins.index') , 'title' =>__('lang.admins'),'active' => true],
-            ['page' => '#' , 'title' =>isset($id)?__('lang.edit_admin'):__('lang.add_admin'),'active' => false],
+            ['page' => '#' , 'title' =>isset($id)?__('lang.edit'):__('lang.add'),'active' => false],
         ];
         return view('dashboard.user_management.admins.create', [
             'page_title' =>$page_title,

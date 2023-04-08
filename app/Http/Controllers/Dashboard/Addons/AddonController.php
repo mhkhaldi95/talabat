@@ -38,9 +38,9 @@ class AddonController extends Controller
     }
     public function create($id = null)
     {
-        $page_title = __('lang.create_addon');
+        $page_title = __('lang.create');
         if (isset($id)) {
-            $page_title = __('lang.edit_addon');
+            $page_title = __('lang.edit');
             try {
                 $item = Addon::query()->filter()->findOrFail($id);
             } catch (QueryException $exception) {
@@ -50,7 +50,7 @@ class AddonController extends Controller
         $page_breadcrumbs = [
             ['page' => route('dashboard.index') , 'title' =>__('lang.home'),'active' => true],
             ['page' => route('addons.index') , 'title' =>__('lang.addons'),'active' => true],
-            ['page' => '#' , 'title' =>isset($id)?__('lang.edit_addon'):__('lang.add_addon'),'active' => false],
+            ['page' => '#' , 'title' =>isset($id)?__('lang.edit'):__('lang.add'),'active' => false],
         ];
         return view('dashboard.addons.create', [
             'page_title' =>$page_title,
