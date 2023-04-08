@@ -70,15 +70,19 @@ class CreateOrder
                 $item->update([
                     'status' => Enum::ACCEPT
                 ]);
-                Notification::send($item->user, new OrderNotification([
-                    'order_id' => $item->id,
-                    'branch_id' =>  null,
-                    'title_ar' => $item->id.' قبول طلبية  #',
-                    'title_en' => 'accept order #'.$item->id,
-                    'body_ar' => $item->id.'قبول طلبية  #',
-                    'body_en' => 'accept order #'.$item->id,
-                    'type' => 'branch_accept_order',
-                ]));
+                if($item->user->id != \auth()->user()->id){
+                    Notification::send($item->user, new OrderNotification([
+                        'order_id' => $item->id,
+                        'branch_id' =>  null,
+                        'title_ar' => $item->id.' قبول طلبية  #',
+                        'title_en' => 'accept order #'.$item->id,
+                        'body_ar' => $item->id.'قبول طلبية  #',
+                        'body_en' => 'accept order #'.$item->id,
+                        'type' => 'branch_accept_order',
+                        'payment_method' => 'online',
+                    ]));
+                }
+
                 return $item;
             }else{
                 return false;

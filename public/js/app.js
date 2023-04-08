@@ -19884,35 +19884,37 @@ var app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_2__.initializeApp)(firebaseCo
 var messaging = (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_3__.getMessaging)(app);
 function startFCM() {
   Notification.requestPermission().then(function () {
-    console.log("getToken(messaging)", (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_3__.getToken)(messaging));
     return (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_3__.getToken)(messaging);
   }).then(function (response) {
-    console.log("sdsd");
     axios__WEBPACK_IMPORTED_MODULE_1__["default"].defaults.headers.common["X-CSRF-TOKEN"] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/store-token', {
       fcm_token: response
     }).then(function (response) {
-      console.log("response", response);
       if (response.data.status) window.localStorage.setItem('fcm_token', response.data.fcm_token);
     });
   })["catch"](function (error) {
     console.log(error);
   });
 }
-var xInterval = null;
-console.log("s");
 (0,firebase_messaging__WEBPACK_IMPORTED_MODULE_3__.onMessage)(messaging, function (payload) {
   if (payload.data.type == 'new_order') {
     countDown(payload.data);
   } else if (payload.data.type == 'branch_accept_order') {
     $('#countDownWebsite').modal('hide');
-    console.log("payload.data.order_id", payload.data.order_id);
-    var x = localStorage.getItem('xInterval' + payload.data.order_id);
-    clearInterval(x);
-    toastr.success('تم قبول الطلبية بنجاح');
+    var x = localStorage.getItem('xInterval_' + payload.data.order_id);
+    if (x) {
+      window.clearInterval(parseInt(x));
+      localStorage.removeItem('xInterval_' + payload.data.order_id);
+      toastr.success('تم قبول الطلبية بنجاح');
+    }
   } else if (payload.data.type == 'branch_reject_order') {
     $('#countDownWebsite').modal('hide');
-    toastr.warning('تم رفض الطلبية بنجاح');
+    var x = localStorage.getItem('xInterval_' + payload.data.order_id);
+    if (x) {
+      window.clearInterval(parseInt(x));
+      localStorage.removeItem('xInterval_' + payload.data.order_id);
+      toastr.warning('تم رفض الطلبية بنجاح');
+    }
   }
   console.log('Message received. ', payload);
 });
@@ -19928,11 +19930,14 @@ function countDown(data) {
   });
   $('#countDown').modal('show');
   var countDownDate = 30;
-  document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
-  xInterval = setInterval(function () {
+  if (document.getElementById("countDown-modal-body")) {
+    document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول الطلب تلقائيا بعد 30 ثانية';
+  }
+  var xInterval = setInterval(function () {
     countDownDate = countDownDate - 1;
-    console.log("countDownDate11", countDownDate);
-    document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
+    if (document.getElementById("countDown-modal-body")) {
+      document.getElementById("countDown-modal-body").innerHTML = countDownDate + '<br/>سيتم قبول الطلب تلقائيا بعد 30 ثانية';
+    }
     if (countDownDate <= 0) {
       axios__WEBPACK_IMPORTED_MODULE_1__["default"].post(data.order_accept_url, {
         order_id: data.order_id,
@@ -19946,9 +19951,12 @@ function countDown(data) {
       });
     }
   }, 1000);
-  window.onbeforeunload = function () {
-    return "Dude, are you sure you want to leave? Think of the kittens!";
-  };
+  localStorage.setItem("xInterval_branch_" + data.order_id, xInterval);
+  if (data.payment_type != 'online') {
+    window.onbeforeunload = function () {
+      return "Dude, are you sure you want to leave? Think of the kittens!";
+    };
+  }
 }
 function getBranch() {
   var queryString = window.location.search;

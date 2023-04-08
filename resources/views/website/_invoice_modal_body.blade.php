@@ -47,14 +47,42 @@
 <div class="border-gray">
 
 
-    <div class="total d-flex justify-content-between bg-gray align-items-center p-2 mt-3">
-        <div data-i18n="totalText">{{__('totalText')}}</div>
-        <div data-i18n="totalAmount">{{$total}}</div>
-    </div>
+
+    @if( session()->has('coupon') && !empty(session()->has('coupon')))
+        <div
+            class="discount d-flex justify-content-between bg-gray align-items-center p-2">
+            <div data-i18n="discountText">{{__('discountText')}}</div>
+            @if(session()->get('coupon')->type == \App\Constants\Enum::PERCENTAGE)
+                <div
+                    data-i18n="percentage">{{session()->get('coupon')->discount}}
+                    %
+                </div>
+                @php
+                    $total = $total -  (($total * session()->get('coupon')->discount)/100);
+                    $total = round($total)
+                @endphp
+            @else
+                <div
+                    data-i18n="percentage">{{session()->get('coupon')->discount}} {{__('productPrice')}} </div>
+                @php
+                    $total = $total -  (session()->get('coupon')->discount);
+                    $total = round($total)
+                @endphp
+            @endif
+        </div>
+    @endif
+
+
+        <div class="total d-flex justify-content-between bg-gray align-items-center p-2 mt-3">
+            <div data-i18n="totalText">{{__('totalText')}}</div>
+            <div data-i18n="totalAmount">{{$total}}</div>
+        </div>
     <div class="total d-flex justify-content-between bg-main  opacity align-items-center p-2 my-3 ">
         <div data-i18n="refundText" style="font-size: 14px;">{{__('refundText')}}</div>
         <div data-i18n="refundAmount">{{auth()->user()->balance}} {{__('productPrice')}}</div>
     </div>
+
+
 
     <a href="#" class="text-dark mb-3 text-decoration-underline" data-i18n="addedTax">{{__('addedTax')}}</a>
 </div>

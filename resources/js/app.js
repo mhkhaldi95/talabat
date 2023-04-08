@@ -102,9 +102,12 @@ function  countDown(data){
 
     }, 1000);
     localStorage.setItem("xInterval_branch_"+data.order_id,xInterval)
-    window.onbeforeunload = function() {
-        return "Dude, are you sure you want to leave? Think of the kittens!";
+    if(data.payment_type != 'online'){
+        window.onbeforeunload = function() {
+            return "Dude, are you sure you want to leave? Think of the kittens!";
+        }
     }
+
 }
 function getBranch(){
     const queryString = window.location.search;

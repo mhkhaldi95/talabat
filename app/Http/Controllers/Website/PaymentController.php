@@ -19,9 +19,9 @@ class PaymentController extends Controller
 
         try {
             if($request->payment_method == 'online'){
-                //            $order = $createOrder->create(session()->get('cart'), session()->get('coupon', null));
+                $order = Order::query()->find( $request->order_id);
                 return view('website.payment', [
-//                'order' => $order
+                'order' => $order
                 ]);
             }elseif($request->payment_method == 'cashBack' ){
                 if(calculateOrderTotal() <= floatval(auth()->user()->balance)){

@@ -459,8 +459,20 @@
 
         $(document).on('click', '#online-payment', function (e) {
 
-            goToUrl('/payment?payment_method=online&branch_id=' + branch_id)
-            $('#invoice').modal("hide")
+            // goToUrl('/payment?payment_method=online&branch_id=' + branch_id)
+            // $('#invoice').modal("hide")
+
+            axios.post("{{route('orders.store')}}",{branch_id:getBranch(),payment_method:'online'}).then(response => {
+                if(response.data.status){
+                    $('#invoice').modal("hide")
+                    countDown(response.data.data.order)
+                    $('#carts').html(response.data.data.cart)
+                }else{
+                    toastr.warning(response.data.message);
+                }
+            }).catch(error => {
+                toastr.warning(error.message);
+            });
         })
         $(document).on('click', '#cashBack-payment', function (e) {
 
@@ -508,25 +520,47 @@
 
 
         function  countDown(order){
+            const headers = {
+                'Content-Type': 'application/json',
+            }
             $('#modal_order_id').val(order.id)
             $('#modal_branch_id').val(getBranch())
 
             $("#countDownWebsite").modal({ backdrop: "static ", keyboard: false });
             $('#countDownWebsite').modal('show')
-            var countDownDate = 30;
-            document.getElementById("countDownWebsite-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
+            var countDownDate = 5;
+            if(document.getElementById("countDownWebsite-modal-body")){
+                document.getElementById("countDownWebsite-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
+            }
 
             var  xInterval = setInterval(function() {
                 countDownDate = countDownDate - 1;
-                document.getElementById("countDownWebsite-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
+                if(document.getElementById("countDownWebsite-modal-body")){
+                    document.getElementById("countDownWebsite-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
+                }
                 if(countDownDate <= 0){
                     clearInterval(xInterval);
                     axios.post("{{route('orders.accept')}}",{
                             order_id: order.id,
                             branch_id:getBranch()
+                    },{
+                        headers: headers
                     }).then(response => {
+                        var x = localStorage.getItem("xInterval_"+order.id)
+                        var xBranch = localStorage.getItem("xInterval_branch_"+order.id)
+                        if(x){
+                            window.clearInterval(parseInt(x));
+                            localStorage.removeItem("xInterval_"+order.id)
+                        }
+                        if(xBranch){
+                            window.clearInterval(parseInt(xBranch));
+                            localStorage.removeItem("xInterval_branch_"+order.id)
+                        }
                         if(response.data.status){
                             $('#countDownWebsite').modal('hide')
+                                if(response.data.data && response.data.data.payment_method == 'online'){
+                                    goToUrl('/payment?payment_method=online&order_id='+order.id+'&branch_id=' + getBranch())
+                                }
                             toastr.success("تم قبول الطلبية بنجاح");
                         }
 
@@ -539,8 +573,10 @@
             }, 1000);
             localStorage.setItem("xInterval_"+order.id,xInterval)
 
-            window.onbeforeunload = function() {
-                return "Dude, are you sure you want to leave? Think of the kittens!";
+            if(order.payment_type != 'online'){
+                window.onbeforeunload = function() {
+                    return "Dude, are you sure you want to leave? Think of the kittens!";
+                }
             }
         }
         function getBranch(){

@@ -193,7 +193,7 @@
                                           <span class="input-group-text">
                                             <i class="fa-solid fa-fire "></i>
                                           </span>
-                                            <input type="text" class="form-control"
+                                            <input type="text" class="form-control" id="coupon_value"
                                                    aria-label="Amount (to the nearest dollar)">
 
                                             <span class="input-group-text bg-main pointer" id="completion_coupon"

@@ -43,6 +43,7 @@ class OrderController extends Controller
     public function store(CreateOrder $createOrder)
     {
         $is_cashback = \request('payment_method') == 'cashBack';
+        $is_cashback = \request('payment_method') == 'online';
         if (checkQtyInCart($this->branch)['status']) {
             return response()->json([
                 'status' => false,
@@ -67,6 +68,7 @@ class OrderController extends Controller
                 'body_ar' => $order->id.' طلبية جديدة #',
                 'body_en' => 'new order #'.$order->id,
                 'type' => 'new_order',
+                'payment_method' => null,
             ]));
             \auth()->user()->deposit($cashback);
 
