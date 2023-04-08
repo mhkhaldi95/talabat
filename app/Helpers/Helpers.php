@@ -144,6 +144,17 @@ function checkQtyInCart($branch)
     return ['status' => $status, 'msg' => $msg];
 
 }
+function calculateCashback(){
+    $cashback = 0;
+    $cart = session()->get('cart');
+    if(!is_null($cart) && count($cart) > 0){
+        foreach($cart as $item){
+            $cashback += floatval($item['cashback']);
+        }
+
+    }
+    return $cashback;
+}
 
 
 

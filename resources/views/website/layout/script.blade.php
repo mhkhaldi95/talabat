@@ -463,14 +463,22 @@
             $('#invoice').modal("hide")
         })
         $(document).on('click', '#cashBack-payment', function (e) {
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            var branch_id = urlParams.get('branch_id')
 
             axios.get('{{route('checkCashback')}}').then(response => {
                 if(response.data.status){
-                    goToUrl('/payment?payment_method=cashBack&branch_id=' + branch_id)
-                    $('#invoice').modal("hide")
+                    // goToUrl('/payment?payment_method=cashBack&branch_id=' + getBranch())
+                    // $('#invoice').modal("hide")
+                    axios.post("{{route('orders.store')}}",{branch_id:getBranch(),payment_method:'cashBack'}).then(response => {
+                        if(response.data.status){
+                            $('#invoice').modal("hide")
+                            countDown(response.data.data.order)
+                            $('#carts').html(response.data.data.cart)
+                        }else{
+                            toastr.warning(response.data.message);
+                        }
+                    }).catch(error => {
+                        toastr.warning(error.message);
+                    });
                 }else{
                     toastr.warning("رصيدك لا يكفي");
                 }

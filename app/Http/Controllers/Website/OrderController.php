@@ -42,20 +42,19 @@ class OrderController extends Controller
 
     public function store(CreateOrder $createOrder)
     {
+        $is_cashback = \request('payment_method') == 'cashBack';
         if (checkQtyInCart($this->branch)['status']) {
             return response()->json([
                 'status' => false,
                 'message' => $this->checkQtyInCart()['msg']
             ]);
         }
-        if (\request('payment_method') == 'cashBack') {
+        if ($is_cashback) {
             if (calculateOrderTotal() > floatval(auth()->user()->balance)) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'لا يوجد لديك رصيد كافي'
-                ]);
+                return $this->response_json(false, StatusCodes::INTERNAL_ERROR, Enum::GENERAL_ERROR, []);
             }
         }
+        $cashback = calculateCashback();
         $order = $createOrder->create(session()->get('cart'), session()->get('coupon', null));
         if ($order) {
 
@@ -69,6 +68,11 @@ class OrderController extends Controller
                 'body_en' => 'new order #'.$order->id,
                 'type' => 'new_order',
             ]));
+            \auth()->user()->deposit($cashback);
+
+            if ($is_cashback) {
+                \auth()->user()->withdraw($order->price);
+            }
             session()->forget('cart');
             session()->forget('coupon');
             return $this->response_json(true, StatusCodes::OK, Enum::DONE_SUCCESSFULLY, [
