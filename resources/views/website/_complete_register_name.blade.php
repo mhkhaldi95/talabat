@@ -17,6 +17,24 @@
         done
     </button>
 </div>
+
+
+<div class="modal-body">
+    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+    <p class="text-center color-low-dark mb-5">complete registeration</p>
+    <div class="input-group flex-nowrap mb-3">
+        <input type="text"  id="name" class="form-control bg-gray name-input" placeholder="Username" aria-label="Username"
+               aria-describedby="addon-wrapping">
+
+    </div>
+    <div style="padding-right: 9%" id="name_hide"  class="selector_hide">
+        <span class="text-danger hide "> أدخل  الاسم </span>
+    </div>
+    <button class="w-100 btn  bg-main py-2" id="modal-enter-name-done">
+        done
+    </button>
+</div>
 <script>
 
     $(document).on('click','#modal-enter-name-done',function (e) {

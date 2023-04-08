@@ -1,21 +1,11 @@
 
 
 .branches{
-    height: 85vh;
-    position: relative;
+    width: 100%;
+    min-height: 60vh;
+    margin: 5rem  0 3rem 0;
 }
 
-
-
-.branche-content{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);  
-    padding: 0 100px;
-  
-    
-}
 
 .branch-item{
     background-color: #f8f8f8;
@@ -24,6 +14,7 @@
     background-color: #d5e9d6;
     color: green;
     padding: 10px 20px;
+    width: 110px !important;
 }
 .open-btn:hover{
     color: green;
@@ -42,7 +33,9 @@
    color: #c32aa3;
    font-size: 1.3rem;
 }
-
+.cart-branch{
+    background-color: #fdfdfd;
+}
 /* password verify */
 .phone-verify{
     position: absolute;

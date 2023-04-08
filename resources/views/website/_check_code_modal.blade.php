@@ -1,4 +1,5 @@
 
+
 <!-- Modal Header -->
 <div class="modal-header">
     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -7,22 +8,25 @@
 <div class="modal-body">
     <div class="container height-100 d-flex justify-content-center align-items-center">
         <div class="position-relative">
-            <div class="card p-2 text-center">
-                <p class="text-center"> ادخل كود التحقق المرسل لرقمك{{$phone}}</p>
+            <div class=" p-2 text-center">
+                <p class="text-center color-low-dark">Enter the verification code sent to your number</p>
                 <div id="otp" class="inputs d-flex flex-row justify-content-center mt-2">
-                    <input class="m-2 text-center form-control rounded" type="text" id="check_input_1" maxlength="1">
-                    <input class="m-2 text-center form-control rounded" type="text" id="check_input_2" maxlength="1">
-                    <input class="m-2 text-center form-control rounded" type="text" id="check_input_3" maxlength="1">
-                    <input class="m-2 text-center form-control rounded" type="text" id="check_input_4" maxlength="1">
-                    <input class="m-2 text-center form-control rounded" type="text" id="check_input_5" maxlength="1">
+                    <input class="m-2 code-input text-center form-control rounded bg-gray" type="text"  id="check_input_1" maxlength="1">
+                    <input class="m-2 code-input text-center form-control rounded bg-gray" type="text"  id="check_input_2" maxlength="1">
+                    <input class="m-2 code-input text-center form-control rounded bg-gray" type="text"  id="check_input_3" maxlength="1">
+                    <input class="m-2 code-input text-center form-control rounded bg-gray" type="text"  id="check_input_4" maxlength="1">
+                    <input class="m-2 code-input text-center form-control rounded bg-gray" type="text"  id="check_input_5" maxlength="1">
+{{--                    <input class="m-2 code-input text-center form-control rounded bg-gray" type="text"  id="check_input_1" maxlength="1">--}}
                 </div>
-                <div style="padding-right: 9%" id="mobile_hide"  class="selector_hide">
-                    <span class="text-danger hide "> أدخل الكود كاملا </span>
-                </div>
+                <a href="javascript:void(0)" class="text-decoration-underline ms-3  color-low-dark" id="resendCodeSms">Resend the code</a>
+
                 <div class="mt-4">
-                    <button class="btn  bg-main px-4 validate w-100" id="modal-check-code-next" >Validate</button>
+                    <button class="btn  bg-main px-4 validate w-100" data-bs-toggle="modal"
+                            data-bs-target="#yourNameModal" id="modal-check-code-next">Validate</button>
+
                 </div>
-                <a href="javascript:void(0)" class="text-decoration-none ms-3 text-dark" id="resendCodeSms">Resend(1/3)</a>
+
+
             </div>
         </div>
     </div>

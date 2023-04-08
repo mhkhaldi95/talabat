@@ -85,6 +85,10 @@ class User extends Authenticatable implements Wallet
     {
         return $this->hasMany(Code::class);
     }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
     public function routeNotificationForFcm()
     {
         return $this->fcm_token;

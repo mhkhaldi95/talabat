@@ -65,33 +65,42 @@
             product = $(this).data('product');
             product_photo = $(this).data('product_photo');
             max_addons = product.max_addons;
-            addons_html = ` <h3 class="text-center ">flavours </h3>`;
+            addons_html = `  <h5 class="text-center ">flavours
+                        </h5>`;
             if (product.product_addons.length > 0) {
                 product.product_addons.forEach(function (addon) {
                     addons_html += `
+                        <div class=" my-1 row align-items-center">
 
-                        <div class=" my-2 row align-items-center">
+                            <div class="col-6  d-flex align-items-center">
 
-                              <div class="col-6  d-flex align-items-center">
                                 <div class="">
-                                    <input class="form-check-input mt-0 addon_check" type="checkbox" name="selected_addons[]" value="${addon.id}"
-                                    aria-label="Checkbox for following text input">
-                              </div>
+                                    <input class="form-check-input mt-0 addon_check" name="selected_addons[]"  type="checkbox" value="${addon.id}"
+                                           aria-label="Checkbox for following text input">
 
+                                </div>
                                 <div class="px-2 mb-2 text-break">${addon.name}</div>
-                              </div>
-                              <div class="d-flex justify-content-center align-items-center h-50 col-6">
-                               <button class="btn w25 bg-main increment qty-count qty-count--add ad" disabled  fdprocessedid="5l4yfr"
-                                            style="font-size: 10px;">
-                                        <i class="fa-solid fa-plus"></i>
-                               </button>
+
+                            </div>
+
+                            <div class=" col-6 d-flex justify-content-center align-items-center h-50 ">
+                                <button class="px-1 bg-main increment qty-count qty-count--add ad"  disabled fdprocessedid="5l4yfr"
+                                        style="font-size: 12px;"
+                                >
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
                                 <span id="root" class="counter-container product-qty">0</span>
-                                 <button class="btn w25 btn-outline-danger qty-count qty-count--minus mi " disabled  fdprocessedid="4aox6r"
-                                            style="font-size: 10px;">
-                                        <i class="fa-solid fa-minus fa-sm"></i>
-                                 </button>
-                              </div>
+                                <button class="px-1 btn-outline-danger qty-count qty-count--minus mi" disabled fdprocessedid="4aox6r"
+                                        style="font-size: 12px; border: none ;background-color: #fbedea;"
+                                ">
+                                <i class="fa-solid fa-minus fa-sm"></i>
+                                </button>
+                            </div>
                         </div>
+
+
+
+
 
 
 

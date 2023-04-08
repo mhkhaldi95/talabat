@@ -1,41 +1,60 @@
 @extends('website.layout.master')
 
 @section('content')
+
     <!-- page breadcrumb -->
     <section class="branch-breadcrumb">
 
         <div class="container">
 
-            <div class="input-group pt-5 " style="z-index: 500;" id="searchInput">
-            <span class="input-group-append  ">
-                <button class="btn btn-outline-secondary border-start-0 border  ms-n3 search-input rounded" type="button">
-                    <i class="fa fa-search"></i>
-                </button>
-            </span>
-                <input class="form-control border-end-0 border rounded " id="product_search" type="text" value="search" >
+            <div class="input-group  search-group " style="z-index: 500;" id="searchInput">
+        <span class="input-group-append  ">
+          <button class="btn btn-outline-secondary border-start-0 border  ms-n3 search-input rounded" type="button">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+                <input class="form-control border-end-0 border  search-bar" type="text" value="search"
+                       id="product_search">
 
             </div>
         </div>
         <div class="breadcrumb-overlay"></div>
     </section>
+    <section class="advanced-search my-5">
+        <div class="container">
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+                <li class="nav-item" role="presentation">
+                    <a href="{{route('break.products.index',['branch_id' =>@$branch->id])}}" class="nav-link  color-main"
+                       type="button"> <span>return</span> </a>
+                </li>
+
+
+            </ul>
+
+        </div>
+    </section>
+    <!-- ../land breadcrumb -->
+
     <!-- products -->
     <section class="products mb-5">
         <div class="container">
 
             <div class="row">
-
                 <div class="col-md-8">
 
                     <div class="tab-content" id="myTabContent">
                         <div id="products">
                             @if(count($products) > 0)
                                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
-                                     aria-labelledby="home-tab" tabindex="0">
+                                     aria-labelledby="home-tab"
+                                     tabindex="0">
                                     <div class="row row-cols-md-2 row-cols-1 gy-4">
                                         <div class="col">
                                             @foreach($products as $index=>$product)
                                                 @if($index % 2 == 0)
-                                                    <div class="product-item " style="margin-top: 5%">
+                                                    <div class="product-item">
                                                         <div class="card h-100 w-100">
                                                             <img
                                                                 src="{{$product['has_photo']?@$product['photos'][0]['photo_path']:$product['master_photo']}}"
@@ -65,7 +84,7 @@
                                         <div class="col">
                                             @foreach($products as $index=>$product)
                                                 @if($index % 2 != 0)
-                                                    <div class="product-item" style="margin-top: 5%">
+                                                    <div class="product-item">
                                                         <div class="card h-100 w-100">
                                                             <img
                                                                 src="{{$product['has_photo']?@$product['photos'][0]['photo_path']:$product['master_photo']}}"
@@ -103,119 +122,160 @@
                     </div>
 
                 </div>
+                @php $total = 0 @endphp
                 <div class="col-md-4">
                     <div class="cart-car">
+                        <div class="card h-100 w-100">
+                            <div class="dropdown">
 
-                        <div class="card">
-                            <div class="d-flex cart-branch justify-content-between align-items-center my-3">
-                                <div class="recieve">
-                                    <i class="fa-solid fa-bag-shopping color-main fa-2xl"></i>
-                                    <span class="mx-2 fs-5 opacity" data-i18n="recieveFrom">{{__('recieveFrom')}}</span>
+                                <div class=" d-flex cart-branch  align-items-center shadow-sm rounded p-3  w-100 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                     aria-expanded="false"  style="color: #818080;">
+                                    <div class="recieve" style="margin-left: 130px;">
+                                        <img src="{{asset('')}}assets/website/images/bag-i.png" alt="" style="width: 25px;">
+                                        <span class="mx-2 recieve-from " data-i18n="recieveFrom" style="color: #909090;">{{__('recieveFrom')}}</span>
+                                    </div>
+                                    <div class="">{{$branch->address}}</div>
                                 </div>
-                                <div class="dropdown">
-                                    <a class="btn btn-sm dropdown-toggle" href="#" role="button"
-                                       data-bs-toggle="dropdown"
-                                       aria-expanded="false" data-i18n="branchName">
-                                        {{$branch->address}}
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a class="dropdown-item" href="#" data-i18n="branchName">{{$branch->address}}</a>
-                                        </li>
-                                    </ul>
-                                </div>
+
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="#" data-i18n="branchName">{{$branch->address}}</a>
+                                    </li>
+                                </ul>
                             </div>
-                            @php $total = 0 @endphp
+
                             <div id="carts">
                                 @if(!is_null($cart) && count($cart) > 0)
-
-                                    @foreach($cart as $item)
-                                        @php $total += $item['price'] * $item['quantity'] @endphp
-                                        <div class="cart-card mb-3">
-                                            <div class="row g-0">
-                                                <div class="col-md-4">
-                                                    <img src="{{$item['photo']}}"
-                                                         class="img-fluid rounded-start h-100 w-100"
-                                                         alt="">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="card-body">
-                                                        <div class="d-flex justify-content-between">
-                                                            <p data-i18n="productName">{{$item['name']}}</p>
-                                                            <p class="text-danger pointer delete_from_cart"
-                                                               data-i18n="remove"
-                                                               data-id="{{$item['id']}}">{{__('remove')}}</p>
-                                                        </div>
-                                                        <div class="d-flex justify-content-between align-items-end">
-                                                            <p data-i18n="productPrice">{{$item['price']}}  {{__('productPrice')}}</p>
-                                                            <div
-                                                                class="d-flex justify-content-center align-items-center h-100 p-3">
-                                                                <button
-                                                                    class="btn w25 bg-main increment qty-count qty-count--add-in-cart ad"
-                                                                    data-product="{{ json_encode($item,TRUE)}}"
-                                                                    data-qty="{{ $branch->getQty($product['id'])}}">
-                                                                    <i class="fa-solid fa-plus"></i>
-                                                                </button>
-                                                                <span id="root"
-                                                                      class="counter-container product-qty">{{$item['quantity']}}</span>
-                                                                <button
-                                                                    class="btn w25 decrement qty-count qty-count--minus-in-cart mi "
-                                                                    data-product="{{ json_encode($item,TRUE)}}">
-                                                                    <i class="fa-solid fa-minus"></i>
-                                                                </button>
+                                    <div class="fill">
+                                        @foreach($cart as $item)
+                                            @php $total += $item['price'] * $item['quantity'] @endphp
+                                            <div class="cart-card mb-3">
+                                                <div class="row g-0 bg-gray">
+                                                    <div class="col-md-3">
+                                                        <img src="{{$item['photo']}}"
+                                                             class="img-fluid rounded-start "
+                                                             alt="">
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <div class="px-2 py-1 ">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span data-i18n="productName">{{$item['name']}}</span>
+                                                                <span class="text-danger pointer delete_from_cart"
+                                                                      data-id="{{$item['id']}}"
+                                                                      data-i18n="remove">{{__('remove')}}</span>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between align-items-end">
+                                                                <span
+                                                                    data-i18n="productPrice">{{$item['price']}}  {{__('productPrice')}}</span>
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center h-100 p-1">
+                                                                    <button
+                                                                        class="btn w25 bg-main increment qty-count qty-count--add-in-cart ad"
+                                                                        data-product="{{ json_encode($item,TRUE)}}"
+                                                                        data-qty="{{ $branch->getQty($product['id'])}}">
+                                                                        <i class="fa-solid fa-plus"></i>
+                                                                    </button>
+                                                                    <span id="root"
+                                                                          class="counter-container product-qty">{{$item['quantity']}}</span>
+                                                                    <button
+                                                                        class="btn w25 decrement qty-count qty-count--minus-in-cart mi "
+                                                                        data-product="{{ json_encode($item,TRUE)}}">
+                                                                        <i class="fa-solid fa-minus"></i>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        @endforeach
+                                        <div class="input-group mb-3">
+                                          <span class="input-group-text">
+                                            <i class="fa-solid fa-fire "></i>
+                                          </span>
+                                            <input type="text" class="form-control"
+                                                   aria-label="Amount (to the nearest dollar)">
+
+                                            <span class="input-group-text bg-main pointer" id="completion_coupon"
+                                                  data-branch-id="{{$branch->id}}"
+                                                  data-i18n="completion">{{__('completion')}}</span>
                                         </div>
-                                    @endforeach
+                                        <div class="bill">
+                                            <p>Bill</p>
+                                            @if( session()->has('coupon') && !empty(session()->has('coupon')))
+                                                <div
+                                                    class="discount d-flex justify-content-between bg-gray align-items-center p-2">
+                                                    <div data-i18n="discountText">{{__('discountText')}}</div>
+                                                    @if(session()->get('coupon')->type == \App\Constants\Enum::PERCENTAGE)
+                                                        <div
+                                                            data-i18n="percentage">{{session()->get('coupon')->discount}}
+                                                            %
+                                                        </div>
+                                                        @php
+                                                            $total = $total -  (($total * session()->get('coupon')->discount)/100);
+                                                            $total = round($total)
+                                                        @endphp
+                                                    @else
+                                                        <div
+                                                            data-i18n="percentage">{{session()->get('coupon')->discount}} {{__('productPrice')}} </div>
+                                                        @php
+                                                            $total = $total -  (session()->get('coupon')->discount);
+                                                            $total = round($total)
+                                                        @endphp
+                                                    @endif
+                                                </div>
+                                            @endif
+                                        </div>
+
+                                        <div
+                                            class="total d-flex justify-content-between bg-gray align-items-center p-2 mt-3">
+                                            <div data-i18n="totalText">{{__('totalText')}}</div>
+                                            <div data-i18n="totalAmount">{{$total}}</div>
+                                        </div>
+                                        <a href="#" class="text-dark mb-3 text-decoration-underline"
+                                           data-i18n="addedTax">
+                                            {{__('addedTax')}}
+                                        </a>
+                                        @if(\Auth::check() && auth()->user()->role == \App\Constants\Enum::CUSTOMER)
+                                            <div
+                                                class="total d-flex justify-content-between bg-main  opacity align-items-center p-2 my-3 ">
+                                                <div data-i18n="refundText">{{__('refundText')}}</div>
+                                                <div
+                                                    data-i18n="refundAmount">{{auth()->user()->balance}} {{__('productPrice')}}</div>
+                                            </div>
+                                        @endif
+                                        <a href="javascript:void(0)" class="btn btn-product w-100"
+                                           id="{{!\Auth::check() ? 'complete_order' : (!is_null($cart) && count($cart) > 0 ?'openModalInvoice':'')}}"
+                                        >
+                                            {{--                                            <span class="mx-1" data-i18n="productPrice">{{$total}}  {{__('productPrice')}}</span>--}}
+                                            <span class="mx-1" data-i18n="productPrice">   اتمام الطلب  الان{{$total}}   {{__('productPrice')}}  </span>
+                                            <img src="{{asset('')}}assets/website/images/sal-i.png" alt=""
+                                                 class="w-20px">
+                                        </a>
+                                    </div>
+                                @else
+                                    <div class="empty text-center  mt-5">
+                                        <div class="empty-img">
+                                            <img src="{{asset('')}}assets/website/images/cart-bag.png" alt="">
+                                        </div>
+                                        <p class="mt-3 color-low-dark">the bag is empty</p>
+                                    </div>
                                 @endif
-                                <div class="input-group mb-3">
-                            <span class="input-group-text">
-                              <i class="fa-solid fa-fire "></i>
-                            </span>
-                                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                                    <span class="input-group-text bg-main pointer"
-                                          data-i18n="completion">{{__('completion')}}</span>
-                                </div>
-
-                                <p data-i18n="bill">Bill</p>
-                                <div class="discount d-flex justify-content-between bg-gray align-items-center p-2">
-                                    <div data-i18n="discountText">{{__('discountText')}}</div>
-                                    <div data-i18n="percentage">20%</div>
-                                </div>
-                                <div class="total d-flex justify-content-between bg-gray align-items-center p-2 mt-3">
-                                    <div data-i18n="totalText">{{__('totalText')}}</div>
-                                    <div data-i18n="totalAmount">{{$total}}</div>
-                                </div>
-                                <a href="#" class="text-dark mb-3 text-decoration-underline" data-i18n="addedTax">
-                                    {{__('addedTax')}}
-                                </a>
-                                <div
-                                    class="total d-flex justify-content-between bg-main  opacity align-items-center p-2 my-3 ">
-                                    <div data-i18n="refundText"> {{__('refundText')}}</div>
-                                    <div data-i18n="refundAmount">20 SAR</div>
-                                </div>
 
 
-                                <a href="#" class="btn btn-product w-100" data-bs-toggle="modal"
-                                   @if(!\Auth::check()) id="complete_order" @endif
-                                   data-bs-target="#loginModal">
-                                    <span class="mx-1" data-i18n="productPrice">{{$total}}  {{__('productPrice')}}</span>
-                                    <img src="{{asset('')}}assets/website/images/sal-i.png" alt="" class="w-20px">
-                                </a>
                             </div>
 
-
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+        </div>
+        </div>
+        </div>
     </section>
-    <!-- ../products -->
+
 
     @include('website.layout.modal')
 @endsection
