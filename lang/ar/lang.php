@@ -91,6 +91,7 @@ return [
     'save_failed' =>'هناك مشكلة بعملية الحفظ',
     'Signed out Successfully' =>'تم تسجيل الخروج بنجاح',
     'Are you sure you want to delete' =>'هل أنت متأكد من حذف',
+    'Are you sure you want to receive order' =>'هل أنت متأكد من تسلم الطلبية',
     'and' => 'و',
     'more' => 'أكثر',
     'Role Permissions' => 'أذونات الدور',
@@ -182,6 +183,11 @@ return [
     'initiated' => 'بدأت',
     'paid' => 'مدفوعة',
     'show' => 'عرض',
+    'orders_management' => 'ادارة الطلبات',
+    'accept' => 'مقبولة',
+    'done' => 'مستلمة',
+    'reject' => 'مرفوضة',
+    'receive' => 'استلام',
 
 ];
 

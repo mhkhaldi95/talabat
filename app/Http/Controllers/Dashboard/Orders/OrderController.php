@@ -70,6 +70,23 @@ class OrderController extends Controller
         return $this->response_json(false, StatusCodes::INTERNAL_ERROR, Enum::GENERAL_ERROR);
 
     }
+    public function receive($id){
+        try {
+            $item = Order::query()->filter()->findOrFail($id);
+
+        } catch (QueryException $exception) {
+            return $this->invalidIntParameter();
+        }
+        $item->update([
+            'status' => Enum::DONE
+        ]);
+        if($item){
+            return $this->response_json(true, StatusCodes::OK, Enum::DONE_SUCCESSFULLY);
+
+        }
+        return $this->response_json(false, StatusCodes::INTERNAL_ERROR, Enum::GENERAL_ERROR);
+
+    }
 
     public function deleteSelected(Request $request)
     {

@@ -87,7 +87,7 @@ return [
     'save_done' =>'Save Done',
     'save_failed' =>'There is a problem with the save process',
     'Signed out Successfully' =>'Signed out Successfully',
-    'Are you sure you want to delete' =>'Are you sure you want to delete',
+    'Are you sure you want to receive order' =>'Are you sure you want to receive order',
     'and' =>'and' ,
     'more' => 'more',
     'Role Permissions' => 'Role Permissions',
@@ -162,5 +162,18 @@ return [
     'percentage' => 'Percentage',
     'days' => 'Days',
     'cashback' => 'Cashback',
+    'orders' => 'Orders',
+    'user' => 'Customer',
+    'date' => 'Date',
+    'status' => 'Status',
+    'initiated' => 'initiated',
+    'paid' => 'paid',
+    'show' => 'show',
+    'orders_management' => 'Orders management',
+    'accept' => 'accept',
+    'done' => 'done',
+    'reject' => 'reject',
+    'receive' => 'receive',
+
 
 ];

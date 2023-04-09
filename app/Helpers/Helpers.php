@@ -1,6 +1,7 @@
 <?php
 
 use App\Classes\Timeout;
+use App\Constants\Enum;
 use App\Http\Resources\Branch\ProductResource;
 use App\Models\Order;
 use App\Models\Permission;
@@ -163,8 +164,24 @@ function calculateOrderCashback($order){
      }
      return $cachback;
 
-
-
+}
+function getClassByStatus($status){
+    switch ($status) {
+        case Enum::ACCEPT: return 'primary';
+        case Enum::INITIATED : return 'info';
+        case Enum::REJECT : return 'danger';
+        case Enum::PAID :
+        case Enum::DONE : return 'success';
+    }
+}
+function getStatusStr($status){
+    switch ($status) {
+        case Enum::ACCEPT: return __('lang.'.Enum::ACCEPT);
+        case Enum::INITIATED : return __('lang.'.Enum::INITIATED);
+        case Enum::REJECT :return __('lang.'.Enum::REJECT);
+        case Enum::PAID : return __('lang.'.Enum::PAID);
+        case Enum::DONE :return  __('lang.'.Enum::DONE);
+    }
 }
 
 

@@ -72,6 +72,37 @@ const handleDeleteDatatable = (dt, url) => {
         });
 
     })
+    $('.delete-form-datatable').on("click", function (e) {
+        let id = $(this).attr("data-id");
+        Swal.fire({
+            text: "هل تريد تأكيد عملية الحذف؟",
+            icon: "warning",
+            showCancelButton: true,
+            buttonsStyling: false,
+            confirmButtonText: "احذف!",
+            cancelButtonText: "الغاء",
+            customClass: {
+                confirmButton: "btn fw-bold btn-danger",
+                cancelButton: "btn fw-bold btn-active-light-primary",
+            },
+        }).then(function (result) {
+            if (result.value) {
+                $.ajax({
+                    url: url,
+                    type: 'DELETE',
+                    data: {
+                        user_id: id ,
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (data) {
+                        dt.draw();
+                    }
+                });
+
+            }
+        });
+
+    })
 }
 
 

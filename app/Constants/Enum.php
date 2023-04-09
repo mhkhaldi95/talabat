@@ -68,6 +68,7 @@ class Enum
     const PAID = 'paid';
     const ACCEPT = 'accept';
     const REJECT = 'reject';
+    const DONE = 'done';
 
 
 }

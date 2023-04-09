@@ -211,7 +211,6 @@
                         {
                             targets: 0,
                             orderable: true,
-                            className: 'text-start',
                         },
                         {
                             targets: -1,
@@ -259,40 +258,19 @@
                 filterPayment = document.querySelectorAll('[data-kt-customer-table-filter="payment_type"] [name="payment_type"]');
                 // filterPayment = document.querySelector('#payment_type');
                 // const filterButton = document.querySelector('[data-kt-docs-table-filter="filter"]');
-                const filterButton = document.querySelector('#filter');
-                // Filter datatable on submit
-                filterButton.addEventListener('click', function () {
-                    // Get filter values
-                    let paymentValue = '';
 
-                    // Get payment value
-                    filterPayment.forEach(r => {
-                        if (r.checked) {
-                            paymentValue = r.value;
-                        }
-
-                        // Reset payment value if "All" is selected
-                        if (paymentValue === 'all') {
-                            paymentValue = '';
-                        }
-                    });
-
-                    // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
-                    dt.search(paymentValue).draw();
-                });
             }
 
             // Delete customer
             var handleDeleteRows = () => {
                 // Select all delete buttons
-                // const deleteButtons = document.querySelectorAll('[data-kt-docs-table-filter="delete_row"]');
-                const deleteButtons = document.querySelectorAll('#delete_row');
+                const deleteButtons = document.querySelectorAll('[data-kt-docs-table-filter="delete_row"]');
+                const receiveButtons = document.querySelectorAll('[data-kt-docs-table-filter="receive-order"]');
 
                 deleteButtons.forEach(d => {
                     // Delete button on click
                     d.addEventListener('click', function (e) {
                         e.preventDefault();
-
                         // Select parent row
                         const parent = e.target.closest('tr');
                         var record_id = $(parent.children[0]).children().children().val();
@@ -350,22 +328,74 @@
                         });
                     })
                 });
+                receiveButtons.forEach(d => {
+                    // Delete button on click
+                    d.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        // Select parent row
+                        const parent = e.target.closest('tr');
+                        var record_id = $(parent.children[0]).children().children().val();
+                        // Get customer name
+                        const orderID = parent.querySelectorAll('td')[0].innerText;
+
+                        // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
+                        Swal.fire({
+                            text: "{{__('lang.Are you sure you want to receive order')}} #" + orderID + "?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            buttonsStyling: false,
+                            confirmButtonText: "Yes, receive!",
+                            cancelButtonText: "No, cancel",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-success",
+                                cancelButton: "btn fw-bold btn-active-light-primary"
+                            }
+                        }).then(function (result) {
+                            if (result.value) {
+                                // Simulate delete request -- for demo purpose only
+                                Swal.fire({
+                                    text: "Receiving order #" + orderID,
+                                    icon: "info",
+                                    buttonsStyling: false,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then(function () {
+                                    Swal.fire({
+                                        text: "You have received order #" + orderID + "!.",
+                                        icon: "success",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn fw-bold btn-primary",
+                                        }
+                                    }).then(function () {
+                                        // delete row data from server and re-draw datatable
+                                        axios.get('/admin/orders/'+orderID+'/receive').then(function (response) {
+                                            dt.draw();
+                                        })
+                                    });
+                                });
+                            } else if (result.dismiss === 'cancel') {
+                                Swal.fire({
+                                    text: 'order #'+orderID + " was not received.",
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                });
+                            }
+                        });
+                    })
+                });
             }
 
             // Reset Filter
             var handleResetForm = () => {
                 // Select reset button
                 // const resetButton = document.querySelector('[data-kt-docs-table-filter="reset"]');
-                const resetButton = document.querySelector('#reset');
 
-                // Reset datatable
-                resetButton.addEventListener('click', function () {
-                    // Reset payment type
-                    filterPayment[0].checked = true;
-
-                    // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
-                    dt.search('').draw();
-                });
             }
 
             // Init toggle toolbar

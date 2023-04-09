@@ -164,7 +164,7 @@
 
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3" data-kt-docs-table-filter="delete_row" id="delete_row">
+                                    <a href="#" class="menu-link px-3" data-kt-docs-table-filter="delete_row" >
                                          {{__('lang.Delete')}}
                                     </a>
                                 </div>
@@ -210,39 +210,39 @@
                 // const filterButton = document.querySelector('[data-kt-docs-table-filter="filter"]');
                 const filterButton = document.querySelector('#filter');
                 // Filter datatable on submit
-                filterButton.addEventListener('click', function () {
-                    // Get filter values
-                    let paymentValue = '';
-
-                    // Get payment value
-                    filterPayment.forEach(r => {
-                        if (r.checked) {
-                            paymentValue = r.value;
-                        }
-
-                        // Reset payment value if "All" is selected
-                        if (paymentValue === 'all') {
-                            paymentValue = '';
-                        }
-                    });
-
-                    // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
-                    dt.search(paymentValue).draw();
-                });
+                // filterButton.addEventListener('click', function () {
+                //     // Get filter values
+                //     let paymentValue = '';
+                //
+                //     // Get payment value
+                //     filterPayment.forEach(r => {
+                //         if (r.checked) {
+                //             paymentValue = r.value;
+                //         }
+                //
+                //         // Reset payment value if "All" is selected
+                //         if (paymentValue === 'all') {
+                //             paymentValue = '';
+                //         }
+                //     });
+                //
+                //     // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
+                //     dt.search(paymentValue).draw();
+                // });
             }
 
             // Delete customer
             var handleDeleteRows = () => {
                 // Select all delete buttons
-                // const deleteButtons = document.querySelectorAll('[data-kt-docs-table-filter="delete_row"]');
-                const deleteButtons = document.querySelectorAll('#delete_row');
+                const deleteButtons = document.querySelectorAll('[data-kt-docs-table-filter="delete_row"]');
+                // const deleteButtons = document.querySelectorAll('#delete_row');
 
                 deleteButtons.forEach(d => {
                     // Delete button on click
                     d.addEventListener('click', function (e) {
                         e.preventDefault();
-
                         // Select parent row
+
                         const parent = e.target.closest('tr');
                         var record_id = $(parent.children[0]).children().children().val();
                         // Get customer name
@@ -305,16 +305,16 @@
             var handleResetForm = () => {
                 // Select reset button
                 // const resetButton = document.querySelector('[data-kt-docs-table-filter="reset"]');
-                const resetButton = document.querySelector('#reset');
+                // const resetButton = document.querySelector('#reset');
 
                 // Reset datatable
-                resetButton.addEventListener('click', function () {
-                    // Reset payment type
-                    filterPayment[0].checked = true;
-
-                    // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
-                    dt.search('').draw();
-                });
+                // resetButton.addEventListener('click', function () {
+                //     // Reset payment type
+                //     filterPayment[0].checked = true;
+                //
+                //     // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
+                //     dt.search('').draw();
+                // });
             }
 
             // Init toggle toolbar
