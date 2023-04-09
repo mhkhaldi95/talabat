@@ -63,6 +63,7 @@
             // play()
             e.preventDefault()
             product = $(this).data('product');
+            console.log("product",product)
             product_photo = $(this).data('product_photo');
             max_addons = product.max_addons;
             addons_html = `  <h5 class="text-center ">flavours
