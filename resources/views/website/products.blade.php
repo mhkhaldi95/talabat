@@ -64,7 +64,7 @@
                                                                data-product_photo="{{$product['has_photo']?@$product['photos'][0]['photo_path']:$product['master_photo']}}"
                                                                class="btn btn-product w-100 open_product_modal">
                                                                 <span class="mx-1"
-                                                                      data-i18n="productPrice"> {{$product['price']}} {{__('productPrice')}} 11111111111</span>
+                                                                      data-i18n="productPrice"> {{$product['price']}} {{__('productPrice')}} </span>
                                                                 <img src="{{asset('')}}assets/website/images/sal-i.png"
                                                                      alt="" class="w-20px">
                                                             </a>
@@ -94,7 +94,7 @@
                                                                data-product_photo="{{$product['has_photo']?@$product['photos'][0]['photo_path']:$product['master_photo']}}"
                                                                class="btn btn-product w-100 open_product_modal">
                                                                 <span class="mx-1"
-                                                                      data-i18n="productPrice"> {{$product['price']}} {{__('productPrice')}} 11111111</span>
+                                                                      data-i18n="productPrice"> {{$product['price']}} {{__('productPrice')}} </span>
                                                                 <img src="{{asset('')}}assets/website/images/sal-i.png"
                                                                      alt="" class="w-20px">
                                                             </a>

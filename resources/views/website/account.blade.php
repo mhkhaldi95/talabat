@@ -306,7 +306,7 @@
                                                     @foreach($order->items as $item)
                                                         <div
                                                             class="discount d-flex justify-content-between bg-gray align-items-center p-2">
-                                                            <div data-i18n="discountText">{{__('productName')}}</div>
+                                                            <div data-i18n="discountText">{{$item->product->name}}</div>
                                                             <div
                                                                 data-i18n="percentage">{{$item->product->price}} {{__('productPrice')}}</div>
                                                         </div>
