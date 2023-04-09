@@ -50,7 +50,7 @@
                         <div class="Refund-text">
                             <img src="{{asset('')}}assets/website/images/icons/information.png" alt=""
                                  class="w-20px h-20px">
-                            <span class="mx-2">you have refund balance</span>
+                            <span class="mx-2">{{__('you have refund balance')}}</span>
                         </div>
                         <div
                             class="Refund-num bg-main p-2 rounded">{{auth()->user()->balance}} {{__('productPrice')}}</div>
