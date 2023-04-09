@@ -57,7 +57,7 @@
 
                     </div>
                     @php
-                        $new_orders = auth()->user()->orders()->where('status','!=','done')->orderBy('created_at','desc')->take(10)->get();
+                        $new_orders = auth()->user()->orders()->orderBy('created_at','desc')->take(10)->get();
                     @endphp
                     <div class="row row-cols-md-2 mt-3">
                         @if(count($new_orders) > 0)
@@ -79,14 +79,17 @@
                                                 <div class="card-body text-center">
                                                     @php $cachback = 0 @endphp
                                                     @foreach($order->items as $item)
-
-                                                        @php $cachback+=$item->product->cashback @endphp
-                                                        <div
-                                                            class="discount d-flex justify-content-between bg-gray align-items-center p-2">
-                                                            <div data-i18n="discountText">{{__('productName')}}</div>
+                                                        @php $product = $item->product @endphp
+                                                        @if($product->cachback > 0)
+                                                            @php $cachback+=$product->cashback @endphp
                                                             <div
-                                                                data-i18n="percentage">{{$item->product->price}} {{__('productPrice')}}</div>
-                                                        </div>
+                                                                class="discount d-flex justify-content-between bg-gray align-items-center p-2">
+                                                                <div
+                                                                    data-i18n="discountText">{{__('productName')}}</div>
+                                                                <div
+                                                                    data-i18n="percentage">{{$item->product->price}} {{__('productPrice')}}</div>
+                                                            </div>
+                                                        @endif
                                                     @endforeach
                                                     <a href="#" class="text-dark  text-decoration-underline text-center"
                                                        data-i18n="viewDetails">{{__('viewDetails')}}</a>
@@ -118,14 +121,17 @@
                                                 <div class="card-body text-center">
                                                     @php $cachback = 0 @endphp
                                                     @foreach($order->items as $item)
-
-                                                        @php $cachback+=$item->product->cashback @endphp
-                                                        <div
-                                                            class="discount d-flex justify-content-between bg-gray align-items-center p-2">
-                                                            <div data-i18n="discountText">{{__('productName')}}</div>
+                                                        @php $product = $item->product @endphp
+                                                        @if($product->cachback > 0)
+                                                            @php $cachback+=$product->cashback @endphp
                                                             <div
-                                                                data-i18n="percentage">{{$item->product->price}} {{__('productPrice')}}</div>
-                                                        </div>
+                                                                class="discount d-flex justify-content-between bg-gray align-items-center p-2">
+                                                                <div
+                                                                    data-i18n="discountText">{{__('productName')}}</div>
+                                                                <div
+                                                                    data-i18n="percentage">{{$item->product->price}} {{__('productPrice')}}</div>
+                                                            </div>
+                                                        @endif
                                                     @endforeach
                                                     <a href="#" class="text-dark  text-decoration-underline text-center"
                                                        data-i18n="viewDetails">{{__('viewDetails')}}</a>
