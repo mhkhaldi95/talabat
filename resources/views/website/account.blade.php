@@ -385,7 +385,7 @@
                         @endif
                     </div>
 
-                    @if(count($new_orders) == 0 && count($history_orders) == 0)
+                    @if(count($new_orders) == 0 && count($history_orders) == 0 && false)
                         <div class="empty-orders text-center mt-5">
                             <div class="empty-img mt-2">
                                 <img src="{{asset('')}}assets/website/images/Add to Cart-amico (1).png" alt="">
