@@ -529,7 +529,7 @@
 
             $("#countDownWebsite").modal({ backdrop: "static ", keyboard: false });
             $('#countDownWebsite').modal('show')
-            var countDownDate = 5;
+            var countDownDate = 30;
             if(document.getElementById("countDownWebsite-modal-body")){
                 document.getElementById("countDownWebsite-modal-body").innerHTML = countDownDate+'<br/>سيتم قبول طلبك تلقائيا بعد 30 ثانية';
             }
