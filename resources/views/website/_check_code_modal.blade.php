@@ -56,7 +56,7 @@
             }else{
                 localStorage.setItem("phone",null)
                 localStorage.setItem("is_new",null)
-                {{__('Logged in successfully')}}
+                toastr.success(" {{__('Logged in successfully')}}");
                 setTimeout(function (){
                     window.location.reload()
                 }, 1500)

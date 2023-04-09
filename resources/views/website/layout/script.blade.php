@@ -274,9 +274,9 @@
             }
             axios.post('{{route('check-phone')}}', {phone: phone}).then(response => {
                 if (response.data.data.phone) {
-                    localStorage.setItem("phone", response.data.data.phone)
-                    localStorage.setItem("is_new", response.data.data.is_new)
-                    $('#modal-content').html(response.data.data.check_code_modal)
+                    localStorage.setItem("phone", response.data.data.phone);
+                    localStorage.setItem("is_new", response.data.data.is_new);
+                    $('#modal-content').html(response.data.data.check_code_modal);
                 }
 
             }).catch(error => {
@@ -305,7 +305,8 @@
 
             })
 
-            $(document).on('click', '#modal-check-code-next222', function (e) {
+            $(document).on('click', '#modal-check-code-next', function (e) {
+                alert("X")
                 var check_input_1 = $('#check_input_1').val();
                 var check_input_2 = $('#check_input_2').val();
                 var check_input_3 = $('#check_input_3').val();

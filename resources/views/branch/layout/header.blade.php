@@ -100,7 +100,7 @@
                             <!--end::Menu separator-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
-                                <a href="{{route('logout')}}" onclick="event.preventDefault(); window.localStorage.removeItem('fcm_token')" class="menu-link px-5">{{__('lang.sign_out')}}</a>
+                                <a href="{{route('logout')}}" onclick=" window.localStorage.removeItem('fcm_token')" class="menu-link px-5">{{__('lang.sign_out')}}</a>
                             </div>
                             <!--end::Menu item-->
                             <!--begin::Menu separator-->
