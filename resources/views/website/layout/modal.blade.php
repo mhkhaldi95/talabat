@@ -148,7 +148,7 @@
                         </div>
 
                         <a href="#" class="btn btn-product w-50 mx-3 p-2 " id="modal-box-button">
-                            <span class="mx-1" data-i18n="productPrice"><span id="price_modal"></span> ريال</span>
+                            <span class="mx-1" data-i18n="productPrice"><span id="price_modal"></span> {{__('productPrice')}}</span>
                             <img src="{{asset('')}}assets/website/images/sal-i.png" alt="" class="w-20px">
                         </a>
 
@@ -226,10 +226,10 @@
 
 
                 <div style="padding-right: 9%" id="mobile_hide" class="selector_hide">
-                    <span class="text-danger hide "> يجب ادخال رقم الجوال</span>
+                    <span class="text-danger hide ">  {{__('enter_mobie')}}</span>
                 </div>
                 <button class="w-100 btn p-2 bg-main" id="modal-mobile-login-next">
-                    Next
+                    {{__('Next')}}
                 </button>
             </div>
         </div>

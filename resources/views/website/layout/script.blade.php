@@ -66,7 +66,7 @@
             console.log("product",product)
             product_photo = $(this).data('product_photo');
             max_addons = product.max_addons;
-            addons_html = `  <h5 class="text-center ">flavours
+            addons_html = `  <h5 class="text-center ">{{__('flavours')}}
                         </h5>`;
             if (product.product_addons && product.product_addons.length > 0) {
                 product.product_addons.forEach(function (addon) {
@@ -214,7 +214,7 @@
             }).then(function (response) {
                 if (response.data.data) {
                     $('#carts').html(response.data.data)
-                    toastr.success("تمت الاضافة الى السلة بنجاح");
+                    toastr.success("{{__('Add to Cart Successfully')}}");
                 }
 
             })
@@ -268,7 +268,7 @@
         $(document).on('click', '#modal-mobile-login-next', function (e) {
             var phone = $('#phone').val();
             if (!phone || phone == '') {
-                toastr.warning("تأكد من رقم الجوال")
+                toastr.warning("{{__('Verify the mobile number')}}")
                 // $('#mobile_hide').removeClass( "selector_hide" ).addClass( "selector_show" );
                 return;
             }
@@ -299,7 +299,7 @@
                 if (response.data.data) {
                     $('#carts').html(response.data.data)
                     $('#productModal').modal("hide")
-                    toastr.success("تمت الاضافة الى السلة بنجاح");
+                    toastr.success("{{__('Add to Cart Successfully')}}");
                 }
 
 
@@ -333,7 +333,7 @@
                     } else {
                         localStorage.setItem("phone", null)
                         localStorage.setItem("is_new", null)
-                        toastr.success("تم تسجيل الدخول بنجاح");
+                        toastr.success("{{__('Logged in successfully')}}");
                         setTimeout(function () {
                             window.location.reload()
                         }, 1500)
@@ -373,12 +373,12 @@
                     localStorage.setItem("phone", null)
                     localStorage.setItem("is_new", null)
                     $('#modal-subscribe').modal("hide")
-                    toastr.success("تم تسجيل الدخول بنجاح");
+                    toastr.success("{{__('Logged in successfully')}}");
                     setTimeout(function () {
                         window.location.reload()
                     }, 1500)
                 }).catch(error => {
-                    toastr.success("Login Failed");
+                    toastr.success("{{__('Login Failed')}}");
                 });
 
             })
@@ -395,7 +395,7 @@
             if (
                 !code || code == ''
             ) {
-                toastr.warning("أدخل الكود بشكل صحيح");
+                toastr.warning("{{__('Enter the code correctly')}}");
                 return;
             }
             var url = '{{ route("check.coupon", ":id") }}';
@@ -403,9 +403,9 @@
             url = url + "?branch_id=" + branch_id;
             axios.post(url).then(response => {
                 $('#carts').html(response.data.data)
-                toastr.success("تم تطبيق الكوبون بنجاح");
+                toastr.success("{{__('The coupon has been applied successfully')}}");
             }).catch(error => {
-                toastr.warning("أدخل الكود بشكل صحيح");
+                toastr.warning("{{__('Enter the code correctly')}}");
             });
 
         })
@@ -415,7 +415,7 @@
             if (branch_id) {
                 goToUrl('/products?branch_id=' + branch_id)
             } else {
-                toastr.warning("يجب أن تختار الفرع");
+                toastr.warning("{{__('You must choose the branch')}}");
             }
 
         })
@@ -452,7 +452,7 @@
             axios.get(url,{branch_id:getBranch()}).then(response => {
                 $('#invoice-modal-body').html(response.data.data)
             }).catch(error => {
-                toastr.warning("حدث خطا ما");
+                toastr.warning("{{__('Something went wrong')}}");
             });
             $('#invoice').modal("show")
         })
@@ -493,11 +493,11 @@
                         toastr.warning(error.message);
                     });
                 }else{
-                    toastr.warning("رصيدك لا يكفي");
+                    toastr.warning("{{__('Your cashback is not enough')}}");
                 }
 
             }).catch(error => {
-                toastr.warning("حدث خطا ما");
+                toastr.warning("{{__('Something went wrong')}}");
             });
 
             // goToUrl('/payment?payment_method=cashBack&branch_id=' + branch_id)
@@ -562,11 +562,11 @@
                                 if(response.data.data && response.data.data.payment_method == 'online'){
                                     goToUrl('/payment?payment_method=online&order_id='+order.id+'&branch_id=' + getBranch())
                                 }
-                            toastr.success("تم قبول الطلبية بنجاح");
+                            toastr.success("{{__('The order has been accepted successfully')}}");
                         }
 
                     }).catch(error => {
-                        toastr.warning("حدث خطا ما");
+                        toastr.warning("{{__('Something went wrong')}}");
                     });
                 }
 

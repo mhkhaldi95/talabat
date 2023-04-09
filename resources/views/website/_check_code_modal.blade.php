@@ -9,7 +9,7 @@
     <div class="container height-100 d-flex justify-content-center align-items-center">
         <div class="position-relative">
             <div class=" p-2 text-center">
-                <p class="text-center color-low-dark">Enter the verification code sent to your number</p>
+                <p class="text-center color-low-dark">{{__('Enter the verification code sent to your number')}}</p>
                 <div id="otp" class="inputs d-flex flex-row justify-content-center mt-2">
                     <input class="m-2 code-input text-center form-control rounded bg-gray" type="text"  id="check_input_1" maxlength="1">
                     <input class="m-2 code-input text-center form-control rounded bg-gray" type="text"  id="check_input_2" maxlength="1">
@@ -18,11 +18,11 @@
                     <input class="m-2 code-input text-center form-control rounded bg-gray" type="text"  id="check_input_5" maxlength="1">
 {{--                    <input class="m-2 code-input text-center form-control rounded bg-gray" type="text"  id="check_input_1" maxlength="1">--}}
                 </div>
-                <a href="javascript:void(0)" class="text-decoration-underline ms-3  color-low-dark" id="resendCodeSms">Resend the code</a>
+                <a href="javascript:void(0)" class="text-decoration-underline ms-3  color-low-dark" id="resendCodeSms">{{__('Resend the code')}}</a>
 
                 <div class="mt-4">
                     <button class="btn  bg-main px-4 validate w-100" data-bs-toggle="modal"
-                            data-bs-target="#yourNameModal" id="modal-check-code-next">Validate</button>
+                            data-bs-target="#yourNameModal" id="modal-check-code-next">{{__('Validate')}}</button>
 
                 </div>
 
@@ -56,7 +56,7 @@
             }else{
                 localStorage.setItem("phone",null)
                 localStorage.setItem("is_new",null)
-                toastr.success("تم تسجيل الدخول بنجاح");
+                {{__('Logged in successfully')}}
                 setTimeout(function (){
                     window.location.reload()
                 }, 1500)

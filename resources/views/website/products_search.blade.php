@@ -248,7 +248,7 @@
                                            id="{{!\Auth::check() ? 'complete_order' : (!is_null($cart) && count($cart) > 0 ?'openModalInvoice':'')}}"
                                         >
                                             {{--                                            <span class="mx-1" data-i18n="productPrice">{{$total}}  {{__('productPrice')}}</span>--}}
-                                            <span class="mx-1" data-i18n="productPrice">   اتمام الطلب  الان{{$total}}   {{__('productPrice')}}  </span>
+                                            <span class="mx-1" data-i18n="productPrice">   {{__('Complete the order now')}}{{$total}}   {{__('productPrice')}}  </span>
                                             <img src="{{asset('')}}assets/website/images/sal-i.png" alt=""
                                                  class="w-20px">
                                         </a>
@@ -258,7 +258,7 @@
                                         <div class="empty-img">
                                             <img src="{{asset('')}}assets/website/images/cart-bag.png" alt="">
                                         </div>
-                                        <p class="mt-3 color-low-dark">the bag is empty</p>
+                                        <p class="mt-3 color-low-dark">{{__('the bag is empty')}}</p>
                                     </div>
                                 @endif
 

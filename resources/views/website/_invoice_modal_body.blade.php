@@ -11,14 +11,14 @@
 <div class="invoice-head ">
     <div class="img text-center">
         <img src="{{asset('')}}assets/website/bill (1).png" alt="" class="">
-        <h5 class="ms-3 mt-2">invoice</h5>
+        <h5 class="ms-3 mt-2">{{__('invoice')}}</h5>
 
     </div>
 </div>
 <div class="border-gray receit-products mb-2">
 
     <div class="discount bg-gray text-center p-2 mb-2">
-        <div>order #{{lastOrderNumber()}}</div>
+        <div>{{__('order')}} #{{lastOrderNumber()}}</div>
     </div>
     @if(!is_null($cart) && count($cart) > 0)
         @foreach($cart as $item)
@@ -92,7 +92,7 @@
 <div class="btn  bg-gray w-100 p-2 mt-3">
     <div class="d-flex align-items-center justify-content-center" id="online-payment">
         <img src="{{asset('')}}assets/website/images/visa.png" alt="" style="width: 30px;">
-        <span class="mx-2">visa</span>
+        <span class="mx-2">{{__('Visa')}}</span>
     </div>
 </div>
 
@@ -100,7 +100,7 @@
 <div class="btn  bg-gray w-100 p-2 my-2">
     <div class="d-flex align-items-center justify-content-center" id="cashBack-payment">
         <img src="{{asset('')}}assets/website/images/refund.png" alt="" style="width: 20px;">
-        <span class="mx-2">cashBack</span>
+        <span class="mx-2">{{__('Cashback')}}</span>
     </div>
 </div>
 
@@ -108,6 +108,6 @@
 <div class="btn  bg-gray w-100 p-2 mb-4">
     <div class="d-flex align-items-center justify-content-center" id="cash-payment">
         <img src="{{asset('')}}assets/website/images/money.png" alt="" style="width: 20px;">
-        <span class="mx-2">money</span>
+        <span class="mx-2">{{__('Cash')}}</span>
     </div>
 </div>

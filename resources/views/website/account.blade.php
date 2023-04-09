@@ -12,28 +12,28 @@
                                 <div class="user-link user-item active-user my-3 p-2 pointer" id="myDataLink"
                                      onclick="toggleProfile()">
                                     <i class="fa-solid fa-circle-user fa-xl"></i>
-                                    <span class="mx-2">my data</span>
+                                    <span class="mx-2">{{__('my data')}}</span>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="user-link orders-item  my-3 p-2 pointer" id="myOrdersLink"
                                      onclick="toggleMyOrders()">
                                     <i class="fa-solid fa-calendar-days fa-xl"></i>
-                                    <span class="mx-2">my orders</span>
+                                    <span class="mx-2">{{__('my orders')}}</span>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="user-link cash-item  my-3 p-2 pointer" id="cashBackLink"
                                      onclick="toggleCashBack()">
                                     <i class="fa-solid fa-cash-register fa-xl"></i>
-                                    <span class="mx-2">cash back</span>
+                                    <span class="mx-2">{{__('Cashback')}}</span>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="out-item  my-3 p-2 text-danger pointer"
                                      onclick="goToUrl('{{route('break.logout')}}') ; event.preventDefault(); window.localStorage.removeItem('fcm_token')">
                                     <i class="fa-solid fa-right-from-bracket fa-xl"></i>
-                                    <span class="mx-2">sign out</span>
+                                    <span class="mx-2">{{__('Sign out')}}</span>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
 
                                                         <button class="btn btn-product new-order-btn w-100 mt-3">
                                                     <span class="mx-1"
-                                                          data-i18n="recieveFromBranch">كاش باك  {{$cachback}} {{__('productPrice')}} </span>
+                                                          data-i18n="recieveFromBranch">{{__('Cashback')}}  {{$cachback}} {{__('productPrice')}} </span>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -140,7 +140,7 @@
 
                                                     <button class="btn btn-product new-order-btn w-100 mt-3">
                                                     <span class="mx-1"
-                                                          data-i18n="recieveFromBranch">كاش باك  {{$cachback}} {{__('productPrice')}} </span>
+                                                          data-i18n="recieveFromBranch">{{__('Cashback')}}  {{$cachback}} {{__('productPrice')}} </span>
                                                     </button>
                                                 </div>
                                             </div>
@@ -154,10 +154,10 @@
                                 <div class="empty-img mt-2">
                                     <img src="{{asset('')}}assets/website/images/Add to Cart-amico (1).png" alt="">
                                 </div>
-                                <p class="mt-3">you need to order</p>
+                                <p class="mt-3">{{__('you need to order')}}</p>
                                 <a href="{{route('break.products.index',['branch_id' =>@$branch->id])}}"
                                    class="btn btn-product " style="width: 380px;">
-                                    <span class="mx-1">go and order</span>
+                                    <span class="mx-1">{{__('go and order')}}</span>
                                     <img src="{{asset('')}}assets/website/images/sal-i.png" alt="" class="w-20px">
                                 </a>
                             </div>
@@ -177,7 +177,7 @@
                                     id="NewOrdersBtn">
                                 <img src="{{asset('')}}assets/website/images/icons/new-order.png" alt=""
                                      class="w-20px ">
-                                <span class="mx-2">New Order</span>
+                                <span class="mx-2">{{__('New Orders')}}</span>
 
 
                             </button>
@@ -188,7 +188,7 @@
                                     id="OrderHistoryBtn">
                                 <img src="{{asset('')}}assets/website/images/icons/recieved-order.png" alt=""
                                      class="w-20px ">
-                                <span class="mx-2">recived Order</span>
+                                <span class="mx-2">{{__('History Orders')}}</span>
 
                             </button>
                         </div>
@@ -280,10 +280,10 @@
                                 <div class="empty-img mt-2">
                                     <img src="{{asset('')}}assets/website/images/Add to Cart-amico (1).png" alt="">
                                 </div>
-                                <p class="mt-3">you need to order</p>
+                                <p class="mt-3">{{__('you need to order')}}</p>
                                 <a href="{{route('break.products.index',['branch_id' =>@$branch->id])}}"
                                    class="btn btn-product " style="width: 380px;">
-                                    <span class="mx-1">go and order</span>
+                                    <span class="mx-1">{{__('go and order')}}</span>
                                     <img src="{{asset('')}}assets/website/images/sal-i.png" alt="" class="w-20px">
                                 </a>
                             </div>
@@ -324,7 +324,7 @@
                                                        data-i18n="viewDetails">{{__('viewDetails')}}</a>
 
                                                     <button class="btn btn-outline-success w-100 mt-3">
-                                                        <span class="mx-1">recieved</span>
+                                                        <span class="mx-1">{{__('Received')}}</span>
                                                         <i class="fa-solid fa-calendar-check"></i>
                                                     </button>
                                                 </div>
@@ -361,7 +361,7 @@
                                                        data-i18n="viewDetails">{{__('viewDetails')}}</a>
 
                                                     <button class="btn btn-outline-success w-100 mt-3">
-                                                        <span class="mx-1">recieved</span>
+                                                        <span class="mx-1">{{__('Received')}}</span>
                                                         <i class="fa-solid fa-calendar-check"></i>
                                                     </button>
                                                 </div>
@@ -375,10 +375,10 @@
                                 <div class="empty-img mt-2">
                                     <img src="{{asset('')}}assets/website/images/Add to Cart-amico (1).png" alt="">
                                 </div>
-                                <p class="mt-3">you need to order</p>
+                                <p class="mt-3">{{__('you need to order')}}</p>
                                 <a href="{{route('break.products.index',['branch_id' =>@$branch->id])}}"
                                    class="btn btn-product " style="width: 380px;">
-                                    <span class="mx-1">go and order</span>
+                                    <span class="mx-1">{{__('go and order')}}</span>
                                     <img src="{{asset('')}}assets/website/images/sal-i.png" alt="" class="w-20px">
                                 </a>
                             </div>
@@ -390,9 +390,9 @@
                             <div class="empty-img mt-2">
                                 <img src="{{asset('')}}assets/website/images/Add to Cart-amico (1).png" alt="">
                             </div>
-                            <p class="mt-3">you need to order</p>
+                            <p class="mt-3">{{__('you need to order')}}</p>
                             <a href="#" class="btn btn-product " style="width: 380px;">
-                                <span class="mx-1">go and order</span>
+                                <span class="mx-1">{{__('go and order')}}</span>
                                 <img src="{{asset('')}}assets/website/images/sal-i.png" alt="" class="w-20px">
                             </a>
                         </div>
@@ -403,24 +403,24 @@
                 <div class="links-content col-md-8  data-form mt-5 " id="myData">
                     <div class="row g-3 row-cols-md-2 row-cols-1 ">
                         <div class="col">
-                            <label for="name" class="form-label">name</label>
+                            <label for="name" class="form-label">{{__('Name')}}</label>
                             <input type="text" class="form-control" name="name" value="{{auth()->user()->name}}"
                                    aria-label="First name" placeholder="ahmed">
 
                         </div>
                         <div class="col">
-                            <label for="phone" class="form-label">phone number</label>
+                            <label for="phone" class="form-label">{{__('Phone number')}}</label>
                             <input type="tel" class="form-control" aria-label="phone" name="phone"
                                    value="{{auth()->user()->phone}}" placeholder="012 826 78299">
 
                         </div>
                         <div class="col">
-                            <label for="email" class="form-label">email</label>
+                            <label for="email" class="form-label">{{__('Email')}}</label>
                             <input type="email" class="form-control" aria-label="email" name="email"
                                    value="{{auth()->user()->email}}" placeholder="test@gmail.com">
                         </div>
                         <div class="col">
-                            <label for="gender" class="form-label">gender</label>
+                            <label for="gender" class="form-label">{{__('Gender')}}</label>
                             <select class="form-select  gender" name="gender" aria-label="Default select example"
                                     placeholder="male">
                                 <option
@@ -430,7 +430,7 @@
                             </select>
                         </div>
                         <div class="col mt-4">
-                            <button class="btn btn-product w-100">save</button>
+                            <button class="btn btn-product w-100">{{__('Save')}}</button>
                         </div>
                     </div>
                 </div>

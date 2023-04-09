@@ -94,34 +94,6 @@
 <!-- the Section End Footer -->
 
 <!-- the Section Start model -->
-<div class="modal fade" id="modal-mobile-login2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" id="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close right " data-bs-dismiss="modal" aria-label="Close"></button>
-                <h4 class="modal-title text-right" id="staticBackdropLabel">التحقق من رقم الجوال</h4>
-            </div>
-            <div class="modal-body d-flex justify-content-center flex-row sizes">
-                <form>
-                    <div class="input-group flex-nowrap mobile">
-                        <input type="text" class="form-control py-2 rr tele" placeholder="Username" id="modal-mobile-input" aria-label="Username" aria-describedby="addon-wrapping">
-                        <span class="input-group-text rud" id="addon-wrapping">+966 <img src="{{asset('')}}assets/website/images/saudi-arabia.png" alt="" width="28px;" class="pe-2 left"></span>
-
-                    </div>
-                    <div style="padding-right: 9%" id="mobile_hide"  class="selector_hide">
-                        <span class="text-danger hide "> يجب ادخال رقم الجوال</span>
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer button-next">
-                <button class="box-button fs-5" id="modal-mobile-login-next">
-                    التالي
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
