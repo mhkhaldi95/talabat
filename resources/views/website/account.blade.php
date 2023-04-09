@@ -87,7 +87,7 @@
                                                                 <div
                                                                     data-i18n="discountText">{{__('productName')}}</div>
                                                                 <div
-                                                                    data-i18n="percentage">{{$item->product->price}} {{__('productPrice')}}</div>
+                                                                    data-i18n="percentage">{{$product->cachback}} {{__('productPrice')}}</div>
                                                             </div>
                                                         @endif
                                                     @endforeach
@@ -129,7 +129,7 @@
                                                                 <div
                                                                     data-i18n="discountText">{{__('productName')}}</div>
                                                                 <div
-                                                                    data-i18n="percentage">{{$item->product->price}} {{__('productPrice')}}</div>
+                                                                    data-i18n="percentage">{{$product->cachback}} {{__('productPrice')}}</div>
                                                             </div>
                                                         @endif
                                                     @endforeach
