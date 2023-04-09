@@ -155,6 +155,17 @@ function calculateCashback(){
     }
     return $cashback;
 }
+function calculateOrderCashback($order){
+    $cachback = 0 ;
+     foreach($order->items as $item){
+         $product = $item->product ;
+         $cachback+=$product->cashback;
+     }
+     return $cachback;
+
+
+
+}
 
 
 

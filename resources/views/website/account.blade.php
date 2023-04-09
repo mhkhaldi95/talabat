@@ -63,49 +63,51 @@
                         @if(count($new_orders) > 0)
                             <div class="col">
                                 @foreach($new_orders as $index => $order)
-                                    @if($index % 2 == 0)
-                                        <div class="product-item">
-                                            <div class="card">
-                                                <div class="item-img position-relative">
-                                                    <img src="{{$order->items[0]->product->avatar}}"
-                                                         class="card-img-top" alt="product">
-                                                    <div class="card-img-overlay">
+                                    @if(calculateOrderCashback($order) > 0)
+                                        @if($index % 2 == 0)
+                                            <div class="product-item">
+                                                <div class="card">
+                                                    <div class="item-img position-relative">
+                                                        <img src="{{$order->items[0]->product->avatar}}"
+                                                             class="card-img-top" alt="product">
+                                                        <div class="card-img-overlay">
                                             <span
                                                 class="card-title shadow-sm bg-body p-2 color-main w-25 left rounded text-center">
                                                 {{$order->created_at}}</span>
+                                                        </div>
                                                     </div>
-                                                </div>
-
-                                                <div class="card-body text-center">
-                                                    @php $cachback = 0 @endphp
-                                                    @foreach($order->items as $item)
-                                                        @php $product = $item->product @endphp
-                                                        @if($product->cachback > 0)
-                                                            @php $cachback+=$product->cashback @endphp
-                                                            <div
-                                                                class="discount d-flex justify-content-between bg-gray align-items-center p-2">
+                                                    <div class="card-body text-center">
+                                                        @php $cachback = 0 @endphp
+                                                        @foreach($order->items as $item)
+                                                            @php $product = $item->product @endphp
+                                                            @if($product->cachback > 0)
+                                                                @php $cachback+=$product->cashback @endphp
                                                                 <div
-                                                                    data-i18n="discountText">{{__('productName')}}</div>
-                                                                <div
-                                                                    data-i18n="percentage">{{$product->cachback}} {{__('productPrice')}}</div>
-                                                            </div>
-                                                        @endif
-                                                    @endforeach
-                                                    <a href="#" class="text-dark  text-decoration-underline text-center"
-                                                       data-i18n="viewDetails">{{__('viewDetails')}}</a>
+                                                                    class="discount d-flex justify-content-between bg-gray align-items-center p-2">
+                                                                    <div
+                                                                        data-i18n="discountText">{{__('productName')}}</div>
+                                                                    <div
+                                                                        data-i18n="percentage">{{$product->cachback}} {{__('productPrice')}}</div>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                        <a href="#" class="text-dark  text-decoration-underline text-center"
+                                                           data-i18n="viewDetails">{{__('viewDetails')}}</a>
 
-                                                    <button class="btn btn-product new-order-btn w-100 mt-3">
+                                                        <button class="btn btn-product new-order-btn w-100 mt-3">
                                                     <span class="mx-1"
                                                           data-i18n="recieveFromBranch">كاش باك  {{$cachback}} {{__('productPrice')}} </span>
-                                                    </button>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     @endif
                                 @endforeach
                             </div>
                             <div class="col">
                                 @foreach($new_orders as $index=>$order)
+                                    @if(calculateOrderCashback($order) > 0)
                                     @if($index % 2 != 0)
                                         <div class="product-item">
                                             <div class="card">
@@ -143,6 +145,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    @endif
                                     @endif
                                 @endforeach
                             </div>
