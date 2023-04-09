@@ -23,9 +23,13 @@ Route::group(['prefix' => 'branch','middleware' => ['auth:sanctum','branch']], f
         Route::group(['prefix' => 'products'], function () {
             Route::get('/', [ProductController::class, 'index'])->name('branch.products.index');
             Route::get('/create/{id?}', [ProductController::class, 'create'])->name('branch.products.create');
+            Route::post('/store/{id?}', [ProductController::class, 'store'])->name('branch.products.store');
             Route::post('change-status', [ProductController::class, 'changeStatus'])->name('change-status');
         });
         Route::group(['prefix' => 'orders'], function () {
+            Route::get('/', [OrderController::class, 'index'])->name('branch.orders.index');
+            Route::get('/show/{id}', [OrderController::class, 'show'])->name('branch.orders.show');
+            Route::get('{id}/receive', [OrderController::class, 'receive'])->name('branch.orders.receive');
             Route::post('/accept', [OrderController::class, 'accept'])->name('branch.orders.accept');
             Route::post('/reject', [OrderController::class, 'reject'])->name('branch.orders.reject');
         });

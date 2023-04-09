@@ -6,6 +6,7 @@ use App\Constants\Enum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Kreait\Firebase\Contract\Auth;
 
 class Order extends Model
 {
@@ -57,6 +58,16 @@ class Order extends Model
            $q->whereHas('user',function ($user) use ($value){
                  $user->where("users.id",$value);
             });
+        }
+        if($col == 'branch_id' && $value !=''){
+           $q->whereHas('branch',function ($branch) use ($value){
+               $branch->where("branches.id",$value);
+            });
+        }
+        if(\auth()->check()){
+            if(\auth()->user()->role == Enum::Branch){
+                $q->where('branch_id',auth()->user()->branch->id);
+            }
         }
         return $q;
     }

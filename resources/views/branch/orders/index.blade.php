@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('branch.layout.master')
 @section('content')
     <!--begin::Post-->
     <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -94,21 +94,7 @@
                                             <!--end::Input-->
                                         </div>
                                         <!--end::Col-->
-                                        <!--begin::Col-->
-                                        <div class="col-lg-3">
-                                            <!--begin::Label-->
-                                            <label class="form-label fs-5 fw-bold mb-3">{{__('lang.branch')}}:</label>
-                                            <!--end::Label-->
-                                            <!--begin::Input-->
-                                            <select class="form-select form-select-solid  w-250px fw-bolder " data-kt-select2="true" data-placeholder="{{__('lang.select')}}" data-allow-clear="true"  id="branch_filter" >
-                                                <option></option>
-                                                @foreach($branches as $branch)
-                                                    <option value="{{$branch->branch->id}}" >{{$branch->branch->address}}</option>
-                                                @endforeach
-                                            </select>
-                                            <!--end::Input-->
-                                        </div>
-                                        <!--end::Col-->
+
 
                                         <!--begin::Col-->
                                         <div class="col-lg-3">
@@ -123,6 +109,7 @@
                                                 <option value="{{\App\Constants\Enum::REJECT}}" >{{__('lang.'.\App\Constants\Enum::REJECT)}}</option>
                                                 <option value="{{\App\Constants\Enum::ACCEPT}}" >{{__('lang.'.\App\Constants\Enum::ACCEPT)}}</option>
                                                 <option value="{{\App\Constants\Enum::DONE}}" >{{__('lang.'.\App\Constants\Enum::DONE)}}</option>
+
                                             </select>
                                             <!--end::Input-->
                                         </div>
@@ -150,10 +137,9 @@
                         <thead>
                         <!--begin::Table row-->
                         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                            <th class="min-w-70px text-start">
+                            <th class=" min-w-75px">
                               #
                             </th>
-                            <th class="min-w-125px">{{__('lang.branch')}}</th>
                             <th class="min-w-125px">{{__('lang.user')}}</th>
                             <th class="min-w-125px">{{__('lang.price')}}</th>
                             <th class="min-w-125px">{{__('lang.date')}}</th>
@@ -205,18 +191,13 @@
                     serverSide: true,
                     order: [],
                     stateSave: true,
-                    select: {
-                        style: 'multi',
-                        selector: 'td:first-child input[type="checkbox"]',
-                        className: 'row-selected'
-                    },
+
                     ajax: {
                         // url: "https://preview.keenthemes.com/api/datatables.php",
                         url: "{{url()->current()}}",
                     },
                     columns: [
                         { data: 'id' },
-                        { data: 'branch' },
                         { data: 'user' },
                         { data: 'price' },
                         { data: 'created_at' },
@@ -228,6 +209,7 @@
                         {
                             targets: 0,
                             orderable: true,
+                            className: 'text-start'
                         },
                         {
                             targets: -1,

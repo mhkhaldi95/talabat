@@ -126,5 +126,12 @@
     "Total": "الاجمالي",
     "Subtotal": "المجموع الفرعي",
     "Customer": "الزبون",
-    "Discount": "الخصم"
+    "Discount": "الخصم",
+    "customers number" : "عدد الزبائن",
+    "branches number" : "عدد الأفرع",
+    "orders number" : "عدد الطلبات",
+    "Product available in the system" : " منتج متوفر في  النظام",
+    "category in system" : " صنف في النظام",
+    "Best selling products" : "المنتجات الأكثر مبيعا",
+    "Recent Orders" : "الطلبات الحديثة"
 }

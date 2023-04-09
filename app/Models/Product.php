@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -102,6 +103,18 @@ class Product extends Model
             }
         }
         return $price_after_discount;
+    }
+    public function getBestSellingProducts(){
+        $bestSellingProducts = DB::table('order_items')
+            ->select('product_id', DB::raw('SUM(quantity) as total_quantity'))
+            ->groupBy('product_id')
+            ->orderBy('total_quantity', 'desc')
+            ->take(10)
+            ->get();
+
+        $productIds = $bestSellingProducts->pluck('product_id');
+        $bestSellingProductsData = Product::whereIn('id', $productIds)->get();
+        return $bestSellingProductsData;
     }
 
 

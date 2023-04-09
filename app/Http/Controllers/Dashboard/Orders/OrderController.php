@@ -34,6 +34,7 @@ class OrderController extends Controller
             'page_title' =>__('lang.orders'),
             'page_breadcrumbs' => $page_breadcrumbs,
             'customers' => User::query()->where('role',Enum::CUSTOMER)->get(),
+            'branches' => User::query()->where('role',Enum::Branch)->get(),
         ]);
     }
     public function show($id)

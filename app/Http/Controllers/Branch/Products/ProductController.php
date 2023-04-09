@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Branch\Products;
 use App\Constants\Enum;
 use App\Constants\StatusCodes;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Products\ProductRequest;
 use App\Http\Resources\Branch\ProductResource;
 use App\Models\Addon;
 use App\Models\Branch;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductAddon;
 use App\Models\ProductBranch;
 use App\Models\ProductPhoto;
 use Illuminate\Database\QueryException;
@@ -67,6 +69,30 @@ class ProductController extends Controller
         ]);
     }
 
+    public function store(Request $request, $id = null)
+    {
+
+        DB::beginTransaction();
+        try {
+
+
+            $qty = $request->qty[auth()->user()->branch->id];
+            $item = Product::query()->findOrFail($id);
+            ProductBranch::query()->update([
+                'product_id' => $item->id,
+                'branch_id' => auth()->user()->branch->id,
+                'qty' => $qty[0]
+            ]);
+
+
+            DB::commit();
+
+            return $this->returnBackWithSaveDone();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return $this->returnBackWithSaveDoneFailed();
+        }
+    }
 
     public function changeStatus(Request $request)
     {

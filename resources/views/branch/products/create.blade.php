@@ -9,7 +9,7 @@
 
             </form>
 
-            <form action="#" method="post" class="form d-flex flex-column flex-lg-row" enctype="multipart/form-data">
+            <form action="{{route('branch.products.store',$item['id'])}}" method="post" class="form d-flex flex-column flex-lg-row" enctype="multipart/form-data">
                 @csrf
                 <!--begin::Aside column-->
                 <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
@@ -38,8 +38,8 @@
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                     <i class="bi bi-pencil-fill fs-7"></i>
                                     <!--begin::Inputs-->
-                                    <input type="file" disabled name="master_photo" accept=".png, .jpg, .jpeg" />
-                                    <input type="hidden" disabled name="avatar_remove" />
+                                    <input type="file" readonly name="master_photo" accept=".png, .jpg, .jpeg" />
+                                    <input type="hidden" readonly name="avatar_remove" />
                                     <!--end::Inputs-->
                                 </label>
                                 <!--end::Label-->
@@ -81,7 +81,7 @@
                         <!--begin::Card body-->
                         <div class="card-body pt-0">
                             <!--begin::Select2-->
-                            <select class="form-select mb-2" disabled  data-control="select2" data-hide-search="true"  name="status" data-placeholder="{{__('lang.Select an option')}}" id="kt_ecommerce_add_product_status_select">
+                            <select class="form-select mb-2" readonly  data-control="select2" data-hide-search="true"  name="status" data-placeholder="{{__('lang.Select an option')}}" id="kt_ecommerce_add_product_status_select">
                                 <option></option>
                                 <option value="{{\App\Constants\Enum::PUBLISHED}}" {{isset($item)?$item['status'] == \App\Constants\Enum::PUBLISHED?'selected':'':''}}>{{__('lang.Published')}}</option>
                                 <option value="{{\App\Constants\Enum::INACTIVE}}" {{isset($item)?$item['status'] == \App\Constants\Enum::INACTIVE?'selected':'':''}}>{{__('lang.Inactive')}}</option>
@@ -110,7 +110,7 @@
                             <!--end::Label-->
                             <!--begin::Select2-->
 
-                            <select class="form-select mb-2" disabled data-control="select2" name="category_id" data-placeholder="{{__('lang.Select an option')}}" data-allow-clear="true" >
+                            <select class="form-select mb-2" readonly data-control="select2" name="category_id" data-placeholder="{{__('lang.Select an option')}}" data-allow-clear="true" >
 {{--                                multiple="multiple"--}}
                                 <option></option>
                                 @foreach($categories as $category)
@@ -127,7 +127,7 @@
                             <label class="form-label d-block">{{__('lang.Tags')}}</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input disabled id="kt_ecommerce_add_product_tags" name="tags" class="form-control mb-2" value="{{isset($item)?($item['tags']):old('tags')}}" />
+                            <input readonly id="kt_ecommerce_add_product_tags" name="tags" class="form-control mb-2" value="{{isset($item)?($item['tags']):old('tags')}}" />
                             <!--end::Input-->
                             <!--begin::Description-->
 {{--                            <div class="text-muted fs-7">Add tags to a product.</div>--}}
@@ -141,6 +141,9 @@
                 <!--end::Aside column-->
                 <!--begin::Main column-->
                 <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+                    <div class="alert alert-warning">
+                        لديك صلاحية للتعديل على كمية المنتج فقط
+                    </div>
                     <!--begin::Tab content-->
                     <div class="tab-content">
                         <!--begin::Tab pane-->
@@ -160,18 +163,18 @@
                                                 <label class="form-label">{{__('lang.ar.name')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input disabled type="text" name="name_ar" class="form-control mb-2"
+                                                <input readonly type="text" name="name_ar" class="form-control mb-2"
                                                        placeholder="{{__('lang.ar.name')}}" value="{{isset($item)?$item['name_ar']:old('name_ar')}}" />
                                                 <!--end::Input-->
                                             </div>
                                             <!--end::Input group-->
                                             <!--begin::Input group-->
-                                            <div disabled class="fv-row w-100 flex-md-root">
+                                            <div readonly class="fv-row w-100 flex-md-root">
                                                 <!--begin::Label-->
                                                 <label class="form-label">{{__('lang.en.name')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <input disabled type="text" name="name_en" class="form-control mb-2"
+                                                <input readonly type="text" name="name_en" class="form-control mb-2"
                                                        placeholder="{{__('lang.en.name')}}" value="{{isset($item)?$item['name_en']:old('name_en')}}" />
                                                 <!--end::Input-->
                                             </div>
@@ -185,7 +188,7 @@
                                                 <label class="form-label">{{__('lang.ar.description')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Editor-->
-                                                <textarea disabled class="form-control" name="description_ar"  id="kt_ecommerce_add_product_description" rows="3">
+                                                <textarea readonly class="form-control" name="description_ar"  id="kt_ecommerce_add_product_description" rows="3">
                                                     {{isset($item)?$item['description_ar']:old('description_ar')}}
                                                 </textarea>
                                                 <!--end::Editor-->
@@ -197,7 +200,7 @@
                                                 <label class="form-label">{{__('lang.en.description')}}</label>
                                                 <!--end::Label-->
                                                 <!--begin::Editor-->
-                                                <textarea disabled class="form-control" name="description_en"  id="kt_ecommerce_add_product_description_en" rows="3">
+                                                <textarea readonly class="form-control" name="description_en"  id="kt_ecommerce_add_product_description_en" rows="3">
                                                      {{isset($item)?$item['description_en']:old('description_en')}}
                                                 </textarea>
                                                 <input type="hidden" id="description_en_hidden" value=" {{isset($item)?$item['description_en']:''}}">
@@ -226,13 +229,21 @@
                             <!--end::Card header-->
                             <!--begin::Card body-->
                             <div class="card-body pt-0">
+                                <div class="mb-10 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="required form-label">{{__('lang.cashback')}}</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <input type="text" readonly name="cashback" class="form-control mb-2" placeholder="{{__('lang.cashback')}}" value="{{isset($item)?$item['cashback']:old('cashback')}}" />
+                                    <!--end::Input-->
+                                </div>
                                 <!--begin::Input group-->
                                 <div class="mb-10 fv-row">
                                     <!--begin::Label-->
                                     <label class="required form-label">{{__('lang.Base Price')}}</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input disabled type="text" name="price" class="form-control mb-2" placeholder="{{__('lang.Base Price')}}" value="{{isset($item)?$item['price']:old('price')}}" />
+                                    <input readonly type="text" name="price" class="form-control mb-2" placeholder="{{__('lang.Base Price')}}" value="{{isset($item)?$item['price']:old('price')}}" />
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
@@ -250,7 +261,7 @@
                                             <label class="btn btn-outline btn-outline-dashed btn-outline-default active d-flex text-start p-6" data-kt-button="true">
                                                 <!--begin::Radio-->
                                                 <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
-																				<input disabled class="form-check-input" type="radio" name="discount_option" value="1" {{isset($item)?($item['discount_option'] == 1 ?'checked':''):''}} />
+																				<input readonly class="form-check-input" type="radio" name="discount_option" value="1" {{isset($item)?($item['discount_option'] == 1 ?'checked':''):''}} />
 																			</span>
                                                 <!--end::Radio-->
                                                 <!--begin::Info-->
@@ -268,7 +279,7 @@
                                             <label class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6" data-kt-button="true">
                                                 <!--begin::Radio-->
                                                 <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
-																				<input disabled class="form-check-input" type="radio" name="discount_option" value="2" {{isset($item)?($item['discount_option'] == 2 ?'checked':''):''}} />
+																				<input readonly class="form-check-input" type="radio" name="discount_option" value="2" {{isset($item)?($item['discount_option'] == 2 ?'checked':''):''}} />
 																			</span>
                                                 <!--end::Radio-->
                                                 <!--begin::Info-->
@@ -286,7 +297,7 @@
                                             <label class="btn btn-outline btn-outline-dashed btn-outline-default d-flex text-start p-6" data-kt-button="true">
                                                 <!--begin::Radio-->
                                                 <span class="form-check form-check-custom form-check-solid form-check-sm align-items-start mt-1">
-																				<input disabled class="form-check-input" type="radio" name="discount_option" value="3" {{isset($item)?($item['discount_option'] == 3 ?'checked':''):''}} />
+																				<input readonly class="form-check-input" type="radio" name="discount_option" value="3" {{isset($item)?($item['discount_option'] == 3 ?'checked':''):''}} />
 																			</span>
                                                 <!--end::Radio-->
                                                 <!--begin::Info-->
@@ -312,7 +323,7 @@
                                         <div class="d-flex align-items-start justify-content-center mb-7">
                                             <span class="fw-bolder fs-3x" id="kt_ecommerce_add_product_discount_label">{{isset($item)?($item['discount_option'] == 2 ?$item['discounted_price'] :0):0}}</span>
                                             <span class="fw-bolder fs-4 mt-1 ms-2">%</span>
-                                            <input disabled type="hidden" name="discounted_percentage" class="form-control mb-2" id="discounted_percentage" value="{{isset($item)?($item['discount_option'] == 2 ?$item['discounted_price'] :0):0}}"  placeholder="{{__('lang.Discounted price')}}" />
+                                            <input readonly type="hidden" name="discounted_percentage" class="form-control mb-2" id="discounted_percentage" value="{{isset($item)?($item['discount_option'] == 2 ?$item['discounted_price'] :0):0}}"  placeholder="{{__('lang.Discounted price')}}" />
 
                                         </div>
                                         <div id="kt_ecommerce_add_product_discount_slider" class="noUi-sm"></div>
@@ -326,7 +337,7 @@
                                     <label class="form-label">{{__('lang.Fixed Discounted Price')}}</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input disabled type="text" name="discounted_price" class="form-control mb-2" value="{{isset($item)?($item['discount_option'] == 3 ?$item['discounted_price'] :old('discounted_price')):old('discounted_price')}}"  placeholder="{{__('lang.Discounted price')}}" />
+                                    <input readonly type="text" name="discounted_price" class="form-control mb-2" value="{{isset($item)?($item['discount_option'] == 3 ?$item['discounted_price'] :old('discounted_price')):old('discounted_price')}}"  placeholder="{{__('lang.Discounted price')}}" />
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
@@ -341,7 +352,7 @@
                             <!--begin::Card header-->
                             <div class="card-header">
                                 <div class="card-title">
-                                    <h2>{{__('lang.Quantity')}} - {{__('lang.branches')}}</h2>
+                                    <h2>{{__('lang.Quantity')}}</h2>
                                 </div>
                             </div>
                             <!--end::Card header-->
@@ -352,20 +363,18 @@
                                     <div id="qtys">
                                         <!--begin::Form group-->
                                         <div class="form-group">
-                                            @foreach($branches as $branch)
                                                 <!--begin::Input group-->
                                                 <div class="row mb-6">
                                                     <!--begin::Label-->
-                                                    <label class="col-lg-3 col-form-label fw-bold fs-6">{{$branch->address}}</label>
+                                                    <label class="col-lg-3 col-form-label fw-bold fs-6">{{auth()->user()->branch->address}}</label>
                                                     <!--end::Label-->
                                                     <!--begin::Col-->
                                                     <div class="col-lg-4 fv-row">
-                                                        <input disabled type="text" name="qty[{{$branch->id}}][]" class="form-control form-control-lg form-control-solid" placeholder="Company website" value="{{isset($item)?$branch->getQty($item['id']):0}}" />
+                                                        <input  type="text" name="qty[{{auth()->user()->branch->id}}][]" class="form-control form-control-lg form-control-solid" placeholder="Company website" value="{{isset($item)?auth()->user()->branch->getQty($item['id']):0}}" />
                                                     </div>
                                                     <!--end::Col-->
                                                 </div>
                                                 <!--end::Input group-->
-                                            @endforeach
                                         </div>
                                         <!--end::Form group-->
                                     </div>
@@ -406,7 +415,7 @@
                                                     <label class="form-label">{{__('lang.max_addons')}}</label>
                                                     <!--end::Label-->
                                                     <!--begin::Input-->
-                                                    <input disabled type="text" name="max_addons" class="form-control mb-2"
+                                                    <input readonly type="text" name="max_addons" class="form-control mb-2"
                                                            placeholder="{{__('lang.max_addons')}}" value="{{isset($item)?$item['max_addons']:old('max_addons')}}" />
                                                     <!--end::Input-->
                                                 </div>
@@ -418,7 +427,7 @@
                                                         <div data-repeater-item="" class="form-group d-flex flex-wrap gap-5">
                                                             <!--begin::Select2-->
                                                             <div class="w-100 w-md-200px">
-                                                                <select disabled class="form-select" name="addon_id" data-placeholder="{{__('lang.select')}}" data-kt-ecommerce-catalog-add-product="product_option">
+                                                                <select readonly class="form-select" name="addon_id" data-placeholder="{{__('lang.select')}}" data-kt-ecommerce-catalog-add-product="product_option">
                                                                     <option></option>
                                                                     @foreach($addons  as $addon)
                                                                         <option value="{{$addon->id}}" {{$item_addon ==$addon->id ?'selected':'' }}>{{$addon->name}}</option>
@@ -474,6 +483,16 @@
                                 @endif
                             </div>
                             <!--end::Card header-->
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                            <!--begin::Button-->
+                            <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
+                                <span class="indicator-label">{{__('lang.submit')}}</span>
+                                <span class="indicator-progress">{{__('lang.Please wait')}}...
+												<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                            <!--end::Button-->
                         </div>
                     <!--end::Tab content-->
                 </div>
