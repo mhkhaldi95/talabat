@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware'=>'locale'], function () {
+Route::group(['middleware'=>['locale','website']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('break.index');
     Route::get('/branches', [BranchController::class, 'index'])->name('break.branches.index');
     Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
