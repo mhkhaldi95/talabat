@@ -75,9 +75,9 @@ class Product extends Model
 
 
     public function getDescriptionAttribute(){
-        $points = strlen($this->description_ar)>90?' ...':'';
+        $points = strlen($this->description_ar)>80?' ...':'';
         if(app()->getLocale() == 'ar'){
-            return substr($this->description_ar,0,90).$points;
+            return substr($this->description_ar,0,80).$points;
         }
         return  substr($this->description_en,0,90).$points;
 
