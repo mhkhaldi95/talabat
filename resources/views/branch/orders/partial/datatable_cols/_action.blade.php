@@ -22,23 +22,14 @@
     </div>
     <!--end::Menu item-->
 
-    @if(!$is_branch)
         <!--begin::Menu item-->
+
     @if($item->status == \App\Constants\Enum::ACCEPT && $item->status != \App\Constants\Enum::DONE)
         <div class="menu-item px-3">
             <a href="#" class="menu-link px-3 receive-order"  data-kt-docs-table-filter="receive-order"  data-id="{{$item->id}}">
                 {{__('lang.receive')}}
             </a>
         </div>
-    @endif
-        <!--end::Menu item-->
-        <!--begin::Menu item-->
-{{--        <div class="menu-item px-3">--}}
-{{--            <a href="#" class="menu-link px-3 delete-form-datatable"  data-kt-docs-table-filter="delete_row"  data-id="{{$item->id}}">--}}
-{{--                {{__('lang.Delete')}}--}}
-{{--            </a>--}}
-{{--        </div>--}}
-        <!--end::Menu item-->
     @endif
 
 

@@ -65,7 +65,6 @@ onMessage(messaging, (payload) => {
 
     console.log('Message received. ', payload);
 });
-
 if (!window.localStorage.getItem('fcm_token')) {
     startFCM();
 }

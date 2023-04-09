@@ -185,7 +185,6 @@
 @endsection
 @section('scripts')
     <script>
-        localStorage.clear();
 
         // $("#datatable").DataTable();
         "use strict";

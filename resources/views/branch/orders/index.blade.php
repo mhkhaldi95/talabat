@@ -171,7 +171,6 @@
 @endsection
 @section('scripts')
     <script>
-        localStorage.clear();
 
         // $("#datatable").DataTable();
         "use strict";
@@ -311,7 +310,7 @@
                                         }
                                     }).then(function () {
                                         // delete row data from server and re-draw datatable
-                                        axios.post('/admin/orders/'+record_id+'/delete').then(function (response) {
+                                        axios.post('/branch/orders/'+record_id+'/delete').then(function (response) {
                                             dt.draw();
                                         })
                                     });
@@ -372,7 +371,7 @@
                                         }
                                     }).then(function () {
                                         // delete row data from server and re-draw datatable
-                                        axios.get('/admin/orders/'+orderID+'/receive').then(function (response) {
+                                        axios.get('/branch/orders/'+orderID+'/receive').then(function (response) {
                                             dt.draw();
                                         })
                                     });

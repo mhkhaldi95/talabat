@@ -6,6 +6,7 @@ use App\Classes\CreateOrder;
 use App\Constants\Enum;
 use App\Constants\StatusCodes;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Orders\BranchOrderResource;
 use App\Http\Resources\Orders\OrderResource;
 use App\Models\Branch;
 use App\Models\Order;
@@ -22,7 +23,7 @@ class OrderController extends Controller
         if($request->ajax()){
             $items = Order::query()->orderBy(getColAndDirForOrderBy(Order::class)['col'],getColAndDirForOrderBy(Order::class)['dir'])
                 ->filter()->paginate(\request()->get('length', 10),'*','*',getPageNumber());
-            return datatable_response($items, null, OrderResource::class);
+            return datatable_response($items, null, BranchOrderResource::class);
         }
         $page_breadcrumbs = [
             ['page' => route('dashboard.index') , 'title' =>__('lang.home'),'active' => true],
