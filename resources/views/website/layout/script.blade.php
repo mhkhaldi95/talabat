@@ -67,7 +67,7 @@
             max_addons = product.max_addons;
             addons_html = `  <h5 class="text-center ">flavours
                         </h5>`;
-            if (product.product_addons.length > 0) {
+            if (product.product_addons && product.product_addons.length > 0) {
                 product.product_addons.forEach(function (addon) {
                     addons_html += `
                         <div class=" my-1 row align-items-center">
