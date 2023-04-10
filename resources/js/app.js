@@ -32,7 +32,9 @@ function startFCM() {
         .then(function (response) {
             axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             axios.post('/store-token', {fcm_token: response}).then(function (response) {
-                if (response.data.status)
+                if (response.data.status){
+                    console.log("response.data.fcm_token",response.data.fcm_token)
+                }
                     window.localStorage.setItem('fcm_token', response.data.fcm_token);
             })
 
@@ -65,7 +67,7 @@ onMessage(messaging, (payload) => {
 
     console.log('Message received. ', payload);
 });
-if (!window.localStorage.getItem('fcm_token')) {
+if (!window.localStorage.getItem('fcm_token') || window.localStorage.getItem('fcm_token') == 'undefined' ) {
     startFCM();
 }
 //شسيشسي

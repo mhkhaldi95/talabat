@@ -19890,7 +19890,10 @@ function startFCM() {
     axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/store-token', {
       fcm_token: response
     }).then(function (response) {
-      if (response.data.status) window.localStorage.setItem('fcm_token', response.data.fcm_token);
+      if (response.data.status) {
+        console.log("response.data.fcm_token", response.data.fcm_token);
+      }
+      window.localStorage.setItem('fcm_token', response.data.fcm_token);
     });
   })["catch"](function (error) {
     console.log(error);
@@ -19918,7 +19921,7 @@ function startFCM() {
   }
   console.log('Message received. ', payload);
 });
-if (!window.localStorage.getItem('fcm_token')) {
+if (!window.localStorage.getItem('fcm_token') || window.localStorage.getItem('fcm_token') == 'undefined') {
   startFCM();
 }
 //شسيشسي
