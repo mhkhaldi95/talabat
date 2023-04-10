@@ -35,6 +35,7 @@ Route::group(['middleware'=>['locale','website']], function () {
 
     Route::group(['middleware' => ['select_branch']], function () {
         Route::get('/products', [ProductController::class, 'index'])->name('break.products.index');
+        Route::get('/category/{id}/products', [ProductController::class, 'getCategoryProducts'])->name('break.category.products.index');
         Route::get('/products_search', [ProductSearchController::class, 'index'])->name('products.search');
         Route::post('/products_filter', [ProductSearchController::class, 'filter'])->name('products.filter');
 

@@ -121,7 +121,7 @@
             // }else{
             //     $('#parent_addon').remove()
             // }
-            $('.product-item #photo_modal').attr("src", product_photo);
+            $('#photo_modal').attr("src", product_photo);
             // $('#photo_modal').css("background-image", "url(" + product_photo + ")");
             // $("#productModal").modal({ backdrop: "static ", keyboard: false });
             $('#productModal').modal("show")
@@ -509,6 +509,23 @@
                     $('#invoice').modal("hide")
                     countDown(response.data.data.order)
                     $('#carts').html(response.data.data.cart)
+                }else{
+                    toastr.warning(response.data.message);
+                }
+            }).catch(error => {
+                toastr.warning(error.message);
+            });
+
+        })
+        $(document).on('click', '.category_product',function (e) {
+            var category_id = $(this).data('category_id');
+
+            var url = "{{route('break.category.products.index', ":id")}}";
+            url = url.replace(':id', category_id);
+            url = url + "?branch_id=" + getBranch();
+            axios.get(url).then(response => {
+                if(response.data.status){
+                    $('#category_'+category_id+'-pane').html(response.data.data.products);
                 }else{
                     toastr.warning(response.data.message);
                 }

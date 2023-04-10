@@ -44,6 +44,9 @@ class Product extends Model
         if($col == 'status' && $value !=''){
             return $q->where("status",$value);
         }
+        if(request('category_id') && !empty(request('category_id'))){
+            return $q->where("category_id",request('category_id'));
+        }
         return $q;
     }
     public function scopePublished($q){

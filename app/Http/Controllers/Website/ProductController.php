@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Website;
 
+use App\Constants\Enum;
+use App\Constants\StatusCodes;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Categories\CategoryResource;
 use App\Http\Resources\Website\ProductResource;
@@ -36,6 +38,28 @@ class ProductController extends Controller
                 return $this->invalidIntParameter();
             }
         }
+
+    }
+    public function getCategoryProducts($id,Request $request)
+    {
+
+        try {
+            $category =  Category::query()->findOrFail($id);
+            $branch =  Branch::query()->findOrFail($request->branch_id);
+            $category = (new CategoryResource($category));
+            $data =  view('website._category_products', [
+                'category' => $category->resolve(),
+                'branch' => $branch,
+            ])->render();
+
+            return $this->response_json(true, StatusCodes::OK, Enum::DONE_SUCCESSFULLY, [
+                'products' => $data,
+            ]);
+        } catch (QueryException $exception) {
+            return $this->invalidIntParameter();
+        }
+
+
 
     }
 }
