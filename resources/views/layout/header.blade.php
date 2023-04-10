@@ -79,6 +79,42 @@
                             <!--begin::Menu separator-->
                             <div class="separator my-2"></div>
                             <!--end::Menu separator-->
+
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="right-start">
+                                <a href="#" class="menu-link px-5">
+													<span class="menu-title position-relative">{{__('language')}}
+													<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
+                                                        {{app()->getLocale() == 'ar'?__('lang.Arabic'):__('lang.English')}}
+													<img class="w-15px h-15px rounded-1 ms-2" src="{{app()->getLocale() == 'ar'?asset('assets/media/flags/saudi-arabia.svg'):asset('assets/media/flags/united-states.svg')}}" alt="" /></span></span>
+                                </a>
+                                <!--begin::Menu sub-->
+                                <div class="menu-sub menu-sub-dropdown w-175px py-4">
+                                    <!--begin::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
+                                        <a href="{{route('setLocale','ar')}}" class="menu-link d-flex px-5">
+														<span class="symbol symbol-20px me-4">
+															<img class="rounded-1" src="{{asset('')}}assets/media/flags/saudi-arabia.svg" alt="" />
+														</span>{{__('lang.Arabic')}}</a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <div class="menu-item px-3">
+                                        <a href="{{route('setLocale','en')}}" class="menu-link d-flex px-5 active">
+														<span class="symbol symbol-20px me-4">
+															<img class="rounded-1" src="{{asset('')}}assets/media/flags/united-states.svg" alt="" />
+														</span>{{__('lang.English')}}</a>
+                                    </div>
+                                    <!--end::Menu item-->
+
+
+                                </div>
+                                <!--end::Menu sub-->
+                            </div>
+                            <!--end::Menu item-->
+                            <!--begin::Menu separator-->
+                            <div class="separator my-2"></div>
+                            <!--end::Menu separator-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
                                 <a href="{{route('logout')}}" onclick=" window.localStorage.removeItem('fcm_token')" class="menu-link px-5">{{__('lang.sign_out')}}</a>
