@@ -616,6 +616,24 @@ i {
     }
 }
 
+.product-item .card .image {
+    width: 412px;
+    height: 153px;
+    background-color: #f9f7f6;
+    border-radius: 5px;
+    opacity: 1;
+}
+.product-item .card .image .img {
+    border-radius: 5px;
+    background-size: contain;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
 @media (min-width: 768px) and (max-width: 1199.98px) {
     .land-home {
         background-position: 60% 50%;
