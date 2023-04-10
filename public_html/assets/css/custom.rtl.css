@@ -1,0 +1,26 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(../fonts/cairo/Cairo-Bold.woff2);
+}
+* {
+    font-family: myFirstFont;
+}
+.select2-container--bootstrap5 .select2-selection--multiple .select2-selection__rendered .select2-selection__choice .select2-selection__choice__remove
+{
+    left:6% !important;
+}
+.ql-blank{
+    text-align: right !important;
+}
+.ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg{
+    right: unset !important;
+}
+.ql-editor{
+    text-align: right !important;
+}
+.select2-container--bootstrap5 .select2-selection__clear{
+    right: 15rem; !important;
+}
+.status_filter .select2-selection__clear{
+    right: 8rem;
+}
