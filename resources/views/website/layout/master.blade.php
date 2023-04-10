@@ -118,7 +118,7 @@
 <!-- owl.carousel js scripts -->
 <script src="{{asset('')}}assets/website/js/owl.carousel.min.js"></script>
 <script src="{{asset('')}}assets/website/js/wow.min.js"></script>
-<script src="{{asset('')}}assets/website/js/index.js"></script>
+{{--<script src="{{asset('')}}assets/website/js/index.js"></script>--}}
 
 <!-- WOW init -->
 <script>
