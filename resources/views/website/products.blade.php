@@ -50,7 +50,7 @@
                                                 $photo = $product['has_photo']?@$product['photos'][0]['photo_path']:$product['master_photo']
                                             @endphp
                                             @if($index % 2 == 0)
-                                                <div class="product-item">
+                                                <div class="product-item {{$index !=0 ? 'mt-3': ''}}">
                                                     <div class="card">
 
                                                         <div class="image">
@@ -90,7 +90,7 @@
                                                 $photo = $product['has_photo']?@$product['photos'][0]['photo_path']:$product['master_photo']
                                             @endphp
                                             @if($index % 2 != 0)
-                                                <div class="product-item">
+                                                <div class="product-item {{$index !=1 ? 'mt-3': ''}}">
                                                     <div class="card">
 
                                                         <div class="image">
