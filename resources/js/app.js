@@ -68,6 +68,7 @@ onMessage(messaging, (payload) => {
 if (!window.localStorage.getItem('fcm_token')) {
     startFCM();
 }
+//شسيشسي
 function  countDown(data){
 
     $('#modal_order_id').val(data.order_id)
