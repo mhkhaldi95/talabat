@@ -614,6 +614,9 @@ i {
     .nav-link {
         padding: 5px;
     }
+    .product-item .card .image{
+        width: unset !important;
+    }
 }
 
 .product-item .card .image {
@@ -648,4 +651,5 @@ i {
     .search-group {
         width: 710px !important;
     }
+
 }
