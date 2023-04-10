@@ -189,7 +189,7 @@
                     processing: true,
                     serverSide: true,
                     order: [],
-                    stateSave: true,
+                    stateSave: false,
 
                     ajax: {
                         // url: "https://preview.keenthemes.com/api/datatables.php",

@@ -306,7 +306,6 @@
             })
 
             $(document).on('click', '#modal-check-code-next', function (e) {
-                alert("X")
                 var check_input_1 = $('#check_input_1').val();
                 var check_input_2 = $('#check_input_2').val();
                 var check_input_3 = $('#check_input_3').val();

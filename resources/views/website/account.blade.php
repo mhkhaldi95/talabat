@@ -44,7 +44,7 @@
                 <div class="links-content col-md-8 orders data-form mt-5 d-none" id="cashBack">
 
                     <div class="discount bg-gray text-center p-3">
-                        <div data-i18n="orderNumber">رصيد الكاش باك</div>
+                        <div data-i18n="orderNumber">{{__('Cashback balance')}}</div>
                     </div>
                     <div class="Refund-balance d-flex justify-content-between align-items-center mt-3">
                         <div class="Refund-text">

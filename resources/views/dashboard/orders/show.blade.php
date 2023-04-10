@@ -145,7 +145,7 @@
                                             <!--end::Avatar-->
                                             <!--begin::Name-->
                                             <a href="#"
-                                               class="text-gray-600 text-hover-primary">{{$item->user->name}}</a>
+                                               class="text-gray-600 text-hover-primary">{{@$item->user->name}}</a>
                                             <!--end::Name-->
                                         </div>
                                     </td>
@@ -171,7 +171,7 @@
                                             <!--end::Svg Icon-->{{__('Email')}}</div>
                                     </td>
                                     <td class="fw-bolder text-end">
-                                        <a href="#" class="text-gray-600 text-hover-primary">{{$item->user->email}}</a>
+                                        <a href="#" class="text-gray-600 text-hover-primary">{{@$item->user->email}}</a>
                                     </td>
                                 </tr>
                                 <!--end::Payment method-->
@@ -193,7 +193,7 @@
 																	</span>
                                             <!--end::Svg Icon-->{{__('Phone')}}</div>
                                     </td>
-                                    <td class="fw-bolder text-end">{{$item->user->phone}}</td>
+                                    <td class="fw-bolder text-end">{{@$item->user->phone}}</td>
                                 </tr>
                                 <!--end::Date-->
                                 </tbody>
@@ -249,7 +249,7 @@
                                             <!--end::Avatar-->
                                             <!--begin::Name-->
                                             <a href="#"
-                                               class="text-gray-600 text-hover-primary">{{$item->branch->address}}</a>
+                                               class="text-gray-600 text-hover-primary">{{@$item->branch->address}}</a>
                                             <!--end::Name-->
                                         </div>
                                     </td>
@@ -276,7 +276,7 @@
                                     </td>
                                     <td class="fw-bolder text-end">
                                         <a href="#"
-                                           class="text-gray-600 text-hover-primary">{{$item->branch->user->email}}</a>
+                                           class="text-gray-600 text-hover-primary">{{@$item->branch->user->email}}</a>
                                     </td>
                                 </tr>
                                 <!--end::Payment method-->
@@ -298,7 +298,7 @@
 																	</span>
                                             <!--end::Svg Icon-->{{__('Phone')}}</div>
                                     </td>
-                                    <td class="fw-bolder text-end">{{$item->branch->user->phone}}</td>
+                                    <td class="fw-bolder text-end">{{@$item->branch->user->phone}}</td>
                                 </tr>
                                 <!--end::Date-->
                                 </tbody>

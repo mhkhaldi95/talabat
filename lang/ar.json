@@ -133,5 +133,7 @@
     "Product available in the system" : " منتج متوفر في  النظام",
     "category in system" : " صنف في النظام",
     "Best selling products" : "المنتجات الأكثر مبيعا",
-    "Recent Orders" : "الطلبات الحديثة"
+    "Recent Orders" : "الطلبات الحديثة",
+    "Cashback balance" : "رصيد الكاش باك",
+    "customer_info" : "معلومات الزبون"
 }

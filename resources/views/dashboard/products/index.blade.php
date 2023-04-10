@@ -152,7 +152,7 @@
                     processing: true,
                     serverSide: true,
                     order: [],
-                    stateSave: true,
+                    stateSave: false,
                     select: {
                         style: 'multi',
                         selector: 'td:first-child input[type="checkbox"]',
