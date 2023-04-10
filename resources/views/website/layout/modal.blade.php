@@ -191,7 +191,7 @@
                 <p class="login-text ">completed order</p>
 
                 <div class="done-img text-center">
-                    <img src="{{asset('')}}assets/website/ass/images/icons/تمت العملية.svg" alt="">
+                    <img src="{{asset('')}}assets/website/images/icons/تمت العملية.svg" alt="">
                 </div>
 
                 <button class="w-100 btn p-2 bg-main">
