@@ -21,8 +21,7 @@
                 <a href="javascript:void(0)" class="text-decoration-underline ms-3  color-low-dark" id="resendCodeSms">{{__('Resend the code')}}</a>
 
                 <div class="mt-4">
-                    <button class="btn  bg-main px-4 validate w-100" data-bs-toggle="modal"
-                            data-bs-target="#yourNameModal" id="modal-check-code-next">{{__('Validate')}}</button>
+                    <button class="btn  bg-main px-4 validate w-100"  id="modal-check-code-next">{{__('Validate')}}</button>
 
                 </div>
 

@@ -37,7 +37,7 @@
 
 
 <!-- The you rName Modal -->
-<div class="modal" id="yourNameModal">
+<div class="modal" id="yourNameModal1">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
