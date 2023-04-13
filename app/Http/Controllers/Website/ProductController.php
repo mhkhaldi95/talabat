@@ -36,7 +36,7 @@ class ProductController extends Controller
             ['page' => '#' , 'title' =>__('lang.products'),'active' => true],
         ];
         if($request->ajax()){
-            $products = Product::query()->filter()->published()->with(['photos','addons'])->paginate(2);
+            $products = Product::query()->filter()->published()->with(['photos','addons'])->paginate(6);
             $data['products'] = view('website._products',[
                 'products' => ProductResource::collection($products)->resolve(),
                 'branch' => $this->branch,
@@ -45,7 +45,7 @@ class ProductController extends Controller
         }
             try {
                 $categories = Category::with(['products','products.photos','products.addons'])->get();
-                $products= Product::query()->filter()->published()->with(['photos','addons'])->paginate(2);
+                $products= Product::query()->filter()->published()->with(['photos','addons'])->paginate(6);
                 return view('website.products',[
                     'categories' => CategoryResource::collection($categories)->resolve(),
                     'products' => ProductResource::collection($products)->resolve(),
