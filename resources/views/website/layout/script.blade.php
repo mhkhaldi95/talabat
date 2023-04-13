@@ -1,4 +1,7 @@
 <script>
+
+
+
     // const audio = new Audio('https://waveform.customer.envato.com/tsunami/156322809/preview.mp3');
     // audio.play();
     toastr.options = {
@@ -40,6 +43,24 @@
     }
     @endif
     $(window).ready(function () {
+
+        var page = 1;
+
+        $(window).scroll(function() {
+            if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                page++;
+                var url = '{{route('break.products.index')}}';
+                url = url + `?page=${page}&branch_id=${getBranch()}`;
+                $.ajax({
+                    url: url,
+                    success: function(data) {
+                        $('#all-products').append(data.data.products);
+                    }
+                });
+            }
+        });
+
+
 
         $("#product_search").on("keyup", function (event) {
             axios.post('{{route('products.filter')}}', {

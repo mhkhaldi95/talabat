@@ -16,28 +16,46 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+    public $branch = null;
+
+    public function __construct()
+    {
+        if (isset(request()->branch_id)) {
+            try {
+                $this->branch = Branch::query()->findOrFail(request()->branch_id);
+            } catch (QueryException $exception) {
+                return $this->invalidIntParameter();
+            }
+        }
+    }
+
     public function index(Request $request){
         $page_breadcrumbs = [
             ['page' => route('break.index') , 'title' =>__('lang.home'),'active' => false],
             ['page' => route('break.branches.index') , 'title' =>__('lang.branches'),'active' => false],
             ['page' => '#' , 'title' =>__('lang.products'),'active' => true],
         ];
-        if (isset($request->branch_id)) {
+        if($request->ajax()){
+            $products = Product::query()->filter()->published()->with(['photos','addons'])->paginate(2);
+            $data['products'] = view('website._products',[
+                'products' => ProductResource::collection($products)->resolve(),
+                'branch' => $this->branch,
+            ])->render();
+            return  $this->response_json(true,StatusCodes::OK,Enum::DONE_SUCCESSFULLY,$data);
+        }
             try {
-               $branch =  Branch::query()->findOrFail($request->branch_id);
                 $categories = Category::with(['products','products.photos','products.addons'])->get();
-                $products= Product::query()->filter()->published()->with(['photos','addons'])->get();
+                $products= Product::query()->filter()->published()->with(['photos','addons'])->paginate(2);
                 return view('website.products',[
                     'categories' => CategoryResource::collection($categories)->resolve(),
                     'products' => ProductResource::collection($products)->resolve(),
                     'cart' =>session()->get('cart')??null,
-                    'branch' =>$branch,
+                    'branch' => $this->branch,
                     'page_breadcrumbs' =>$page_breadcrumbs
                ]);
             } catch (QueryException $exception) {
                 return $this->invalidIntParameter();
             }
-        }
 
     }
     public function getCategoryProducts($id,Request $request)
@@ -45,11 +63,10 @@ class ProductController extends Controller
 
         try {
             $category =  Category::query()->findOrFail($id);
-            $branch =  Branch::query()->findOrFail($request->branch_id);
             $category = (new CategoryResource($category));
             $data =  view('website._category_products', [
                 'category' => $category->resolve(),
-                'branch' => $branch,
+                'branch' =>  $this->branch,
             ])->render();
 
             return $this->response_json(true, StatusCodes::OK, Enum::DONE_SUCCESSFULLY, [

@@ -10,7 +10,7 @@
 
                 <li class="nav-item mb-2" role="presentation">
                     <button class="nav-link   color-main active" id="home-tab" data-bs-toggle="tab"
-                            data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane"
+                            data-bs-target="#all-products" type="button" role="tab" aria-controls="all-products"
                             aria-selected="true"><span data-i18n="all">{{__('all')}}</span></button>
                 </li>
                 @foreach($categories as $category)
@@ -40,7 +40,7 @@
                     <div class="tab-content" id="myTabContent">
 
                         @if(count($products) > 0)
-                            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
+                            <div class="tab-pane fade show active" id="all-products" role="tabpanel"
                                  aria-labelledby="home-tab"
                                  tabindex="0">
                                 <div class="row row-cols-md-2 row-cols-1 gy-4">
@@ -123,7 +123,6 @@
                                             @endif
                                         @endforeach
                                     </div>
-
 
                                 </div>
 
