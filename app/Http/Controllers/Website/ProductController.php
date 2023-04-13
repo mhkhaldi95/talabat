@@ -29,44 +29,46 @@ class ProductController extends Controller
         }
     }
 
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $page_breadcrumbs = [
-            ['page' => route('break.index') , 'title' =>__('lang.home'),'active' => false],
-            ['page' => route('break.branches.index') , 'title' =>__('lang.branches'),'active' => false],
-            ['page' => '#' , 'title' =>__('lang.products'),'active' => true],
+            ['page' => route('break.index'), 'title' => __('lang.home'), 'active' => false],
+            ['page' => route('break.branches.index'), 'title' => __('lang.branches'), 'active' => false],
+            ['page' => '#', 'title' => __('lang.products'), 'active' => true],
         ];
-        if($request->ajax()){
-            $products = Product::query()->filter()->published()->with(['photos','addons'])->paginate(6);
-            $data['products'] = view('website._products',[
+        if ($request->ajax()) {
+            $products = Product::query()->filter()->published()->with(['photos', 'addons'])->paginate(6);
+            $data['products'] = view('website._products', [
                 'products' => ProductResource::collection($products)->resolve(),
                 'branch' => $this->branch,
             ])->render();
-            return  $this->response_json(true,StatusCodes::OK,Enum::DONE_SUCCESSFULLY,$data);
+            return $this->response_json(true, StatusCodes::OK, Enum::DONE_SUCCESSFULLY, $data);
         }
-            try {
-                $categories = Category::with(['products','products.photos','products.addons'])->get();
-                $products= Product::query()->filter()->published()->with(['photos','addons'])->paginate(6);
-                return view('website.products',[
-                    'categories' => CategoryResource::collection($categories)->resolve(),
-                    'products' => ProductResource::collection($products)->resolve(),
-                    'cart' =>session()->get('cart')??null,
-                    'branch' => $this->branch,
-                    'page_breadcrumbs' =>$page_breadcrumbs
-               ]);
-            } catch (QueryException $exception) {
-                return $this->invalidIntParameter();
-            }
+        try {
+            $categories = Category::with(['products', 'products.photos', 'products.addons'])->get();
+            $products = Product::query()->filter()->published()->with(['photos', 'addons'])->paginate(6);
+            return view('website.products', [
+                'categories' => CategoryResource::collection($categories)->resolve(),
+                'products' => ProductResource::collection($products)->resolve(),
+                'cart' => session()->get('cart') ?? null,
+                'branch' => $this->branch,
+                'page_breadcrumbs' => $page_breadcrumbs
+            ]);
+        } catch (QueryException $exception) {
+            return $this->invalidIntParameter();
+        }
 
     }
-    public function getCategoryProducts($id,Request $request)
+
+    public function getCategoryProducts($id, Request $request)
     {
 
         try {
-            $category =  Category::query()->findOrFail($id);
+            $category = Category::query()->findOrFail($id);
             $category = (new CategoryResource($category));
-            $data =  view('website._category_products', [
+            $data = view('website._category_products', [
                 'category' => $category->resolve(),
-                'branch' =>  $this->branch,
+                'branch' => $this->branch,
             ])->render();
 
             return $this->response_json(true, StatusCodes::OK, Enum::DONE_SUCCESSFULLY, [
@@ -75,7 +77,6 @@ class ProductController extends Controller
         } catch (QueryException $exception) {
             return $this->invalidIntParameter();
         }
-
 
 
     }

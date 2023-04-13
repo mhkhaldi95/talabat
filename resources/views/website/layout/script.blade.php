@@ -540,19 +540,19 @@
         })
         $(document).on('click', '.category_product',function (e) {
             var category_id = $(this).data('category_id');
+                var url = "{{route('break.category.products.index', ":id")}}";
+                url = url.replace(':id', category_id);
+                url = url + "?branch_id=" + getBranch();
+                axios.get(url).then(response => {
+                    if(response.data.status){
+                        $('#category_'+category_id+'-pane').html(response.data.data.products);
+                    }else{
+                        toastr.warning(response.data.message);
+                    }
+                }).catch(error => {
+                    toastr.warning(error.message);
+                });
 
-            var url = "{{route('break.category.products.index', ":id")}}";
-            url = url.replace(':id', category_id);
-            url = url + "?branch_id=" + getBranch();
-            axios.get(url).then(response => {
-                if(response.data.status){
-                    $('#category_'+category_id+'-pane').html(response.data.data.products);
-                }else{
-                    toastr.warning(response.data.message);
-                }
-            }).catch(error => {
-                toastr.warning(error.message);
-            });
 
         })
 
