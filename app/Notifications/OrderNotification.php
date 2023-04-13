@@ -85,6 +85,9 @@ class OrderNotification extends Notification
             'body_ar' => $this->data['body_ar'],
             'body_en' => $this->data['body_en'],
             'type' => $this->data['type'],
+            'meta' =>[
+                'order_id' => $this->data['order_id']
+            ],
         ];
     }
 }
